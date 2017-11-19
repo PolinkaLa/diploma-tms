@@ -15,8 +15,16 @@ public class User {
                 String name,
                 String email) {
         this.login = login;
-        this.name = name;
-        this.email = email;
+
+        int index = name.lastIndexOf("=");
+        if(index >= 0){
+            this.name = name.substring(index + 1);
+        }
+
+        index = email.lastIndexOf("=");
+        if(index >= 0){
+            this.email = email.substring(index + 1);
+        }
     }
 
 

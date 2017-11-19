@@ -2,10 +2,12 @@
     <nav>
         <div>
             <ul>
-                <li><a href="<c:url value="/tests"/>">issues<span></span></a></li>
+                <li><a href="<c:url value="/tests"/>">Tests<span></span></a></li>
             </ul>
             <ul>
+                <li><a href="#">${sessionScope.user.login}</a></li>
                 <li><a href="#">${sessionScope.user.name}</a></li>
+                <li><a href="#">${sessionScope.user.email}</a></li>
                 <li><a href="<c:url value="/logout"/>">logout</a></li>
             </ul>
         </div>
