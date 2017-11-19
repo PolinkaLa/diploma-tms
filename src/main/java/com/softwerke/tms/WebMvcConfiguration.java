@@ -3,9 +3,9 @@ package com.softwerke.tms;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebMvc
+@ComponentScan("com.softwerke.tms")
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
@@ -42,11 +43,6 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
         resolver.setPrefix("/WEB-INF/view/");
         resolver.setSuffix(".jsp");
         return resolver;
-    }
-
-    @Bean
-    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
-        return new MappingJackson2HttpMessageConverter();
     }
 
     @Controller
