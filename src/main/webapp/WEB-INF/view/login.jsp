@@ -14,6 +14,7 @@
             <form action="<c:url value="/login" />" method="POST">
                 <input type="hidden" name="from" value="${from}"/>
                 <h2>Please sign in</h2>
+                <h3>this is LDAP authentication</h3>
                 <label for="login" >Username</label>
                 <input type="text" name="login" id="login" placeholder="login" required
                        autofocus>

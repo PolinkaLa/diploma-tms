@@ -152,7 +152,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
-                    <warName>test-manager</warName>
+                    <warName>test-management-system</warName>
                 </configuration>
             </plugin>
             <plugin>
