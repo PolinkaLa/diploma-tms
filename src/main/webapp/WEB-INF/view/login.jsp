@@ -15,8 +15,7 @@
                 <input type="hidden" name="from" value="${from}"/>
                 <h2>Please sign in</h2>
                 <h3>this is LDAP authentication</h3>
-                <label for="login" >Username</label>
-                <input type="text" name="login" id="login" placeholder="login" required
+                <h4>enter your credentials</h4><input type="text" name="login" id="login" placeholder="login" required
                        autofocus>
                 <label for="inputPassword">Password</label>
                 <input type="password" name="password" id="inputPassword" placeholder="Password"
