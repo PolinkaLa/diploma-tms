@@ -90,7 +90,23 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.3.9.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.2.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -110,7 +126,7 @@
             <version>2.2</version>
             <configuration>
                 <url>http://localhost:8080/manager/text</url>
-                <server>tomcat7</server>
+                <server>tomcat</server>
                 <path>/tms</path>
                 <update>true</update>
                 <username>admin</username>
