@@ -1,6 +1,6 @@
 package com.softwerke.tms.service.impl;
 
-import com.softwerke.tms.entity.User;
+import com.softwerke.tms.entity.Credential;
 import com.softwerke.tms.service.LdapService;
 import org.springframework.stereotype.Service;
 import java.util.Hashtable;
@@ -78,7 +78,7 @@ public class LdapServiceImpl implements LdapService {
         return accountData;
     }
 
-//    public User authorizeUser(String login, String password) {
+//    public Credential authorizeUser(String login, String password) {
 //        String[] accountData;
 //        String accountLogin;
 //        String accountEmail;
@@ -97,20 +97,21 @@ public class LdapServiceImpl implements LdapService {
 //        env.put(Context.SECURITY_CREDENTIALS, password);
 //
 //        // Create the initial context
-//        User user = null;
+//        Credential credential = null;
 //        try {
 //            DirContext ctx = new InitialDirContext(env);
-//            user = new User(login, accountLogin, accountEmail);
-//            return user;
+//            credential = new Credential(login, accountLogin, accountEmail);
+//            return credential;
 //        } catch (NamingException e) {
-//            return user;}
+//            return credential;}
 //    }
 
     /*
     * workflow for authorize user without VPN for developing*/
-    public User authorizeUser(String login, String password) {
-        User user = new User("lpv", "cn=Lappo Polina", "mail=polina.lappo@soft-werke.com");
-        return user;
+    public Credential authorizeUser(String login, String password) {
+//        Credential credential = new Credential("lpv", "cn=Lappo Polina", "mail=polina.lappo@soft-werke.com");
+        Credential credential = new Credential("lappo", "cn=Lappo Polina", "mail=polina.lappo@soft-werke.com");
+        return credential;
     }
 }
 

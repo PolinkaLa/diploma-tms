@@ -1,6 +1,6 @@
 package com.softwerke.tms.service;
 
-import com.softwerke.tms.entity.User;
+import com.softwerke.tms.entity.Credential;
 
 /**
  * Created by LappoPolina on 12.11.2017.
@@ -8,6 +8,6 @@ import com.softwerke.tms.entity.User;
 public interface LdapService {
 
     String[] getUserData(String login) throws Exception;
-    User authorizeUser(String login, String password);
+    Credential authorizeUser(String login, String password);
 }
 

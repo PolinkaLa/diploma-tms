@@ -29,9 +29,8 @@ public class UserDAOImpl implements UserDAO {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             ps.setInt(1, user.getId());
-            ps.setInt(2, user.getFk_role_id());
-            ps.setString(3, user.getPrincipal_name());
-            //ps.setString(3, user.getRole());
+            ps.setInt(2, user.getFkRoleId());
+            ps.setString(3, user.getPrincipalName());
             int out = ps.executeUpdate();
             if(out !=0){
                 System.out.println("Employee saved with id="+user.getId());

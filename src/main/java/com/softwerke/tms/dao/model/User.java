@@ -3,7 +3,8 @@ package com.softwerke.tms.dao.model;
 /**
  * Created by LappoPolina on 26.11.2017.
  */
-public class UserModel {
+public class User {
+    private static int count;
     private int id;
     private int fkRoleId;
     private String principalName;
@@ -29,6 +30,12 @@ public class UserModel {
     }
 
     public void setPrincipalName(String principalName) {
+        this.principalName = principalName;
+    }
+
+    public User(String principalName) {
+        this.id = count++;
+        this.fkRoleId = 1;
         this.principalName = principalName;
     }
 

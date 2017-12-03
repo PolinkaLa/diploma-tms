@@ -1,6 +1,6 @@
 package com.softwerke.tms.entity;
 
-public class User {
+public class Credential{
 
     private String login;
 
@@ -8,10 +8,10 @@ public class User {
 
     private String email;
 
-    public User() {
+    public Credential() {
     }
 
-    public User(String login,
+    public Credential(String login,
                 String name,
                 String email) {
         this.login = login;

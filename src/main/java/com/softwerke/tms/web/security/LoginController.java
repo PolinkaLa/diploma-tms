@@ -1,6 +1,8 @@
 package com.softwerke.tms.web.security;
 
-import com.softwerke.tms.entity.User;
+import com.softwerke.tms.dao.jdbc.UserDAO;
+import com.softwerke.tms.dao.model.User;
+import com.softwerke.tms.entity.Credential;
 import com.softwerke.tms.service.LdapService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class LoginController {
 
     @Autowired
     private LdapService ldapService;
+    @Autowired
+    private UserDAO userDAO;
 
     @GetMapping(value = "/login")
     public Object loginView(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -45,14 +49,16 @@ public class LoginController {
                                 HttpServletRequest request,
                                 HttpServletResponse response) throws IOException, ServletException {
 
-        User user = ldapService.authorizeUser(login, password);
-        if (user == null) {
+        Credential credential = ldapService.authorizeUser(login, password);
+        User user = new User(credential.getLogin());
+        userDAO.save(user);
+        if (credential == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             request.getRequestDispatcher("/error").forward(request, response);
             return;
         }
 
-        request.getSession().setAttribute(AuthorizationManager.USER_SESSION_ATTRIBUTE, user);
+        request.getSession().setAttribute(AuthorizationManager.USER_SESSION_ATTRIBUTE, credential);
         response.sendRedirect(StringUtils.defaultIfBlank(from, "/"));
     }
 
