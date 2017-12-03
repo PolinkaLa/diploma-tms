@@ -1,6 +1,6 @@
 package com.softwerke.tms.service;
 
-import com.softwerke.tms.entity.User;
+import com.softwerke.tms.dao.model.User;
 
 /**
  * Created by LappoPolina on 12.11.2017.

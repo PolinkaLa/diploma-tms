@@ -1,6 +1,7 @@
 package com.softwerke.tms.web.security;
 
-import com.softwerke.tms.entity.User;
+import com.softwerke.tms.dao.jdbc.UserDAO;
+import com.softwerke.tms.dao.model.User;
 import com.softwerke.tms.service.LdapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ public class AuthorizationManager {
 
     @Autowired
     private LdapService ldapService;
+
 
     @Nullable
     public User authorize(HttpServletRequest request) {
@@ -35,7 +37,9 @@ public class AuthorizationManager {
         String password = authorizationHeader.substring(separatorIndex + 1).trim();
 
         User user = ldapService.authorizeUser(login, password);
+//        userDAO.save(user);
         request.getSession(true).setAttribute(USER_SESSION_ATTRIBUTE, user);
+
 
         return user;
     }
