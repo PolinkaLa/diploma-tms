@@ -2,50 +2,29 @@ package com.softwerke.tms.dao.jdbc;
 
 import com.softwerke.tms.dao.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
-import java.sql.SQLException;
 
-@Component
+@Repository
 public class UserDAOImpl implements UserDAO {
 
-    private DataSource dataSource;
-
     @Autowired
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    Sql2o sql2o;
 
     @Override
-    public void save(User user) {
-        String query = "insert into User (id, fk_role_id, principal_name,) values (?,?,?)";
-        Connection con = null;
-        PreparedStatement ps = null;
-        try{
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(query);
-            ps.setInt(1, user.getId());
-            ps.setInt(2, user.getFkRoleId());
-            ps.setString(3, user.getPrincipalName());
-            int out = ps.executeUpdate();
-            if(out !=0){
-                System.out.println("Employee saved with id="+user.getId());
-            }else System.out.println("Employee save failed with id="+user.getId());
-        }catch(SQLException e){
-            e.printStackTrace();
-        }finally{
-            try {
-                ps.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+    public void save(String login) {
+        String sql = "insert into user (fk_role_id, principal_name) values ( :role, :login)";
 
+        try (Connection con = sql2o.open()) {
+            int insertedId = (int) con.createQuery(sql, true)
+                    .addParameter("role", 1)
+                    .addParameter("login", login)
+                    .executeUpdate()
+                    .getKey();
+        }
     }
 
     @Override

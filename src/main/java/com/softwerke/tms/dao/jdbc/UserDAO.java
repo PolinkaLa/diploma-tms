@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserDAO {
     //Create
-    void save(User user);
+    void save(String login);
 
     //Read
     User getById(int id);

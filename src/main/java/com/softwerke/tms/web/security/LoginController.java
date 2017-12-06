@@ -4,6 +4,7 @@ import com.softwerke.tms.dao.jdbc.UserDAO;
 import com.softwerke.tms.dao.model.User;
 import com.softwerke.tms.entity.Credential;
 import com.softwerke.tms.service.LdapService;
+import com.softwerke.tms.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class LoginController {
     @Autowired
     private LdapService ldapService;
     @Autowired
-    private UserDAO userDAO;
+    private UserService userService;
 
     @GetMapping(value = "/login")
     public Object loginView(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -51,7 +52,7 @@ public class LoginController {
 
         Credential credential = ldapService.authorizeUser(login, password);
         User user = new User(credential.getLogin());
-        userDAO.save(user);
+        userService.save(login);
         if (credential == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             request.getRequestDispatcher("/error").forward(request, response);

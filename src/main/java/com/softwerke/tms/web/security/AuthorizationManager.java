@@ -37,6 +37,7 @@ public class AuthorizationManager {
         Credential credential = ldapService.authorizeUser(login, password);
         request.getSession(true).setAttribute(USER_SESSION_ATTRIBUTE, credential);
 
+
         return credential;
     }
 }
