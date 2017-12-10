@@ -78,42 +78,42 @@ public class LdapServiceImpl implements LdapService {
         return accountData;
     }
 
-    public Credential authorizeUser(String login, String password) {
-        String[] accountData;
-        String accountLogin;
-        String accountEmail;
-        try {
-            accountData = getUserData(login);
-        } catch (Exception e) {
-            return null;
-        }
-        accountLogin = accountData[0];
-        accountEmail = accountData[1];
-        Hashtable<String, Object> env = new Hashtable<String, Object>();
-        env.put(Context.INITIAL_CONTEXT_FACTORY, CONTEXT_FACTORY);
-        env.put(Context.PROVIDER_URL, URL);
-        env.put(Context.SECURITY_AUTHENTICATION, SECURITY_AUTH);
-        env.put(Context.SECURITY_PRINCIPAL, accountLogin + "," + SECURITY_PRINCIPAL_POSTFIX);
-        env.put(Context.SECURITY_CREDENTIALS, password);
-
-        // Create the initial context
-        Credential credential = null;
-        try {
-            DirContext ctx = new InitialDirContext(env);
-            credential = new Credential(login, accountLogin, accountEmail);
-            return credential;
-        } catch (NamingException e) {
-
-            return credential;}
-    }
+//    public Credential authorizeUser(String login, String password) {
+//        String[] accountData;
+//        String accountLogin;
+//        String accountEmail;
+//        try {
+//            accountData = getUserData(login);
+//        } catch (Exception e) {
+//            return null;
+//        }
+//        accountLogin = accountData[0];
+//        accountEmail = accountData[1];
+//        Hashtable<String, Object> env = new Hashtable<String, Object>();
+//        env.put(Context.INITIAL_CONTEXT_FACTORY, CONTEXT_FACTORY);
+//        env.put(Context.PROVIDER_URL, URL);
+//        env.put(Context.SECURITY_AUTHENTICATION, SECURITY_AUTH);
+//        env.put(Context.SECURITY_PRINCIPAL, accountLogin + "," + SECURITY_PRINCIPAL_POSTFIX);
+//        env.put(Context.SECURITY_CREDENTIALS, password);
+//
+//        // Create the initial context
+//        Credential credential = null;
+//        try {
+//            DirContext ctx = new InitialDirContext(env);
+//            credential = new Credential(login, accountLogin, accountEmail);
+//            return credential;
+//        } catch (NamingException e) {
+//
+//            return credential;}
+//    }
 
 //    /*
 //    * workflow for authorize user without VPN for developing*/
-//    public Credential authorizeUser(String login, String password) {
-////        Credential credential = new Credential("lpv", "cn=Lappo Polina", "mail=polina.lappo@soft-werke.com");
-//        Credential credential = new Credential("lappo", "cn=Lappo Polina", "mail=polina.lappo@soft-werke.com");
-//        return credential;
-//    }
+    public Credential authorizeUser(String login, String password) {
+//        Credential credential = new Credential("lpv", "cn=Lappo Polina", "mail=polina.lappo@soft-werke.com");
+        Credential credential = new Credential("lappo", "cn=Lappo Polina", "mail=polina.lappo@soft-werke.com");
+        return credential;
+    }
 }
 
 

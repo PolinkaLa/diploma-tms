@@ -1,8 +1,5 @@
 package com.softwerke.tms.dao.model;
 
-/**
- * Created by LappoPolina on 26.11.2017.
- */
 public class User {
     private static int count;
     private int id;

@@ -2,7 +2,8 @@
     <nav>
         <div>
             <ul>
-                <li><a href="<c:url value="/tests"/>">Tests<span></span></a></li>
+                <li><a href="<c:url value="/tests"/>">Tests</a></li>
+                <li><a href="<c:url value="/users"/>">Users</a></li>
             </ul>
             <ul>
                 <li><a href="#">${sessionScope.user.login}</a></li>

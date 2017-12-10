@@ -44,6 +44,10 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getAll() {
-        return null;
+        String sql = "select * from user";
+
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(User.class);
+        }
     }
 }

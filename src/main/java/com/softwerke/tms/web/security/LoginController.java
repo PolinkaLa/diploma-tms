@@ -51,13 +51,13 @@ public class LoginController {
                                 HttpServletResponse response) throws IOException, ServletException {
 
         Credential credential = ldapService.authorizeUser(login, password);
-        User user = new User(credential.getLogin());
-        userService.save(login);
+        //User user = new User(credential.getLogin());
         if (credential == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             request.getRequestDispatcher("/error").forward(request, response);
             return;
         }
+        userService.save(login);
 
         request.getSession().setAttribute(AuthorizationManager.USER_SESSION_ATTRIBUTE, credential);
         response.sendRedirect(StringUtils.defaultIfBlank(from, "/"));

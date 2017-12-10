@@ -1,7 +1,5 @@
 package com.softwerke.tms;
 
-import javax.sql.DataSource;
-import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.sql2o.Sql2o;
@@ -17,5 +15,4 @@ public class DataBaseConfiguration {
         Sql2o sql2o = new Sql2o(url, user, password);
         return sql2o;
     }
-
 }
