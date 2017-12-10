@@ -57,7 +57,7 @@ public class LoginController {
             request.getRequestDispatcher("/error").forward(request, response);
             return;
         }
-        userService.save(login);
+        //userService.save(login);
 
         request.getSession().setAttribute(AuthorizationManager.USER_SESSION_ATTRIBUTE, credential);
         response.sendRedirect(StringUtils.defaultIfBlank(from, "/"));
