@@ -48,7 +48,7 @@ public class SecurityFilter implements Filter {
         if (authorizationManager.authorize(request) == null) {
 
             session.setAttribute(LoginController.GUEST_REFERER_ATTRIBUTE, request.getRequestURI());
-            response.sendRedirect("/login");
+            response.sendRedirect("/tms/login");
             return;
         }
 

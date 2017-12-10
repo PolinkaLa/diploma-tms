@@ -3,9 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <body >
-<%--<%@include file="fragment/header.jsp" %>--%>
+<%@include file="fragment/header.jsp" %>
 <div>
-    hi! & bye
+    hi! & bey
 </div>
+
 </body>
 </html>
