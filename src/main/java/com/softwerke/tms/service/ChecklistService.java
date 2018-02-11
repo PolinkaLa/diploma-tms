@@ -1,6 +1,6 @@
 package com.softwerke.tms.service;
 
-import com.softwerke.tms.dao.model.Checklist;
+import com.softwerke.tms.model.Checklist;
 
 import java.util.List;
 

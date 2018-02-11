@@ -1,8 +1,6 @@
 package com.softwerke.tms.web.security;
 
-import com.softwerke.tms.dao.jdbc.UserDAO;
-import com.softwerke.tms.dao.model.User;
-import com.softwerke.tms.entity.Credential;
+import com.softwerke.tms.model.Credential;
 import com.softwerke.tms.service.LdapService;
 import com.softwerke.tms.service.UserService;
 import org.apache.commons.lang3.StringUtils;

@@ -1,4 +1,4 @@
-package com.softwerke.tms.dao.model;
+package com.softwerke.tms.model;
 
 import java.sql.Timestamp;
 
@@ -92,6 +92,20 @@ public class Test {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public Test(int id, int fkChecklistId, int fkUserId, int fkTypeId, int fkLevelId, String title, String description, String fileName) {
+        this.id = id;
+        this.fkChecklistId = fkChecklistId;
+        this.fkUserId = fkUserId;
+        this.fkTypeId = fkTypeId;
+        this.fkLevelId = fkLevelId;
+        this.title = title;
+        this.description = description;
+        this.fileName = fileName;
+    }
+
+    public Test() {
     }
 
     @Override

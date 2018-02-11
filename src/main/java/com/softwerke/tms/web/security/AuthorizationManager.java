@@ -1,6 +1,6 @@
 package com.softwerke.tms.web.security;
 
-import com.softwerke.tms.entity.Credential;
+import com.softwerke.tms.model.Credential;
 import com.softwerke.tms.service.LdapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

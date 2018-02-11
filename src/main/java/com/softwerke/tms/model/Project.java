@@ -1,9 +1,11 @@
-package com.softwerke.tms.dao.model;
+package com.softwerke.tms.model;
 
-public class Checklist {
+import java.sql.Timestamp;
+
+public class Project {
     int id;
-    int fkProjectId;
     String title;
+    Timestamp createdDate;
     boolean activeStatus;
 
     public int getId() {
@@ -14,20 +16,20 @@ public class Checklist {
         this.id = id;
     }
 
-    public int getFkProjectId() {
-        return fkProjectId;
-    }
-
-    public void setFkProjectId(int fkProjectId) {
-        this.fkProjectId = fkProjectId;
-    }
-
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
     }
 
     public boolean isActiveStatus() {

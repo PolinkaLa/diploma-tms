@@ -1,18 +1,22 @@
 package com.softwerke.tms.web;
 
-import org.springframework.stereotype.Controller;
+import com.softwerke.tms.dao.manager.TestManager;
+import com.softwerke.tms.model.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class TestsController {
 
-    @RequestMapping("tests")
-    public ModelAndView handleIssuesView() {
-        ModelAndView modelAndView = new ModelAndView("page/tests");
-        modelAndView.addObject("view", "page/tests");
-        modelAndView.addObject("title", "Tests Page");
+    @Autowired
+    private TestManager testManager;
 
-        return modelAndView;
+    @RequestMapping("/tests")
+    public Test greeting(@RequestParam(value="name", required=false, defaultValue="World") String name) {
+        Test test;
+        test = testManager.getTest(1);
+        return test;
     }
 }

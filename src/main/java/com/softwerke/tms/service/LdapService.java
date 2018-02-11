@@ -1,6 +1,6 @@
 package com.softwerke.tms.service;
 
-import com.softwerke.tms.entity.Credential;
+import com.softwerke.tms.model.Credential;
 
 /**
  * Created by LappoPolina on 12.11.2017.

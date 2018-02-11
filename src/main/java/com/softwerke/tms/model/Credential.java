@@ -1,4 +1,4 @@
-package com.softwerke.tms.entity;
+package com.softwerke.tms.model;
 
 public class Credential{
 

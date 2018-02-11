@@ -1,6 +1,6 @@
 package com.softwerke.tms.service;
 
-import com.softwerke.tms.dao.model.User;
+import com.softwerke.tms.model.User;
 
 import java.util.List;
 

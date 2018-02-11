@@ -5,7 +5,8 @@
 <body >
 <%@include file="fragment/header.jsp" %>
 <div>
-    hi! & bey
+    hi! & by
+
 </div>
 
 </body>

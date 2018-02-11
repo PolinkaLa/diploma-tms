@@ -1,4 +1,4 @@
-package com.softwerke.tms.dao.model;
+package com.softwerke.tms.model;
 
 public class User {
     private static int count;

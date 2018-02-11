@@ -1,24 +1,25 @@
 package com.softwerke.tms.service.impl;
 
-import com.softwerke.tms.dao.jdbc.UserDAO;
-import com.softwerke.tms.dao.model.User;
+import com.softwerke.tms.model.User;
 import com.softwerke.tms.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserDAO userDAO;
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     @Override
     public List<User> getAll() {
-        return userDAO.getAll();
+        return null;
     }
 
     @Override
     public void save(String login) {
-        userDAO.save(login);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.softwerke.tms.service.impl;
 
-import com.softwerke.tms.dao.model.Project;
+import com.softwerke.tms.model.Project;
 import com.softwerke.tms.service.ProjectService;
 
 import java.util.List;

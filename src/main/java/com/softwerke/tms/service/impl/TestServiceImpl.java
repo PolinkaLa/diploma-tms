@@ -1,22 +1,37 @@
 package com.softwerke.tms.service.impl;
 
-import com.softwerke.tms.dao.model.Test;
+import com.softwerke.tms.model.Test;
 import com.softwerke.tms.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.sql2o.Connection;
-import org.sql2o.Sql2o;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
-@Repository
+@Service
 public class TestServiceImpl implements TestService{
+
+    public static final String GET_ALL_QUERY = "select * from Tickets";
+
     @Autowired
-    private Sql2o sql2o;
+    JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Test> getAll() {
-        return null;
+    public Set<Test> getAll() {
+        return new HashSet<>(jdbcTemplate.query(GET_ALL_QUERY, new RowMapper<Test>() {
+            @Override
+            public Test mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Test test = new Test();
+                test.setId(rs.getInt(1));
+                //other fields mapping
+                return test;
+            }
+        }));
     }
 
     @Override
@@ -26,12 +41,6 @@ public class TestServiceImpl implements TestService{
 
     @Override
     public Test getOne(int id) {
-        String sql = "SELECT * FROM test where id=:id";
-
-        try (Connection con = sql2o.open()) {
-            return con.createQuery(sql)
-                    .addParameter("id", id)
-                    .executeAndFetchFirst(Test.class);
-        }
+        return null;
     }
 }

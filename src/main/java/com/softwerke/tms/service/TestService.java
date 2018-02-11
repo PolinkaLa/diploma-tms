@@ -1,11 +1,11 @@
 package com.softwerke.tms.service;
 
-import com.softwerke.tms.dao.model.Test;
+import com.softwerke.tms.model.Test;
 
-import java.util.List;
+import java.util.Set;
 
 public interface TestService {
-    List<Test> getAll();
+    Set<Test> getAll();
 
     void save(Test test);
 

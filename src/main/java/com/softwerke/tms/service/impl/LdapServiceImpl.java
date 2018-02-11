@@ -1,6 +1,6 @@
 package com.softwerke.tms.service.impl;
 
-import com.softwerke.tms.entity.Credential;
+import com.softwerke.tms.model.Credential;
 import com.softwerke.tms.service.LdapService;
 import org.springframework.stereotype.Service;
 import java.util.Hashtable;
