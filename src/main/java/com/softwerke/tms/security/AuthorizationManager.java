@@ -1,4 +1,4 @@
-package com.softwerke.tms.web.security;
+package com.softwerke.tms.security;
 
 import com.softwerke.tms.model.Credential;
 import com.softwerke.tms.service.LdapService;

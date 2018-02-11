@@ -44,6 +44,8 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
         return tests;
     }
 
+    public void updateTest(Test test){}
+
     private class TestMapper implements RowMapper<Test> {
 
         @Override
@@ -51,8 +53,15 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
                 throws SQLException {
             Test test = new Test();
             test.setId(rs.getInt("id"));
+            test.setFkChecklistId(rs.getInt("fk_checklist_id"));
+            test.setFkUserId(rs.getInt("fk_user_id"));
+            test.setFkTypeId(rs.getInt("fk_type_id"));
+            test.setFkLevelId(rs.getInt("fk_level_id"));
             test.setTitle(rs.getString("title"));
             test.setDescription(rs.getString("description"));
+            test.setCreatedDate(rs.getTimestamp("created_date"));
+            test.setUpdatedDate(rs.getTimestamp("updated_date"));
+            test.setFileName(rs.getString("file_name"));
             return test;
         }
     }

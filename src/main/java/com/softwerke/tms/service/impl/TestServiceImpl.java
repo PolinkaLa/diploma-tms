@@ -1,46 +1,39 @@
 package com.softwerke.tms.service.impl;
 
-import com.softwerke.tms.model.Test;
+import com.softwerke.tms.dao.TestDAO;
 import com.softwerke.tms.service.TestService;
+import com.softwerke.tms.model.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Service
-public class TestServiceImpl implements TestService{
-
-    public static final String GET_ALL_QUERY = "select * from Tickets";
+public class TestServiceImpl implements TestService {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private TestDAO testDAO;
 
     @Override
-    public Set<Test> getAll() {
-        return new HashSet<>(jdbcTemplate.query(GET_ALL_QUERY, new RowMapper<Test>() {
-            @Override
-            public Test mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Test test = new Test();
-                test.setId(rs.getInt(1));
-                //other fields mapping
-                return test;
-            }
-        }));
+    public void insertTest(Test test) {
     }
 
     @Override
-    public void save(Test test) {
-
+    @Transactional
+    public Test getTest(int testID) {
+        return testDAO.getTest(testID);
     }
 
     @Override
-    public Test getOne(int id) {
-        return null;
+    public List<Test> getTests() {
+        return testDAO.getTests();
     }
+
+    @Override
+    public void updateTest(Test test) {
+
+    }
+
+
 }

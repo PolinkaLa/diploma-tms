@@ -10,4 +10,6 @@ public interface TestDAO {
     Test getTest(int testID);
 
     List<Test> getTests();
+
+    void updateTest (Test test);
 }

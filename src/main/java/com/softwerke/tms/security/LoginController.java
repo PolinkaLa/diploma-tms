@@ -1,8 +1,7 @@
-package com.softwerke.tms.web.security;
+package com.softwerke.tms.security;
 
 import com.softwerke.tms.model.Credential;
 import com.softwerke.tms.service.LdapService;
-import com.softwerke.tms.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +22,6 @@ public class LoginController {
 
     @Autowired
     private LdapService ldapService;
-    @Autowired
-    private UserService userService;
 
     @GetMapping(value = "/login")
     public Object loginView(HttpServletRequest request, HttpServletResponse response) throws IOException {

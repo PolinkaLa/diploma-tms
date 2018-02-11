@@ -2,12 +2,14 @@ package com.softwerke.tms.service;
 
 import com.softwerke.tms.model.Test;
 
-import java.util.Set;
+import java.util.List;
 
 public interface TestService {
-    Set<Test> getAll();
+    void insertTest(Test test);
 
-    void save(Test test);
+    Test getTest(int testID);
 
-    Test getOne(int id);
+    List<Test> getTests();
+
+    void updateTest(Test test);
 }

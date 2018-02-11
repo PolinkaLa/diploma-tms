@@ -1,23 +1,36 @@
 package com.softwerke.tms.service.impl;
 
+import com.softwerke.tms.dao.ProjectDAO;
 import com.softwerke.tms.model.Project;
 import com.softwerke.tms.service.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class ProjectServiceImpl implements ProjectService{
+@Service
+public class ProjectServiceImpl implements ProjectService {
+
+    @Autowired
+    ProjectDAO projectDAO;
+
     @Override
-    public List<Project> getAll() {
+    public void insertProject(Project project) {
+
+    }
+
+    @Override
+    public Project getProject(int projectID) {
         return null;
     }
 
     @Override
-    public void save(Project project) {
-
+    public List<Project> getProjects() {
+        return projectDAO.getProjects();
     }
 
     @Override
-    public Project getOne(int id) {
-        return null;
+    public void updateProject(Project project) {
+
     }
 }

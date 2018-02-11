@@ -39,4 +39,6 @@ public class Project {
     public void setActiveStatus(boolean activeStatus) {
         this.activeStatus = activeStatus;
     }
+
+    public Project(){}
 }

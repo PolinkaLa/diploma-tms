@@ -1,10 +1,11 @@
-package com.softwerke.tms.service;
+package com.softwerke.tms.dao;
 
 import com.softwerke.tms.model.Project;
 
 import java.util.List;
 
-public interface ProjectService {
+public interface ProjectDAO {
+
     void insertProject(Project project);
 
     Project getProject(int projectID);

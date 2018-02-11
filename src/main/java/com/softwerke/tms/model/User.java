@@ -36,6 +36,8 @@ public class User {
         this.principalName = principalName;
     }
 
+    public User (){}
+
     @Override
     public String toString() {
         return "User{" +

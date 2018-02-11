@@ -1,4 +1,4 @@
-package com.softwerke.tms.web.security;
+package com.softwerke.tms.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
