@@ -1,9 +1,12 @@
 package com.softwerke.tms.model;
 
+import java.sql.Timestamp;
+
 public class Checklist {
     int id;
     int fkProjectId;
     String title;
+    Timestamp createdDate;
     boolean activeStatus;
 
     public int getId() {
@@ -36,5 +39,13 @@ public class Checklist {
 
     public void setActiveStatus(boolean activeStatus) {
         this.activeStatus = activeStatus;
+    }
+
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
     }
 }
