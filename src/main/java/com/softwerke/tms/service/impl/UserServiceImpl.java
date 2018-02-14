@@ -1,6 +1,7 @@
 package com.softwerke.tms.service.impl;
 
 import com.softwerke.tms.dao.UserDAO;
+import com.softwerke.tms.model.Credential;
 import com.softwerke.tms.model.User;
 import com.softwerke.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,13 @@ public class UserServiceImpl implements UserService{
     UserDAO userDAO;
 
     @Override
-    public void insertUser(User user) {}
+    public void insertUser(String name) {
+        userDAO.insertUser(name);
+    }
 
     @Override
-    public User getUser(int testID) {
-        return null;
+    public User getUser(String login)  throws Exception{
+        return userDAO.getUser(login);
     }
 
     @Override
@@ -29,4 +32,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void updateUser(User User) {}
+
+    public boolean isUserExist(String login)  throws Exception{
+        return userDAO.isUserExist(login);
+    }
 }

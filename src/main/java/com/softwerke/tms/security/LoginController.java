@@ -1,7 +1,9 @@
 package com.softwerke.tms.security;
 
 import com.softwerke.tms.model.Credential;
+import com.softwerke.tms.model.User;
 import com.softwerke.tms.service.LdapService;
+import com.softwerke.tms.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class LoginController {
     @Autowired
     private LdapService ldapService;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping(value = "/login")
     public Object loginView(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -43,16 +48,19 @@ public class LoginController {
                                 @RequestParam String password,
                                 @RequestParam(required = false) String from,
                                 HttpServletRequest request,
-                                HttpServletResponse response) throws IOException, ServletException {
+                                HttpServletResponse response) throws IOException, ServletException, Exception{
 
         Credential credential = ldapService.authorizeUser(login, password);
         //User user = new User(credential.getLogin());
+        //userService.insertUser(credential.getName());
         if (credential == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             request.getRequestDispatcher("/error").forward(request, response);
             return;
         }
-        //userService.save(login);
+        if (!userService.isUserExist(credential.getLogin())) {
+            userService.insertUser(credential.getLogin());
+        }
 
         request.getSession().setAttribute(AuthorizationManager.USER_SESSION_ATTRIBUTE, credential);
         response.sendRedirect(StringUtils.defaultIfBlank(from, "/"));

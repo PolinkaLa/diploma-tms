@@ -1,15 +1,18 @@
 package com.softwerke.tms.service;
 
+import com.softwerke.tms.model.Credential;
 import com.softwerke.tms.model.User;
 
 import java.util.List;
 
 public interface UserService {
-    void insertUser(User user);
+    void insertUser(String name);
 
-    User getUser(int testID);
+    User getUser(String login) throws Exception;
 
     List<User> getUsers();
 
     void updateUser (User User);
+
+    public boolean isUserExist(String login) throws Exception;
 }

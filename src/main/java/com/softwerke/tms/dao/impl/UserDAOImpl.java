@@ -21,17 +21,25 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     }
 
     @Override
-    public void insertUser(User user) {
+    public void insertUser(String name) {
+        getJdbcTemplate().update ("INSERT INTO user ( fk_role_id, principal_name) VALUE ( ?, ?)",
+                 1, name);
 
     }
 
     @Override
-    public User getUser(int userID) {
-        User user = getJdbcTemplate().
-                queryForObject("SELECT * FROM user WHERE id = ?",
-                        new Object[] {userID},
-                        new UserDAOImpl.UserMapper()
-                );
+    public User getUser(String login) throws Exception  {
+        User user = null;
+        try {
+            user = getJdbcTemplate().
+                    queryForObject("SELECT * FROM user WHERE principal_name = ?",
+                            new Object[]{login},
+                            new UserDAOImpl.UserMapper()
+                    );
+        }
+        catch (Exception e) {
+            return null;
+        }
         return user;
     }
 
@@ -45,6 +53,14 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     }
 
     public void updateUser(User user){}
+
+    @Override
+    public boolean isUserExist(String login) throws Exception {
+        if (getUser(login) == null) {
+            return false;
+        }
+        return true;
+    }
 
     private class UserMapper implements RowMapper<User> {
 
