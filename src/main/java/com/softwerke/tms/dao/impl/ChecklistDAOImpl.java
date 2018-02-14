@@ -36,7 +36,7 @@ public class ChecklistDAOImpl extends JdbcDaoSupport implements ChecklistDAO {
                 query("SELECT * FROM checklist",
                         new ChecklistMapper()
                 );
-        return null;
+        return checklists;
     }
 
     @Override
