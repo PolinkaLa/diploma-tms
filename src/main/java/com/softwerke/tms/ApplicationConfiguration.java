@@ -32,7 +32,7 @@ public class ApplicationConfiguration {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/tms_db");
         dataSource.setUsername("root");
-        dataSource.setPassword("1234");
+        dataSource.setPassword("root"); // for home 1234; for office root
 
         return dataSource;
     }

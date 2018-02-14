@@ -15,9 +15,9 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @RequestMapping("/project")
-    public List<Project> getAllUsers (@RequestParam(value="name", required=false, defaultValue="World") String name) {
-        List<Project> users = projectService.getProjects();
-        return users;
+    @RequestMapping("/projects")
+    public List<Project> getAllProjects (@RequestParam(value="name", required=false, defaultValue="World") String name) {
+        List<Project> projects = projectService.getProjects();
+        return projects;
     }
 }
