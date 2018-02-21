@@ -22,7 +22,10 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
 
     @Override
     public void insertTest(Test test) {
-
+        getJdbcTemplate().update ("INSERT INTO test ( fk_checklist_id, fk_user_id, fk_type_id, fk_level_id," +
+                        "title, description) VALUE ( ?, ?, ?, ?, ?, ?)",
+                test.getFkChecklistId(), test.getFkUserId(), test.getFkTypeId(), test.getFkLevelId(),
+                test.getTitle(), test.getDescription());
     }
 
     @Override
