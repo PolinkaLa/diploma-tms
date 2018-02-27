@@ -5,11 +5,13 @@ import com.softwerke.tms.model.Test;
 import java.util.List;
 
 public interface TestDAO {
-    void insertTest(Test test);
+    void insertTest(int checklist, int user, int type, int level, String title, String description);
 
     Test getTest(int testID);
 
     List<Test> getTests();
 
     void updateTest (Test test);
+
+    void delTest(int id);
 }

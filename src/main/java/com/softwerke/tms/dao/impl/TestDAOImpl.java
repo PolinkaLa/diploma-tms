@@ -21,11 +21,10 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
     }
 
     @Override
-    public void insertTest(Test test) {
+    public void insertTest(int checklist, int user, int type, int level, String title, String description) {
         getJdbcTemplate().update ("INSERT INTO test ( fk_checklist_id, fk_user_id, fk_type_id, fk_level_id," +
                         "title, description) VALUE ( ?, ?, ?, ?, ?, ?)",
-                test.getFkChecklistId(), test.getFkUserId(), test.getFkTypeId(), test.getFkLevelId(),
-                test.getTitle(), test.getDescription());
+                checklist, user, type, level, title, description);
     }
 
     @Override
@@ -48,6 +47,11 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
     }
 
     public void updateTest(Test test){}
+
+    @Override
+    public void delTest(int id) {
+
+    }
 
     private class TestMapper implements RowMapper<Test> {
 

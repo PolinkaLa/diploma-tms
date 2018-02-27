@@ -16,7 +16,8 @@ public class TestServiceImpl implements TestService {
     private TestDAO testDAO;
 
     @Override
-    public void insertTest(Test test) {
+    public void insertTest(int checklist, int user, int type, int level, String title, String description) {
+        testDAO.insertTest(checklist, user, type, level, title, description);
     }
 
     @Override
