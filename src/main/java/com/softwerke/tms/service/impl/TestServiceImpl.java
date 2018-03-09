@@ -21,7 +21,6 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    @Transactional
     public Test getTest(int testID) {
         return testDAO.getTest(testID);
     }
@@ -33,7 +32,7 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public void updateTest(Test test) {
-
+        // TODO
     }
 
 

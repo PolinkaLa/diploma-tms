@@ -22,11 +22,12 @@ public class ChecklistDAOImpl extends JdbcDaoSupport implements ChecklistDAO {
 
     @Override
     public void insertChecklist(Checklist checklist) {
-
+        // TODO
     }
 
     @Override
     public Checklist getChecklist(int checklistID) {
+        // TODO
         return null;
     }
 
@@ -41,7 +42,7 @@ public class ChecklistDAOImpl extends JdbcDaoSupport implements ChecklistDAO {
 
     @Override
     public void updateChecklist(Checklist checklist) {
-
+        // TODO
     }
 
     private class ChecklistMapper implements RowMapper<Checklist> {

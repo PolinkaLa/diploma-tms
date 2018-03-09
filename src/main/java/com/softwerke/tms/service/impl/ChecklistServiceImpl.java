@@ -16,11 +16,12 @@ public class ChecklistServiceImpl implements ChecklistService{
 
     @Override
     public void insertChecklist(Checklist checklist) {
-
+        // TODO
     }
 
     @Override
     public Checklist getChecklist(int checklistID) {
+        // TODO
         return null;
     }
 
@@ -31,6 +32,6 @@ public class ChecklistServiceImpl implements ChecklistService{
 
     @Override
     public void updateChecklist(Checklist checklist) {
-
+        // TODO
     }
 }

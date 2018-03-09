@@ -22,11 +22,12 @@ public class ProjectDAOImpl extends JdbcDaoSupport implements ProjectDAO {
 
     @Override
     public void insertProject(Project project) {
-
+        // TODO
     }
 
     @Override
     public Project getProject(int projectID) {
+        // TODO
         return null;
     }
 
@@ -42,7 +43,7 @@ public class ProjectDAOImpl extends JdbcDaoSupport implements ProjectDAO {
 
     @Override
     public void updateProject(Project project) {
-
+        // TODO
     }
 
     private class ProjectMapper implements RowMapper<Project> {
@@ -58,6 +59,4 @@ public class ProjectDAOImpl extends JdbcDaoSupport implements ProjectDAO {
             return project;
         }
     }
-
-
 }

@@ -24,7 +24,6 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     public void insertUser(String name) {
         getJdbcTemplate().update ("INSERT INTO user ( fk_role_id, principal_name) VALUE ( ?, ?)",
                  1, name);
-
     }
 
     @Override
@@ -52,7 +51,9 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
         return users;
     }
 
-    public void updateUser(User user){}
+    public void updateUser(User user){
+        // TODO
+    }
 
     @Override
     public boolean isUserExist(String login) throws Exception {

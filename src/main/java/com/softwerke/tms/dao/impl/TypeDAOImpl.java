@@ -22,7 +22,7 @@ public class TypeDAOImpl extends JdbcDaoSupport implements TypeDAO {
 
     @Override
     public void insertType(String name) {
-
+        // TODO
     }
 
     @Override
@@ -37,17 +37,18 @@ public class TypeDAOImpl extends JdbcDaoSupport implements TypeDAO {
 
     @Override
     public List<Type> getTypes() {
+        // TODO
         return null;
     }
 
     @Override
     public void updateType(Type type) {
-
+        // TODO
     }
 
     @Override
     public void delType(int id) {
-
+        // TODO
     }
 
     private class TypeMapper implements RowMapper<Type> {

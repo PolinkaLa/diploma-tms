@@ -31,7 +31,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void updateUser(User User) {}
+    public void updateUser(User User) {
+        // TODO
+    }
 
     public boolean isUserExist(String login)  throws Exception{
         return userDAO.isUserExist(login);

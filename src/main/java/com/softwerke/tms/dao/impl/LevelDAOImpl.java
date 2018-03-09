@@ -22,7 +22,7 @@ public class LevelDAOImpl extends JdbcDaoSupport implements LevelDAO {
 
     @Override
     public void insertLevel(String name) {
-
+        // TODO
     }
 
     @Override
@@ -37,17 +37,18 @@ public class LevelDAOImpl extends JdbcDaoSupport implements LevelDAO {
 
     @Override
     public List<Level> getLevels() {
+        // TODO
         return null;
     }
 
     @Override
     public void updateLevel(Level level) {
-
+        // TODO
     }
 
     @Override
     public void delLevel(int id) {
-
+        // TODO
     }
     private class LevelMapper implements RowMapper<Level> {
 

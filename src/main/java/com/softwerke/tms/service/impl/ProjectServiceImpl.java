@@ -16,11 +16,12 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void insertProject(Project project) {
-
+        // TODO
     }
 
     @Override
     public Project getProject(int projectID) {
+        // TODO
         return null;
     }
 
@@ -31,6 +32,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void updateProject(Project project) {
-
+        // TODO
     }
 }

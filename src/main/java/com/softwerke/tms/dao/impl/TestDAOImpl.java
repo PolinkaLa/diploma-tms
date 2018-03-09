@@ -46,11 +46,13 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
         return tests;
     }
 
-    public void updateTest(Test test){}
+    public void updateTest(Test test){
+        //TODO
+    }
 
     @Override
     public void delTest(int id) {
-
+        //TODO
     }
 
     private class TestMapper implements RowMapper<Test> {
