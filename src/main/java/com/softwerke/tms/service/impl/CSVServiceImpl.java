@@ -1,5 +1,6 @@
 package com.softwerke.tms.service.impl;
 
+import com.opencsv.CSVReader;
 import com.softwerke.tms.dao.LevelDAO;
 import com.softwerke.tms.dao.TestDAO;
 import com.softwerke.tms.dao.TypeDAO;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,8 +27,24 @@ public class CSVServiceImpl implements CSVService {
     private TypeDAO typeDAO;
 
     @Override
-    public void importChecklist(int checklistID) {
+    public List<Test> importChecklist(int checklistID) throws IOException{
         // TODO
+        CSVReader reader = new CSVReader(new FileReader("D:/test.csv"));
+
+        List<Test> emps = new ArrayList<Test>();
+
+        String[] record;
+
+        while ((record = reader.readNext()) != null) {
+            Test emp = new Test();
+            emp.setId(Integer.valueOf(record[0]));
+            emp.setTitle(record[1]);
+            emp.setDescription(record[2]);
+            emp.setFkTypeId(typeDAO.getTypeId(record[3]));
+            emps.add(emp);
+        }
+        reader.close();
+        return emps;
     }
 
     @Override
@@ -42,8 +60,8 @@ public class CSVServiceImpl implements CSVService {
 
         try {
             fileWriter = new FileWriter("D:/test.csv");
-            fileWriter.append(HEADER);
-            fileWriter.append(LINE_SEPARATOR);
+//            fileWriter.append(HEADER);
+//            fileWriter.append(LINE_SEPARATOR);
             Iterator it = test.iterator();
             while (it.hasNext()) {
                 Test e = (Test) it.next();

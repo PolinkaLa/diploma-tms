@@ -9,6 +9,8 @@ public interface TypeDAO {
 
     String getTypeName(int id);
 
+    int getTypeId(String name);
+
     List<Type> getTypes();
 
     void updateType (Type type);

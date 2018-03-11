@@ -51,4 +51,8 @@ public class TestsController {
         csvService.exportChecklist(1);
     }
 
+    @RequestMapping("/import")
+    public List<Test> importTest() throws IOException {
+        return csvService.importChecklist(1);
+    }
 }

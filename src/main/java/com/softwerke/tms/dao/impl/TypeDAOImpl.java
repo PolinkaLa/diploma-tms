@@ -36,6 +36,16 @@ public class TypeDAOImpl extends JdbcDaoSupport implements TypeDAO {
     }
 
     @Override
+    public int getTypeId(String name) {
+        Type type = getJdbcTemplate().
+                queryForObject("SELECT * FROM type WHERE name = ?",
+                        new Object[] {name},
+                        new TypeMapper()
+                );
+        return type.getId();
+    }
+
+    @Override
     public List<Type> getTypes() {
         // TODO
         return null;

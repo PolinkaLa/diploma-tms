@@ -2,12 +2,14 @@ package com.softwerke.tms.service;
 
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+import com.softwerke.tms.model.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface CSVService {
 
-    void importChecklist(int checklistID);
+    List<Test> importChecklist(int checklistID) throws IOException;
     void exportChecklist(int checklistID) throws IOException, CsvDataTypeMismatchException,
     CsvRequiredFieldEmptyException;
 
