@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page session="true" %>
 <html>
 <head>
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
@@ -51,15 +52,25 @@
                     </v-card-actions>
                 </v-card>
             </v-dialog>
-            <v-data-table :headers="headers" :items="items" hide-actions class="elevation-1">
+            <v-card>
+                <v-card-title>
+                    <v-text-field
+                            append-icon="search"
+                            label="Search"
+                            single-line
+                            hide-details
+                            v-model="search"
+                    ></v-text-field>
+                </v-card-title>
+            <v-data-table :headers="headers" :items="items" :search="search" rows-per-page-text class="elevation-1">
                 <template slot="items" slot-scope="props">
                     <td>{{ props.item.title }}</td>
-                    <td class="text-xs-right">{{ props.item.description }}</td>
-                    <td class="text-xs-right">{{ props.item.level }}</td>
-                    <td class="text-xs-right">{{ props.item.type }}</td>
-                    <td class="text-xs-right">{{ props.item.author }}</td>
-                    <td class="text-xs-right">{{ props.item.updatedDate }}</td>
-                    <td class="text-xs-right">{{ props.item.createdDate }}</td>
+                    <td>{{ props.item.description }}</td>
+                    <td>{{ props.item.level }}</td>
+                    <td>{{ props.item.type }}</td>
+                    <td>{{ props.item.author }}</td>
+                    <td>{{ props.item.updatedDate }}</td>
+                    <td>{{ props.item.createdDate }}</td>
                     <td class="justify-center layout px-0">
                         <v-btn icon class="mx-0" @click="editItem(props.item)">
                             <v-icon color="teal">edit</v-icon>
@@ -73,9 +84,9 @@
                     <v-btn color="primary" @click="initialize">Reset</v-btn>
                 </template>
             </v-data-table>
+            </v-card>
         </div>
     </v-app>
-</div>
 </div>
 
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -85,6 +96,8 @@
         el: '#app',
         data: () => ({
             dialog: false,
+            search: '',
+            pagination: {},
             headers: [{
                 text: 'Title',
                 value: 'title'
@@ -151,6 +164,158 @@
                     author: 1,
                     title: "проверка",
                     updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
+                },{
+                    createdDate: 1512226608000,
+                    description: 'прочитать текст',
+                    level: 1,
+                    type: 1,
+                    author: 1,
+                    title: "проверка",
+                    updatedDate: 1512226608000,
                 }, ]
                 this.projects = [
                     'тестовый проект',
@@ -193,7 +358,7 @@
                     this.items.push(this.editedItem)
                 }
                 this.close()
-            }
+            },
         }
     })
 </script>
