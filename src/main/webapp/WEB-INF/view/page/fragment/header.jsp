@@ -2,8 +2,9 @@
     <nav>
         <div>
             <ul>
-                <li><a href="<c:url value="/tests"/>">Tests</a></li>
-                <li><a href="<c:url value="/users"/>">Users</a></li>
+                <li><a href="<c:url value="/testpage"/>">Tests</a></li>
+                <li><a href="<c:url value="/userpage"/>">Users</a></li>
+                <li><a href="<c:url value="/projectpage"/>">Projects</a></li>
             </ul>
             <ul>
                 <li><a href="#">${sessionScope.user.login}</a></li>
