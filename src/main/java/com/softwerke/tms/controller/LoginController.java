@@ -1,7 +1,8 @@
-package com.softwerke.tms.security;
+package com.softwerke.tms.controller;
 
 import com.softwerke.tms.model.Credential;
 import com.softwerke.tms.model.User;
+import com.softwerke.tms.security.AuthorizationManager;
 import com.softwerke.tms.service.LdapService;
 import com.softwerke.tms.service.UserService;
 import org.apache.commons.lang3.StringUtils;

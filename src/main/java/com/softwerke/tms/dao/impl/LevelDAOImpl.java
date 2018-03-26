@@ -37,8 +37,11 @@ public class LevelDAOImpl extends JdbcDaoSupport implements LevelDAO {
 
     @Override
     public List<Level> getLevels() {
-        // TODO
-        return null;
+        List<Level> levels = getJdbcTemplate().
+                query("SELECT * FROM level",
+                        new LevelMapper()
+                );
+        return levels;
     }
 
     @Override

@@ -19,13 +19,5 @@ public class UsersController {
     public List<User> getAllUsers (@RequestParam(value="name", required=false, defaultValue="World") String name) {
         List<User> users = userService.getUsers();
         return users;
-        }
-
-//    public ModelAndView handleIssuesView() {
-//        ModelAndView modelAndView = new ModelAndView("page/users");
-//        modelAndView.addObject("view", "page/users");
-//        modelAndView.addObject("title", "Users Page");
-//
-//        return modelAndView;
-//    }
+    }
 }

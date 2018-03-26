@@ -1,5 +1,6 @@
 package com.softwerke.tms.security;
 
+import com.softwerke.tms.controller.LoginController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

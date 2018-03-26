@@ -25,6 +25,7 @@ public class PagesController {
         modelAndView.addObject("title", "Users Page");
         return modelAndView;
     }
+
     @RequestMapping("/projectpage")
     public ModelAndView projectPageView() {
         ModelAndView modelAndView = new ModelAndView("page/projects");

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page session="true" %>
+<%@page session="true"%>
 <html>
 <head>
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
@@ -89,9 +89,18 @@
     </v-app>
 </div>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
 <script>
+    function fetchData(){
+        axios.get('/tms/getTests').then( (response) => {
+            this.origs = response.data;
+            return this.origs;
+        })
+    }
+    var testsData = fetchData();
+
     new Vue({
         el: '#app',
         data: () => ({
@@ -156,167 +165,7 @@
 
         methods: {
             initialize() {
-                this.items = [{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                },{
-                    createdDate: 1512226608000,
-                    description: 'прочитать текст',
-                    level: 1,
-                    type: 1,
-                    author: 1,
-                    title: "проверка",
-                    updatedDate: 1512226608000,
-                }, ]
+                this.items = []
                 this.projects = [
                     'тестовый проект',
                     'tms',
@@ -361,6 +210,7 @@
             },
         }
     })
+
 </script>
 </body>
 

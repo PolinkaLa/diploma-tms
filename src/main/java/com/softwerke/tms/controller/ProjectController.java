@@ -16,7 +16,7 @@ public class ProjectController {
     private ProjectService projectService;
 
     @RequestMapping("/projects")
-    public List<Project> getAllProjects (@RequestParam(value="name", required=false, defaultValue="World") String name) {
+    public List<Project> getAllProjects () {
         List<Project> projects = projectService.getProjects();
         return projects;
     }

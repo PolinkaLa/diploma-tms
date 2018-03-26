@@ -16,7 +16,7 @@ public class ChecklistController {
     ChecklistService checklistService;
 
     @RequestMapping("/checklists")
-    public List<Checklist> getAllChecklists (@RequestParam(value="name", required=false, defaultValue="World") String name) {
+    public List<Checklist> getAllChecklists () {
         List<Checklist> checklists = checklistService.getChecklists();
         return checklists;
     }
