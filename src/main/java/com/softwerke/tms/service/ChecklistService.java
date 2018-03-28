@@ -8,7 +8,7 @@ public interface ChecklistService {
 
     com.softwerke.tms.model.Checklist getChecklist(int checklistID);
 
-    List<com.softwerke.tms.model.Checklist> getChecklists();
+    List<com.softwerke.tms.model.Checklist> getChecklists(int projectId);
 
     void updateChecklist(com.softwerke.tms.model.Checklist checklist);
 }

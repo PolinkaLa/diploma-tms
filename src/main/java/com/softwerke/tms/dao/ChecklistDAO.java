@@ -10,7 +10,7 @@ public interface ChecklistDAO {
 
     Checklist getChecklist(int checklistID);
 
-    List<Checklist> getChecklists();
+    List<Checklist> getChecklists(int projectId);
 
     void updateChecklist(Checklist checklist);
 }

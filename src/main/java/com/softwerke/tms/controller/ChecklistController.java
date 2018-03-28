@@ -16,8 +16,8 @@ public class ChecklistController {
     ChecklistService checklistService;
 
     @RequestMapping("/checklists")
-    public List<Checklist> getAllChecklists () {
-        List<Checklist> checklists = checklistService.getChecklists();
+    public List<Checklist> getAllChecklists (@RequestParam int projectId) {
+        List<Checklist> checklists = checklistService.getChecklists(projectId);
         return checklists;
     }
 }

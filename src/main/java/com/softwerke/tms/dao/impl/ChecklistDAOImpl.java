@@ -32,9 +32,10 @@ public class ChecklistDAOImpl extends JdbcDaoSupport implements ChecklistDAO {
     }
 
     @Override
-    public List<Checklist> getChecklists() {
+    public List<Checklist> getChecklists(int projectId) {
         List<Checklist> checklists = getJdbcTemplate().
-                query("SELECT * FROM checklist",
+                query("SELECT * FROM checklist WHERE fk_project_id = ? ",
+                        new Object[] {projectId},
                         new ChecklistMapper()
                 );
         return checklists;

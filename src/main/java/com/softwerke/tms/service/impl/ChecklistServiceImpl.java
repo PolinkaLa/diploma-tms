@@ -26,8 +26,8 @@ public class ChecklistServiceImpl implements ChecklistService{
     }
 
     @Override
-    public List<Checklist> getChecklists() {
-        return checklistDAO.getChecklists();
+    public List<Checklist> getChecklists(int projectId) {
+        return checklistDAO.getChecklists(projectId);
     }
 
     @Override
