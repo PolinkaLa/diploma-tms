@@ -10,7 +10,5 @@ import java.util.List;
 public interface CSVService {
 
     List<Test> importChecklist(int checklistID) throws IOException;
-    void exportChecklist(int checklistID) throws IOException, CsvDataTypeMismatchException,
-    CsvRequiredFieldEmptyException;
 
 }
