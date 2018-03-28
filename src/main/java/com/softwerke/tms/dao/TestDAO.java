@@ -9,7 +9,7 @@ public interface TestDAO {
 
     Test getTest(int testID);
 
-    List<Test> getTests();
+    List<Test> getTests(int checklistId);
 
     void updateTest (Test test);
 

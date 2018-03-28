@@ -26,8 +26,8 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public List<Test> getTests() {
-        return testDAO.getTests();
+    public List<Test> getTests(int checklistId) {
+        return testDAO.getTests(checklistId);
     }
 
     @Override

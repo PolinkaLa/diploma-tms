@@ -1,7 +1,5 @@
 package com.softwerke.tms.controller;
 
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import com.softwerke.tms.service.CSVService;
 import com.softwerke.tms.service.TestService;
 import com.softwerke.tms.model.Test;
@@ -29,9 +27,9 @@ public class TestsController {
     }
 
     @RequestMapping("/getTests")
-    public List<Test> getAllTests() {
+    public List<Test> getAllTests(@RequestParam int checklistId) {
         List<Test> tests;
-        tests = testService.getTests();
+        tests = testService.getTests(checklistId);
         return tests;
     }
 
@@ -43,12 +41,6 @@ public class TestsController {
                            @RequestParam String title,
                            @RequestParam String description){
         testService.insertTest(checklist, user, type, level, title, description);
-    }
-
-    @RequestMapping("/export")
-    public void export()  throws IOException, CsvDataTypeMismatchException,
-            CsvRequiredFieldEmptyException {
-        csvService.exportChecklist(1);
     }
 
     @RequestMapping("/import")

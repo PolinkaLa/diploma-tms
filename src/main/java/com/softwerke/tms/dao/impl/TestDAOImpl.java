@@ -38,9 +38,10 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
     }
 
     @Override
-    public List<Test> getTests() {
+    public List<Test> getTests(int checklistId) {
         List<Test> tests = getJdbcTemplate().
-                query("SELECT * FROM test",
+                query("SELECT * FROM test WHERE fk_checklist_id = ?",
+                        new Object[] {checklistId},
                         new TestMapper()
                 );
         return tests;
