@@ -4,214 +4,156 @@
 <%@page session="true"%>
 <html>
 <head>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.2.2/lib/theme-chalk/index.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
 <%@include file="fragment/header.jsp" %>
 
+<script src="https://rawgit.com/vuejs/vue/dev/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui@2.2.2/lib/index.js"></script>
+<script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
+<script src="https://unpkg.com/vue-data-tables@3.0.0/dist/data-tables.min.js"></script>
+<script src="https://unpkg.com/json2csv@3.9.1/dist/json2csv.js"></script>
 <div id="app">
-    <v-app id="inspire">
-        <div>
-            <v-flex xs6>
-                <v-select :items="projects" v-model="e1" label="Select Project" single-line></v-select>
-            </v-flex>
-            <v-flex xs6>
-                <v-select :items="checklists" v-model="e1" label="Select Checklist" single-line></v-select>
-            </v-flex>
-
-            <v-dialog v-model="dialog" max-width="500px">
-                <v-btn color="primary" dark slot="activator" class="mb-2">New Test Case </v-btn>
-                <v-card>
-                    <v-card-title>
-                        <span class="headline">{{ formTitle }}</span>
-                    </v-card-title>
-                    <v-card-text>
-                        <v-container grid-list-md>
-                            <v-layout wrap>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field label="Title" v-model="editedItem.title"></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field label="Description" multi-line v-model="editedItem.description"></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field label="Level" v-model="editedItem.level"></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field label="Type" v-model="editedItem.type"></v-text-field>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                        <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
-            <v-card>
-                <v-card-title>
-                    <v-text-field
-                            append-icon="search"
-                            label="Search"
-                            single-line
-                            hide-details
-                            v-model="search"
-                    ></v-text-field>
-                </v-card-title>
-            <v-data-table :headers="headers" :items="items" :search="search" rows-per-page-text class="elevation-1">
-                <template slot="items" slot-scope="props">
-                    <td>{{ props.item.title }}</td>
-                    <td>{{ props.item.description }}</td>
-                    <td>{{ props.item.level }}</td>
-                    <td>{{ props.item.type }}</td>
-                    <td>{{ props.item.author }}</td>
-                    <td>{{ props.item.updatedDate }}</td>
-                    <td>{{ props.item.createdDate }}</td>
-                    <td class="justify-center layout px-0">
-                        <v-btn icon class="mx-0" @click="editItem(props.item)">
-                            <v-icon color="teal">edit</v-icon>
-                        </v-btn>
-                        <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-                            <v-icon color="pink">delete</v-icon>
-                        </v-btn>
-                    </td>
-                </template>
-                <template slot="no-data">
-                    <v-btn color="primary" @click="initialize">Reset</v-btn>
-                </template>
-            </v-data-table>
-            </v-card>
-        </div>
-    </v-app>
+    <select v-model="selectedProject">
+        <option v-for="project in projects" v-bind:value="project.id">{{project.title}}</option>
+    </select>
+    <select v-model="selectedChecklist">
+        <option v-for="checklist in checklists" v-bind:value="checklist.id">{{checklist.title}}</option>
+    </select>
+    <data-tables :data="tests" :actions-def="actionsDef" @filtered-data="handleFilteredData">
+        <el-table-column v-for="title in titles" :prop="title.prop" :label="title.label" :key="title.label" sortable="custom">
+        </el-table-column>
+    </data-tables>
 </div>
-
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
 <script>
-    function fetchData(){
-        axios.get('/tms/getTests').then( (response) => {
-            this.origs = response.data;
-            return this.origs;
-        })
-    }
-    var testsData = fetchData();
+    ELEMENT.locale(ELEMENT.lang.en);
+    Vue.use(DataTables);
+    Vue.use(DataTables.DataTablesServer);
+    var titles, currentDate;
+    currentDate = "today";
 
-    new Vue({
-        el: '#app',
-        data: () => ({
-            dialog: false,
-            search: '',
-            pagination: {},
-            headers: [{
-                text: 'Title',
-                value: 'title'
-            }, {
-                text: 'Description',
-                value: 'description'
-            }, {
-                text: 'Level',
-                value: 'level'
-            }, {
-                text: 'Type',
-                value: 'type'
-            }, {
-                text: 'Author',
-                value: 'author'
-            }, {
-                text: 'UpdatedDate',
-                value: 'updatedDate'
-            }, {
-                text: 'CreatedDate',
-                value: 'createdDate'
-            }],
-            items: [],
-            projects: [],
-            checklists: [],
-            editedIndex: -1,
-            editedItem: {
-                description: '',
-                level: '',
-                type: '',
-                title: ''
-            },
-            defaultItem: {
-                description: '',
-                level: 0,
-                type: 0,
-                title: ''
-            }
-        }),
+    titles = [{
+        prop: "id",
+        label: "ID"
+    }, {
+        prop: "title",
+        label: "Title"
+    }, {
+        prop: "description",
+        label: "Description"
+    }, {
+        label: 'Level',
+        prop: 'fkLevelId'
+    }, {
+        label: 'Type',
+        prop: 'fkTypeId'
+    }, {
+        label: 'Author',
+        prop: 'fkUserId'
+    }, {
+        label: 'UpdatedDate',
+        prop: 'updatedDate'
+    }, {
+        label: 'CreatedDate',
+        prop: 'createdDate'
+    }]
 
-        computed: {
-            formTitle() {
-                return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-            }
-        },
-
-        watch: {
-            dialog(val) {
-                val || this.close()
-            }
-        },
-
-        created() {
-            this.initialize()
-        },
-
-        methods: {
-            initialize() {
-                this.items = []
-                this.projects = [
-                    'тестовый проект',
-                    'tms',
-                    'dmp',
-                    'underground'
-
-                ]
-                this.checklists = [
-                    'модуль авторизации',
-                    'модуль тестов',
-                    'моудль имопрта',
-                    'модуль пользователей'
-                ]
-            },
-
-            editItem(item) {
-                this.editedIndex = this.items.indexOf(item)
-                this.editedItem = Object.assign({}, item)
-                this.dialog = true
-            },
-
-            deleteItem(item) {
-                const index = this.items.indexOf(item)
-                confirm('Are you sure you want to delete this item?') && this.items.splice(index, 1)
-            },
-
-            close() {
-                this.dialog = false
-                setTimeout(() => {
-                    this.editedItem = Object.assign({}, this.defaultItem)
-                    this.editedIndex = -1
-                }, 300)
-            },
-
-            save() {
-                if (this.editedIndex > -1) {
-                    Object.assign(this.items[this.editedIndex], this.editedItem)
-                } else {
-                    this.items.push(this.editedItem)
-                }
-                this.close()
-            },
+    let CsvExport = function(data, fields, fieldNames, fileName) {
+        try {
+            var result = json2csv({
+                data: data,
+                fields: fields,
+                fieldNames: fieldNames,
+            })
+            var csvContent = 'data:text/csvcharset=GBK,\uFEFF' + result
+            var encodedUri = encodeURI(csvContent)
+            var link = document.createElement('a')
+            link.setAttribute('href', encodedUri)
+            link.setAttribute('download', `${(fileName || 'file')}.csv`)
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+        } catch (err) {
+            console.error(err)
         }
-    })
+    }
 
+    var Main = {
+        data() {
+            return {
+                titles,
+                canNotClickList: ['id'],
+                actionsDef: [],
+                filteredData: [],
+                projects:[],
+                selectedProject:'Выбрать проект',
+                checklists:[],
+                selectedChecklist:'Выбрать чеклист',
+                tests:[],
+                total: 0
+            }
+        },
+        created() {
+            axios.get('/tms/projects')
+                .then(response => {
+                    this.projects = response.data })
+            let columns = ['id', 'title', 'description', 'fkLevelId', 'fkTypeId']
+            let columnNames = ['ID', 'Title', 'Description', 'Level', 'Type']
+            this.actionsDef = {
+                colProps: {
+                    span: 19
+                },
+                def: [{
+                    name: 'new',
+                    handler: () => {
+                        this.tests.push({
+                            'id': '###',
+                            'title': 'enter test title',
+                            'description': 'enter test description',
+                            'fkLevelId': 'enter test level',
+                            'fkTypeId': 'enter test type',
+                            'fkUserId': `${sessionScope.user.name}`,
+                            'updatedDate': currentDate,
+                            'createdDate': currentDate
+                        })
+                    },
+                    buttonProps: {
+                        type: 'text'
+                    }
+                }, {
+                    name: 'export',
+                    handler: () => {
+                        CsvExport(this.tests, columns, columnNames, "fileName")
+                    },
+                    buttonProps: {
+                        type: 'text'
+                    }
+                }]
+            }
+        },
+        watch: {
+            selectedProject: function () {
+                axios.get('/tms/checklists?projectId='+this.selectedProject)
+                    .then(response => {
+                        this.checklists = response.data })
+            },
+            selectedChecklist: function () {
+                axios.get('/tms/getTests?checklistId='+this.selectedChecklist)
+                    .then(response => {
+                        this.tests = response.data })
+            }
+        },
+        methods: {
+            handleFilteredData(filteredData) {
+                this.filteredData = filteredData
+            }
+        }
+    }
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#app')
 </script>
 </body>
-
 </html>
