@@ -16,16 +16,40 @@
 <script src="https://unpkg.com/vue-data-tables@3.0.0/dist/data-tables.min.js"></script>
 <script src="https://unpkg.com/json2csv@3.9.1/dist/json2csv.js"></script>
 <div id="app">
-    <select v-model="selectedProject">
-        <option v-for="project in projects" v-bind:value="project.id">{{project.title}}</option>
-    </select>
-    <select v-model="selectedChecklist">
-        <option v-for="checklist in checklists" v-bind:value="checklist.id">{{checklist.title}}</option>
-    </select>
+    <el-select v-model="selectedProject">
+        <el-option v-for="project in projects" v-bind:label="project.title" v-bind:value="project.id"></el-option>
+    </el-select>
+    <el-select v-model="selectedChecklist">
+        <el-option v-for="checklist in checklists" v-bind:label="checklist.title" v-bind:value="checklist.id"></el-option>
+    </el-select>
     <data-tables :data="tests" :actions-def="actionsDef" @filtered-data="handleFilteredData">
         <el-table-column v-for="title in titles" :prop="title.prop" :label="title.label" :key="title.label" sortable="custom">
         </el-table-column>
     </data-tables>
+    <el-form ref="form" :model="formAddTest" label-width="120px">
+        <el-form-item label="Название">
+            <el-input v-model="formAddTest.title"></el-input>
+        </el-form-item>
+        <el-form-item label="Тип">
+            <el-select v-model="formAddTest.type" placeholder="выбери тип">
+                <el-option v-for="type in types" v-bind:label="type.name" v-bind:value="type.id"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="Уровень">
+            <el-select v-model="formAddTest.level" placeholder="выбери уровень">
+                <el-option v-for="level in levels" v-bind:label="level.name" v-bind:value="level.id"></el-option>
+            </el-select>
+        </el-form-item>
+
+        <el-form-item label="Описание">
+            <el-input type="textarea" v-model="formAddTest.description"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="addTest">Create</el-button>
+            <el-button>Cancel</el-button>
+        </el-form-item>
+    </el-form>
+
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -93,37 +117,36 @@
                 checklists:[],
                 selectedChecklist:'Выбрать чеклист',
                 tests:[],
-                total: 0
+                total: 0,
+                formAddTest: {
+                    title: '',
+                    type: '',
+                    level: '',
+                    description: ''
+                },
+                selectedType: '',
+                selectedLevel: '',
+                levels:[],
+                types:[]
             }
         },
         created() {
             axios.get('/tms/projects')
                 .then(response => {
                     this.projects = response.data })
+            axios.get('/tms/levels')
+                .then(response => {
+                    this.levels = response.data })
+            axios.get('/tms/types')
+                .then(response => {
+                    this.types = response.data })
             let columns = ['id', 'title', 'description', 'fkLevelId', 'fkTypeId']
             let columnNames = ['ID', 'Title', 'Description', 'Level', 'Type']
             this.actionsDef = {
                 colProps: {
                     span: 19
                 },
-                def: [{
-                    name: 'new',
-                    handler: () => {
-                        this.tests.push({
-                            'id': '###',
-                            'title': 'enter test title',
-                            'description': 'enter test description',
-                            'fkLevelId': 'enter test level',
-                            'fkTypeId': 'enter test type',
-                            'fkUserId': `${sessionScope.user.name}`,
-                            'updatedDate': currentDate,
-                            'createdDate': currentDate
-                        })
-                    },
-                    buttonProps: {
-                        type: 'text'
-                    }
-                }, {
+                def: [ {
                     name: 'export',
                     handler: () => {
                         CsvExport(this.tests, columns, columnNames, "fileName")
@@ -149,6 +172,22 @@
         methods: {
             handleFilteredData(filteredData) {
                 this.filteredData = filteredData
+            },
+            addTest(){
+                axios({
+                    method: 'POST',
+                    url: '/tms/addTest',
+                    data: {
+                        'title': this.formAddTest.title,
+                        'description': this.formAddTest.description,
+                        'fkLevelId': this.formAddTest.level,
+                        'fkTypeId': this.formAddTest.type,
+                        'fkUserId': '1',
+                        'fkChecklistId': this.selectedChecklist
+                    }
+                }).then(function() {
+                    console.log("done");});
+
             }
         }
     }
