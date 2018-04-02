@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProjectDAO {
 
-    void insertProject(Project project);
+    void insertProject(String name, boolean status);
 
     Project getProject(int projectID);
 

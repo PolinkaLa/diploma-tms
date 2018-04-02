@@ -21,8 +21,9 @@ public class ProjectDAOImpl extends JdbcDaoSupport implements ProjectDAO {
     }
 
     @Override
-    public void insertProject(Project project) {
-        // TODO
+    public void insertProject(String name, boolean status) {
+        getJdbcTemplate().update ("INSERT INTO project (title, active_status) VALUE ( ?, ?)", name, status);
+
     }
 
     @Override

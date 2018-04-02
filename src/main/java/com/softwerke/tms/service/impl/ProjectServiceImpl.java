@@ -15,8 +15,8 @@ public class ProjectServiceImpl implements ProjectService {
     ProjectDAO projectDAO;
 
     @Override
-    public void insertProject(Project project) {
-        // TODO
+    public void insertProject(String name, boolean status) {
+        projectDAO.insertProject(name, status);
     }
 
     @Override

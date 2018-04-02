@@ -5,7 +5,7 @@ import com.softwerke.tms.model.Project;
 import java.util.List;
 
 public interface ProjectService {
-    void insertProject(Project project);
+    void insertProject(String name, boolean status);
 
     Project getProject(int projectID);
 
