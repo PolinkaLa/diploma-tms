@@ -8,10 +8,6 @@
     <display-name>Test Management System</display-name>
     <description>Test Management System</description>
 
-    <error-page>
-        <location>/error</location>
-    </error-page>
-
     <context-param>
         <param-name>spring.profiles.active</param-name>
         <param-value>jpa</param-value>
