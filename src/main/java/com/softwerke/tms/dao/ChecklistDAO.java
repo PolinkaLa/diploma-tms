@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ChecklistDAO {
 
-    void insertChecklist(Checklist checklist);
+    void insertChecklist(String name, boolean status, int project);
 
     Checklist getChecklist(int checklistID);
 

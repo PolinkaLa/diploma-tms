@@ -1,11 +1,10 @@
 package com.softwerke.tms.controller;
 
 import com.softwerke.tms.model.Checklist;
+import com.softwerke.tms.model.Project;
 import com.softwerke.tms.service.ChecklistService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +18,12 @@ public class ChecklistController {
     public List<Checklist> getAllChecklists (@RequestParam int projectId) {
         List<Checklist> checklists = checklistService.getChecklists(projectId);
         return checklists;
+    }
+    @PostMapping(value = "/addChecklist")
+    public void addChecklist(@RequestBody Checklist checklist){
+        String name = checklist.getTitle();
+        boolean status = checklist.isActiveStatus();
+        int project = checklist.getFkProjectId();
+        checklistService.insertChecklist(name, status, project);
     }
 }

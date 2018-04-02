@@ -1,14 +1,16 @@
 package com.softwerke.tms.service;
 
+import com.softwerke.tms.model.Checklist;
+
 import java.util.List;
 
 public interface ChecklistService {
 
-    void insertChecklist(com.softwerke.tms.model.Checklist checklist);
+    void insertChecklist(String name, boolean status, int project);
 
-    com.softwerke.tms.model.Checklist getChecklist(int checklistID);
+    Checklist getChecklist(int checklistID);
 
-    List<com.softwerke.tms.model.Checklist> getChecklists(int projectId);
+    List<Checklist> getChecklists(int projectId);
 
-    void updateChecklist(com.softwerke.tms.model.Checklist checklist);
+    void updateChecklist(Checklist checklist);
 }
