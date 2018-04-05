@@ -65,8 +65,7 @@
     Vue.use(DataTables.DataTablesServer);
     var titles, currentDate;
     currentDate = "today";
-    Vue.use(DataTables);
-    var titles, currentDate;
+
     titles = [{
         prop: "title",
         label: "Title"

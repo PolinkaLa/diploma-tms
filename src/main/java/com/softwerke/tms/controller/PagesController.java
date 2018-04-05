@@ -1,12 +1,8 @@
 package com.softwerke.tms.controller;
 
-import com.softwerke.tms.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 public class PagesController {
@@ -30,6 +26,14 @@ public class PagesController {
     public ModelAndView projectPageView() {
         ModelAndView modelAndView = new ModelAndView("page/projects");
         modelAndView.addObject("view", "page/projects");
+        modelAndView.addObject("title", "Progects Page");
+        return modelAndView;
+    }
+
+    @RequestMapping("/import")
+    public ModelAndView importPageView() {
+        ModelAndView modelAndView = new ModelAndView("page/import");
+        modelAndView.addObject("view", "page/import");
         modelAndView.addObject("title", "Progects Page");
         return modelAndView;
     }
