@@ -6,15 +6,33 @@
 <head>
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.2.2/lib/theme-chalk/index.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<%@include file="fragment/header.jsp" %>
-
 <script src="https://rawgit.com/vuejs/vue/dev/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui@2.2.2/lib/index.js"></script>
 <script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
 <script src="https://unpkg.com/vue-data-tables@3.0.0/dist/data-tables.min.js"></script>
 <script src="https://unpkg.com/json2csv@3.9.1/dist/json2csv.js"></script>
+<%@include file="fragment/header.jsp" %>
+<script>
+    var Main = {
+        data() {
+            return {
+                activeIndex: '1',
+                activeIndex2: '1',
+
+            };
+        },
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            }
+        }
+    }
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#menu')
+</script>
 <div id="app">
     <el-select v-model="selectedProject">
         <el-option v-for="project in projects" v-bind:label="project.title" v-bind:value="project.id"></el-option>

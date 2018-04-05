@@ -4,100 +4,86 @@
 <%@page session="true" %>
 <html>
 <head>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.2.2/lib/theme-chalk/index.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+<script src="https://rawgit.com/vuejs/vue/dev/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui@2.2.2/lib/index.js"></script>
+<script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
+<script src="https://unpkg.com/vue-data-tables@3.0.0/dist/data-tables.min.js"></script>
 <%@include file="fragment/header.jsp" %>
-<div id="app">
-    <v-app id="inspire">
-        <v-card>
-            <v-card-title>
-                <v-text-field
-                        append-icon="search"
-                        label="Search"
-                        single-line
-                        hide-details
-                        v-model="search"
-                ></v-text-field>
-            </v-card-title>
-        <v-data-table
-                :headers="headers"
-                :items="items"
-                :search="search"
-        >
-            <template slot="items" slot-scope="props">
-                <td>{{ props.item.login }}</td>
-                <td>{{ props.item.name }}</td>
-                <td>{{ props.item.email }}</td>
-                <td >
-                    <v-edit-dialog
-                            :return-value.sync="props.item.role"
-                            large
-                            lazy
-                            persistent
-                    >
-                        <div>{{ props.item.role }}</div>
-                        <div slot="input" class="mt-3 title">Update Role</div>
-                        <v-text-field
-                                slot="input"
-                                label="Edit"
-                                v-model="props.item.role"
-                                single-line
-                                counter
-                                autofocus
-                                :rules="[max25chars]"
-                        ></v-text-field>
-                    </v-edit-dialog>
-                </td>
-            </template>
-            <template slot="pageText" slot-scope="{ pageStart, pageStop }">
-                From {{ pageStart }} to {{ pageStop }}
-            </template>
-        </v-data-table>
-            </v-card>
-    </v-app>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
-    <script>
-        new Vue({
-            el: '#app',
-            data () {
-                return {
-                    max25chars: (v) => v.length <= 25 || 'Input too long!',
-                    pagination: {},
-                    search: '',
-                    headers: [
-                        {text: 'Login', value: 'login'},
-                        {text: 'Name', value: 'name'},
-                        {text: 'Email', value: 'email'},
-                        {text: 'Role', value: 'role'}
-                    ],
-                    items: [
-                        {
-                            login: 'lpv',
-                            name: 'Polina Lappo',
-                            email: 'polina.lappo@soft-werke.com',
-                            role: 'admin'
-                        },
-                        {
-                            login: 'lpv',
-                            name: 'Polina Lappo',
-                            email: 'polina.lappo@soft-werke.com',
-                            role: 'admin'
-                        },
-                        {
-                            login: 'lpv',
-                            name: 'Polina Lappo',
-                            email: 'polina.lappo@soft-werke.com',
-                            role: 'admin'
-                        }
-                    ]
-                }
+<script>
+    var Main = {
+        data() {
+            return {
+                activeIndex: '3',
+                activeIndex2: '3',
+
+            };
+        },
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
             }
-        })
-    </script>
+        }
+    }
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#menu')
+</script>
+<div id="app">
+
+    <data-tables :data="users" :actions-def="actionsDef" @filtered-data="handleFilteredData">
+        <el-table-column v-for="title in titles" :prop="title.prop" :label="title.label" :key="title.label" sortable="custom">
+        </el-table-column>
+    </data-tables>
+
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    ELEMENT.locale(ELEMENT.lang.en);
+    Vue.use(DataTables);
+    Vue.use(DataTables.DataTablesServer);
+    var titles, currentDate;
+
+
+    titles = [{
+        prop: "login",
+        label: "login"
+    }, {
+        prop: "name",
+        label: "Name"
+    }, {
+        prop: "email",
+        label: "Email"
+    }, {
+        label: 'role',
+        prop: 'Role'
+    }]
+    var Main = {
+        data() {
+            return {
+                titles,
+                canNotClickList: ['id'],
+                actionsDef: [],
+                filteredData: [],
+                projects:[],
+            }
+        },
+        created() {
+            axios.get('/tms/users')
+                .then(response => {
+                    this.users = response.data })
+        },
+        watch: {
+        },
+        methods: {
+        }
+    }
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#app')
+</script>
 </div>
 </body>
 </html>

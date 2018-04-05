@@ -9,12 +9,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<%@include file="fragment/header.jsp" %>
-
 <script src="https://rawgit.com/vuejs/vue/dev/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui@2.2.2/lib/index.js"></script>
 <script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
+<%@include file="fragment/header.jsp" %>
+<script>
+    var Main = {
+        data() {
+            return {
+                activeIndex: '2',
+                activeIndex2: '2',
 
+            };
+        },
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            }
+        }
+    }
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#menu')
+</script>
 <div id="app">
 <el-select v-model="selectedProject">
         <el-option v-for="project in projects" v-bind:label="project.title" v-bind:value="project.id"></el-option>
