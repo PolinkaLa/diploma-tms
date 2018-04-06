@@ -3,6 +3,8 @@ package com.softwerke.tms.controller;
 import com.softwerke.tms.model.Level;
 import com.softwerke.tms.service.LevelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,5 +20,10 @@ public class LevelController {
     public List<Level> getAllLevels () {
         List<Level> level = levelService.getLevels();
         return level;
+    }
+    @PostMapping(value = "/addLevel")
+    public void addLevel(@RequestBody Level level){
+        String name = level.getName();
+        levelService.insertLevel(name);
     }
 }

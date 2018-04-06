@@ -30,11 +30,19 @@ public class PagesController {
         return modelAndView;
     }
 
-    @RequestMapping("/import")
+    @RequestMapping("/importpage")
     public ModelAndView importPageView() {
         ModelAndView modelAndView = new ModelAndView("page/import");
         modelAndView.addObject("view", "page/import");
-        modelAndView.addObject("title", "Progects Page");
+        modelAndView.addObject("title", "Import Page");
+        return modelAndView;
+    }
+
+    @RequestMapping("/managepage")
+    public ModelAndView managePageView() {
+        ModelAndView modelAndView = new ModelAndView("page/manage");
+        modelAndView.addObject("view", "page/manage");
+        modelAndView.addObject("title", "Manage Page");
         return modelAndView;
     }
 }

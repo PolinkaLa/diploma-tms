@@ -22,7 +22,7 @@ public class LevelDAOImpl extends JdbcDaoSupport implements LevelDAO {
 
     @Override
     public void insertLevel(String name) {
-        // TODO
+        getJdbcTemplate().update ("INSERT INTO level (name) VALUE ( ?)", name);
     }
 
     @Override

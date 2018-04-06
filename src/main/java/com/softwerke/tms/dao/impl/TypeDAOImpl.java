@@ -22,7 +22,7 @@ public class TypeDAOImpl extends JdbcDaoSupport implements TypeDAO {
 
     @Override
     public void insertType(String name) {
-        // TODO
+        getJdbcTemplate().update ("INSERT INTO type (name) VALUE ( ?)", name);
     }
 
     @Override
