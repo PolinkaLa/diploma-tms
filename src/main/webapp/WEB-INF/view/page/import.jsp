@@ -39,20 +39,19 @@
         <el-option v-for="checklist in checklists" v-bind:label="checklist.title" v-bind:value="checklist.id"></el-option>
     </el-select>
     <el-upload
-      class="upload-demo"
+      id="upload-demo"
       ref="upload"
-      action="/tms/upload?name=file"
+      action="/tms/upload/"
       :auto-upload="false">
       <el-button slot="trigger" size="small" type="primary">select file</el-button>
       <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">upload to server</el-button>
     </el-upload>
 
-    <form method="POST" enctype="multipart/form-data"
-            action="/tms/upload">
-            File to upload: <input type="file" name="file"><br /> Name: <input
-                type="text" name="name"><br /> <br /> <input type="submit"
-                value="Upload"> Press here to upload the file!
-        </form>
+     <el-upload class="upload-demo" drag action="https://jsonplaceholder.typicode.com/posts/" :on-preview="handlePreview" :on-remove="handleRemove" :file-list="fileList" multiple>
+       <i class="el-icon-upload"></i>
+       <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
+       <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
+     </el-upload>
 
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -80,8 +79,25 @@
             }
         },
         methods: {
-            submitUpload() {
-                this.$refs.upload.submit();
+            uploadFiles () {
+                var s = this
+                const data = new FormData(document.getElementById('uploadForm'))
+                var imagefile = document.querySelector('#file')
+                console.log(imagefile.files[0])
+                data.append('file', imagefile.files[0])
+                data.append('name', s.name)
+                data.append('email', s.email)
+                axios.post('/tms/upload', data, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log(error.response)
+                })
             }
         }
     }

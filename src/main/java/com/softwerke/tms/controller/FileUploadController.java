@@ -16,7 +16,7 @@ public class FileUploadController {
     }
 
     @RequestMapping(value="/upload", method=RequestMethod.POST)
-    public @ResponseBody String handleFileUpload(@RequestParam("file") MultipartFile file){
+    public @ResponseBody String handleFileUpload(@RequestBody MultipartFile file){
         String name = "dsfsd";
         if (!file.isEmpty()) {
             try {
