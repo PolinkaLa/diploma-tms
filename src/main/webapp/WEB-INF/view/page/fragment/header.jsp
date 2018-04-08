@@ -1,7 +1,9 @@
 <style>
     a {
         text-decoration: none;
-
+    }
+    .el-table__empty-block {
+        height: 0%;
     }
 
 </style>
