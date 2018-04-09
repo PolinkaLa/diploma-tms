@@ -45,4 +45,11 @@ public class PagesController {
         modelAndView.addObject("title", "Manage Page");
         return modelAndView;
     }
+    @RequestMapping("/reportpage")
+    public ModelAndView reportPageView() {
+        ModelAndView modelAndView = new ModelAndView("page/report");
+        modelAndView.addObject("view", "page/report");
+        modelAndView.addObject("title", "Report Page");
+        return modelAndView;
+    }
 }
