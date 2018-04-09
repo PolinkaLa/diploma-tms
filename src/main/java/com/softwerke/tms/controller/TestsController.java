@@ -6,6 +6,7 @@ import com.softwerke.tms.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,12 @@ public class TestsController {
         return tests;
     }
 
+    @RequestMapping("/import")
+    public List<Test> importTest() throws IOException {
+        List<Test> tests = csvService.importChecklist();
+        return tests;
+    }
+
     @PostMapping(value = "/addTest")
     public void addTests(@RequestBody Test test){
         int checklist = test.getFkChecklistId();
@@ -40,4 +47,5 @@ public class TestsController {
         String description = test.getDescription();
         testService.insertTest(checklist, user, type, level, title, description);
     }
+
 }
