@@ -14,8 +14,8 @@
 <script src="https://rawgit.com/vuejs/vue/dev/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui@2.2.2/lib/index.js"></script>
 <script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
-<script src="https://unpkg.com/vue-data-tables@3.0.0/dist/data-tables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
 <%@include file="fragment/header.jsp" %>
 <script>
     var Main = {
@@ -23,7 +23,6 @@
             return {
                 activeIndex: '6',
                 activeIndex2: '6',
-
             };
         },
         methods: {
@@ -36,28 +35,35 @@
     new Ctor().$mount('#menu')
 </script>
 <div id="app">
-    <chartjs-line></chartjs-line>
+    <line-chart></line-chart>
 </div>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     ELEMENT.locale(ELEMENT.lang.en);
-    Vue.use(VueCharts);
-    var Main = {
-        data() {
-            return {
-                chartData: [["Jan", 4], ["Feb", 2], ["Mar", 10], ["Apr", 5], ["May", 3]]
-            }
-        },
-        created() {
-        },
-        watch: {
-        },
-        methods: {
+Vue.component('line-chart', {
+  extends: VueChartJs.Line,
+  mounted () {
+    this.renderChart({
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [
+        {
+          label: 'Data One',
+          backgroundColor: '#f87979',
+          data: [40, 39, 10, 40, 39, 80, 40]
         }
-    }
-    var Ctor = Vue.extend(Main)
-    new Ctor().$mount('#app')
+      ]
+    }, {responsive: true, maintainAspectRatio: false})
+  }
+
+})
+
+var vm = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello World'
+  }
+})
 </script>
 </body>
 
