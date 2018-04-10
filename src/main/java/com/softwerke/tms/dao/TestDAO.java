@@ -14,4 +14,6 @@ public interface TestDAO {
     void updateTest (Test test);
 
     void delTest(int id);
+
+    boolean isTestExist(int id) throws Exception;
 }

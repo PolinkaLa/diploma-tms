@@ -48,12 +48,21 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
     }
 
     public void updateTest(Test test){
-        //TODO
+        getJdbcTemplate().update ("UPDATE test SET title=? WHERE id= ?",
+                test.getTitle(), test.getId());
     }
 
     @Override
     public void delTest(int id) {
         //TODO
+    }
+
+    @Override
+    public boolean isTestExist(int id)throws Exception {
+        if (getTest(id) == null) {
+            return false;
+        }
+        return true;
     }
 
     private class TestMapper implements RowMapper<Test> {

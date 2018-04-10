@@ -6,7 +6,6 @@ import com.softwerke.tms.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -32,7 +31,7 @@ public class TestsController {
     }
 
     @RequestMapping("/import")
-    public List<Test> importTest() throws IOException {
+    public List<Test> importTest() throws Exception {
         List<Test> tests = csvService.importChecklist();
         return tests;
     }
