@@ -7,13 +7,36 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.2.2/lib/theme-chalk/index.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        .el-upload-list {
+            height: 0%;
+        }
+    </style>
 </head>
 <body>
-<%@include file="fragment/header.jsp" %>
-
 <script src="https://rawgit.com/vuejs/vue/dev/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui@2.2.2/lib/index.js"></script>
 <script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
+
+<%@include file="fragment/header.jsp" %>
+<script>
+    var Main = {
+        data() {
+            return {
+                activeIndex: '2',
+                activeIndex2: '2',
+
+            };
+        },
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            }
+        }
+    }
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#menu')
+</script>
 
 <div id="app">
 <el-select v-model="selectedProject">
@@ -22,6 +45,10 @@
     <el-select v-model="selectedChecklist">
         <el-option v-for="checklist in checklists" v-bind:label="checklist.title" v-bind:value="checklist.id"></el-option>
     </el-select>
+    <el-upload class="upload-demo" ref="file" action="/tms/uploadFile" :auto-upload="false">
+        <el-button slot="trigger" size="small" type="primary">select file</el-button>
+        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">upload to server</el-button>
+    </el-upload>
 
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -49,6 +76,9 @@
             }
         },
         methods: {
+            submitUpload() {
+                this.$refs.file.submit();
+            }
         }
     }
     var Ctor = Vue.extend(Main)
