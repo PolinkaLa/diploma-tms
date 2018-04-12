@@ -1,7 +1,6 @@
 package com.softwerke.tms.controller;
 
 import com.softwerke.tms.model.Credential;
-import com.softwerke.tms.model.User;
 import com.softwerke.tms.security.AuthorizationManager;
 import com.softwerke.tms.service.LdapService;
 import com.softwerke.tms.service.UserService;
@@ -62,6 +61,7 @@ public class LoginController {
         if (!userService.isUserExist(credential.getLogin())) {
             userService.insertUser(credential.getLogin());
         }
+        credential.setId(userService.getUser(credential.getLogin()).getId());
 
         request.getSession().setAttribute(AuthorizationManager.USER_SESSION_ATTRIBUTE, credential);
         response.sendRedirect(StringUtils.defaultIfBlank(from, "/"));
