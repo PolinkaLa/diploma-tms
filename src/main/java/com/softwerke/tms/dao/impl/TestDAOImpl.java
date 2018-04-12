@@ -47,6 +47,7 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
         return tests;
     }
 
+    @Override
     public void updateTest(Test test){
         getJdbcTemplate().update ("UPDATE test SET title=? WHERE id= ?",
                 test.getTitle(), test.getId());
@@ -64,6 +65,25 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
         }
         return true;
     }
+
+    @Override
+    public int getChecklistOfTest(int id) {
+        return getTest(id).getFkChecklistId();
+    }
+
+    @Override
+    public void insertTestFromFile(Test test) {
+        getJdbcTemplate().update ("INSERT INTO test ( fk_checklist_id, fk_user_id, fk_type_id, fk_level_id," +
+                        "title, description, file_name) VALUE ( ?, ?, ?, ?, ?, ?)",
+                test.getFkChecklistId(),
+                test.getFkUserId(),
+                test.getFkTypeId(),
+                test.getFkLevelId(),
+                test.getTitle(),
+                test.getDescription(),
+                test.getFileName());
+    }
+
 
     private class TestMapper implements RowMapper<Test> {
 

@@ -6,6 +6,7 @@ import com.softwerke.tms.model.Test;
 import com.softwerke.tms.service.CSVService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +22,13 @@ public class CSVServiceImpl implements CSVService {
     private TestDAO testDAO;
 
     @Override
-    public List<Test> importChecklist(InputStream fileReader, String fileName) throws Exception {
+    public List<Test> importChecklist(MultipartFile file) throws Exception {
+
+        int fkCkeclistId = 1;
+        int fkUserId = 2;
+
+        String fileName = file.getOriginalFilename();
+        InputStream fileReader = file.getInputStream();
         List<Test> importedTests = new ArrayList<>();
         CSVReader reader = null;
         try {
@@ -37,6 +44,8 @@ public class CSVServiceImpl implements CSVService {
                 test.setFkLevelId(Integer.parseInt(line[3]));
                 test.setFkTypeId(Integer.parseInt(line[4]));
                 test.setFileName(fileName);
+                test.setFkChecklistId(fkCkeclistId);
+                test.setFkUserId(fkUserId);
                 importedTests.add(test);
             }
         } catch (IOException e) {
@@ -46,10 +55,18 @@ public class CSVServiceImpl implements CSVService {
         try {
             for (Test testItem : importedTests) {
                 if (testDAO.isTestExist(testItem.getId())) {
-                    testDAO.updateTest(testItem);
+                    if (testItem.getFkChecklistId() == fkCkeclistId) {
+                        testDAO.updateTest(testItem);
+                    }
+                    else {
+                        testDAO.updateTest(testItem);
+                    }
+                }
+                else {
+                    testDAO.insertTestFromFile(testItem);
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

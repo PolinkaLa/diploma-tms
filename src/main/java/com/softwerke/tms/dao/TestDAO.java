@@ -16,4 +16,8 @@ public interface TestDAO {
     void delTest(int id);
 
     boolean isTestExist(int id) throws Exception;
+
+    int getChecklistOfTest(int id);
+
+    void insertTestFromFile(Test test);
 }
