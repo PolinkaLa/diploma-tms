@@ -8,6 +8,8 @@ public class Credential{
 
     private String email;
 
+    private int id;
+
     public Credential() {
     }
 
@@ -38,5 +40,13 @@ public class Credential{
 
     public String getEmail() {
         return email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
