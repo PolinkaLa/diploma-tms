@@ -200,7 +200,7 @@
                         'description': this.formAddTest.description,
                         'fkLevelId': this.formAddTest.level,
                         'fkTypeId': this.formAddTest.type,
-                        'fkUserId': '1',
+                        'fkUserId': `${sessionScope.user.id}`,
                         'fkChecklistId': this.selectedChecklist
                     }
                 }).then(function() {
