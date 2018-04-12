@@ -17,11 +17,11 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public void insertTest(int checklist, int user, int type, int level, String title, String description) {
-        testDAO.insertTest(checklist, user, type, level, title, description);
+        testDAO.insertTest(checklist, user, type, level, title, description, null);
     }
 
     @Override
-    public Test getTest(int testID) {
+    public Test getTest(int testID) throws Exception {
         return testDAO.getTest(testID);
     }
 

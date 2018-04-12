@@ -14,7 +14,7 @@ public class TestsController {
     private TestService testService;
 
     @RequestMapping("/getTest")
-    public Test getTest(@RequestParam int id) {
+    public Test getTest(@RequestParam int id) throws Exception {
         Test test;
         test = testService.getTest(id);
         return test;

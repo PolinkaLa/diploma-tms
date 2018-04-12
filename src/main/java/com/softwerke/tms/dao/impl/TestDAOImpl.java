@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -21,20 +22,25 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
     }
 
     @Override
-    public void insertTest(int checklist, int user, int type, int level, String title, String description) {
+    public void insertTest(int checklist, int user, int type, int level, String title, String description, String file) {
         getJdbcTemplate().update ("INSERT INTO test ( fk_checklist_id, fk_user_id, fk_type_id, fk_level_id," +
-                        "title, description) VALUE ( ?, ?, ?, ?, ?, ?)",
-                checklist, user, type, level, title, description);
+                        "title, description, file_name) VALUE ( ?, ?, ?, ?, ?, ?, ?)",
+                checklist, user, type, level, title, description, file);
     }
 
     @Override
-    public Test getTest(int testID) {
+    public Test getTest(int testID) throws Exception{
+        try{
         Test test = getJdbcTemplate().
                 queryForObject("SELECT * FROM test WHERE id = ?",
                         new Object[] {testID},
                         new TestMapper()
                 );
         return test;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -49,8 +55,23 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
 
     @Override
     public void updateTest(Test test){
-        getJdbcTemplate().update ("UPDATE test SET title=? WHERE id= ?",
-                test.getTitle(), test.getId());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        getJdbcTemplate().update ("UPDATE test SET title=?, " +
+                        "description=?," +
+                        "fk_user_id=?," +
+                        "fk_type_id=?," +
+                        "fk_level_id=?," +
+                        "updated_date=?," +
+                        "file_name=?" +
+                        " WHERE id= ?",
+                test.getTitle(),
+                test.getDescription(),
+                test.getFkUserId(),
+                test.getFkTypeId(),
+                test.getFkLevelId(),
+                timestamp,
+                test.getFileName(),
+                test.getId());
     }
 
     @Override
@@ -59,22 +80,27 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
     }
 
     @Override
-    public boolean isTestExist(int id)throws Exception {
-        if (getTest(id) == null) {
+    public boolean isTestExist(int id) throws Exception {
+        try {
+            if (getTest(id) == null) {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
         return true;
     }
 
     @Override
-    public int getChecklistOfTest(int id) {
+    public int getChecklistOfTest(int id) throws Exception{
         return getTest(id).getFkChecklistId();
     }
 
     @Override
-    public void insertTestFromFile(Test test) {
+    public void insertTestFromFile(Test test) throws Exception{
         getJdbcTemplate().update ("INSERT INTO test ( fk_checklist_id, fk_user_id, fk_type_id, fk_level_id," +
-                        "title, description, file_name) VALUE ( ?, ?, ?, ?, ?, ?)",
+                        "title, description, file_name) VALUE ( ?, ?, ?, ?, ?, ?, ?)",
                 test.getFkChecklistId(),
                 test.getFkUserId(),
                 test.getFkTypeId(),
@@ -84,6 +110,16 @@ public class TestDAOImpl extends JdbcDaoSupport implements TestDAO {
                 test.getFileName());
     }
 
+    @Override
+    public void copyTest(Test test) throws Exception {
+        insertTest(test.getFkChecklistId(),
+                test.getFkUserId(),
+                test.getFkTypeId(),
+                test.getFkLevelId(),
+                test.getTitle(),
+                test.getDescription(),
+                test.getFileName());
+    }
 
     private class TestMapper implements RowMapper<Test> {
 

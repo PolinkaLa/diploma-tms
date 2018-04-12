@@ -45,7 +45,8 @@
     <el-select v-model="selectedChecklist">
         <el-option v-for="checklist in checklists" v-bind:label="checklist.title" v-bind:value="checklist.id"></el-option>
     </el-select>
-    <el-upload class="upload-demo" ref="file" action="/tms/uploadFile" :auto-upload="false">
+    <el-upload class="upload-demo" ref="file" action="/tms/uploadFile" :auto-upload="false" :limit="1"
+               :data="{checklistId: selectedChecklist, userId: `${sessionScope.user.id}`}">
         <el-button slot="trigger" size="small" type="primary">select file</el-button>
         <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">upload to server</el-button>
     </el-upload>

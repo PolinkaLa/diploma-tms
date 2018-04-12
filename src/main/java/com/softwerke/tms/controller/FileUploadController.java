@@ -18,8 +18,8 @@ public class FileUploadController {
     CSVService csvService;
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public List<Test> submit(@RequestParam("file") MultipartFile file) throws Exception {
-        List<Test> csv = csvService.importChecklist(file);
+    public List<Test> submit(@RequestParam("file") MultipartFile file, int checklistId, int userId) throws Exception {
+        List<Test> csv = csvService.importChecklist(file, checklistId, userId);
         return csv;
     }
 }

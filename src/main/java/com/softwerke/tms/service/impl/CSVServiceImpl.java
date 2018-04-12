@@ -22,10 +22,7 @@ public class CSVServiceImpl implements CSVService {
     private TestDAO testDAO;
 
     @Override
-    public List<Test> importChecklist(MultipartFile file) throws Exception {
-
-        int fkCkeclistId = 1;
-        int fkUserId = 2;
+    public List<Test> importChecklist(MultipartFile file, int checklistId, int userId) throws Exception {
 
         String fileName = file.getOriginalFilename();
         InputStream fileReader = file.getInputStream();
@@ -44,8 +41,8 @@ public class CSVServiceImpl implements CSVService {
                 test.setFkLevelId(Integer.parseInt(line[3]));
                 test.setFkTypeId(Integer.parseInt(line[4]));
                 test.setFileName(fileName);
-                test.setFkChecklistId(fkCkeclistId);
-                test.setFkUserId(fkUserId);
+                test.setFkChecklistId(checklistId);
+                test.setFkUserId(userId);
                 importedTests.add(test);
             }
         } catch (IOException e) {
@@ -54,12 +51,12 @@ public class CSVServiceImpl implements CSVService {
 
         try {
             for (Test testItem : importedTests) {
-                if (testDAO.isTestExist(testItem.getId())) {
-                    if (testItem.getFkChecklistId() == fkCkeclistId) {
+                if (testItem.getId() >= 0 && testDAO.isTestExist(testItem.getId())) {
+                    if (testDAO.getChecklistOfTest(testItem.getId()) == checklistId) {
                         testDAO.updateTest(testItem);
                     }
                     else {
-                        testDAO.updateTest(testItem);
+                        testDAO.copyTest(testItem);
                     }
                 }
                 else {
