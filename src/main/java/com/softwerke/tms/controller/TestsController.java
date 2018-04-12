@@ -1,7 +1,6 @@
 package com.softwerke.tms.controller;
 
 import com.softwerke.tms.model.Test;
-import com.softwerke.tms.service.CSVService;
 import com.softwerke.tms.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,6 @@ public class TestsController {
 
     @Autowired
     private TestService testService;
-    @Autowired
-    private CSVService csvService;
 
     @RequestMapping("/getTest")
     public Test getTest(@RequestParam int id) {
@@ -27,12 +24,6 @@ public class TestsController {
     public List<Test> getAllTests(@RequestParam int checklistId) {
         List<Test> tests;
         tests = testService.getTests(checklistId);
-        return tests;
-    }
-
-    @RequestMapping("/import")
-    public List<Test> importTest() throws Exception {
-        List<Test> tests = csvService.importChecklist();
         return tests;
     }
 
