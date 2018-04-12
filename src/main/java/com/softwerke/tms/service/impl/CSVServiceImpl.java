@@ -7,13 +7,11 @@ import com.softwerke.tms.service.CSVService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 @Service
@@ -23,15 +21,11 @@ public class CSVServiceImpl implements CSVService {
     private TestDAO testDAO;
 
     @Override
-    public List<Test> importChecklist() throws Exception {
-        String csvFile = "C:/Users/lpv.SOFTWERKE/Downloads/false.csv";
-
-        Scanner scanner = new Scanner(new File(csvFile), "UTF-8");
+    public List<Test> importChecklist(InputStream fileReader, String fileName) throws Exception {
         List<Test> importedTests = new ArrayList<>();
-
         CSVReader reader = null;
         try {
-            reader = new CSVReader(new InputStreamReader(new FileInputStream(csvFile), "UTF-8"));
+            reader = new CSVReader(new InputStreamReader(fileReader, "UTF-8"));
             String[] lineHeader;
             String[] line;
             lineHeader = reader.readNext();
@@ -42,6 +36,7 @@ public class CSVServiceImpl implements CSVService {
                 test.setDescription(line[2]);
                 test.setFkLevelId(Integer.parseInt(line[3]));
                 test.setFkTypeId(Integer.parseInt(line[4]));
+                test.setFileName(fileName);
                 importedTests.add(test);
             }
         } catch (IOException e) {
