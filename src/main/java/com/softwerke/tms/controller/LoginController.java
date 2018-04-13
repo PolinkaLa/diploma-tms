@@ -58,8 +58,8 @@ public class LoginController {
             request.getRequestDispatcher("/error").forward(request, response);
             return;
         }
-        if (!userService.isUserExist(credential.getLogin())) {
-            userService.insertUser(credential.getLogin());
+        if (!userService.isUserExist(login)) {
+            userService.insertUser(login);
         }
         credential.setId(userService.getUser(credential.getLogin()).getId());
 

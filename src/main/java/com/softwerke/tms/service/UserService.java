@@ -14,5 +14,7 @@ public interface UserService {
 
     void updateUser (User User);
 
-    public boolean isUserExist(String login) throws Exception;
+    boolean isUserExist(String login) throws Exception;
+
+    List<Credential> getUsersData () throws Exception;
 }

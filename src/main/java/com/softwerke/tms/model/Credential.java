@@ -10,6 +10,8 @@ public class Credential{
 
     private int id;
 
+    private int role;
+
     public Credential() {
     }
 
@@ -48,5 +50,25 @@ public class Credential{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

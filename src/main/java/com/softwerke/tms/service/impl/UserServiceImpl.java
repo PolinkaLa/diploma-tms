@@ -3,10 +3,12 @@ package com.softwerke.tms.service.impl;
 import com.softwerke.tms.dao.UserDAO;
 import com.softwerke.tms.model.Credential;
 import com.softwerke.tms.model.User;
+import com.softwerke.tms.service.LdapService;
 import com.softwerke.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,6 +16,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     UserDAO userDAO;
+
+    @Autowired
+    LdapService ldapService;
 
     @Override
     public void insertUser(String name) {
@@ -37,5 +42,31 @@ public class UserServiceImpl implements UserService{
 
     public boolean isUserExist(String login)  throws Exception{
         return userDAO.isUserExist(login);
+    }
+
+    @Override
+    public List<Credential> getUsersData() throws Exception{
+        try {
+            List<Credential> usersData = new ArrayList<>();
+            List<User> users;
+            users = getUsers();
+            for (User user: users){
+                Credential userData = new Credential();
+                String[] ldapData = ldapService.getUserData(user.getPrincipalName());
+                userData.setId(user.getId());
+                userData.setRole(user.getFkRoleId());
+                userData.setLogin(user.getPrincipalName());
+                String[] temp;
+                temp = ldapData[0].split("= ");
+                userData.setName(temp[1]);
+                temp = ldapData[1].split("= ");
+                userData.setEmail(temp[1]);
+                usersData.add(userData);
+            }
+            return  usersData;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

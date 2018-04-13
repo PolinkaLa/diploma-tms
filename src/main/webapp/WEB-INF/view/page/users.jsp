@@ -34,7 +34,7 @@
 </script>
 <div id="app">
 
-    <data-tables :data="users" :actions-def="actionsDef" @filtered-data="handleFilteredData">
+    <data-tables :data="users">
         <el-table-column v-for="title in titles" :prop="title.prop" :label="title.label" :key="title.label" sortable="custom">
         </el-table-column>
     </data-tables>
@@ -58,17 +58,14 @@
         prop: "email",
         label: "Email"
     }, {
-        label: 'role',
-        prop: 'Role'
+        label: 'Role',
+        prop: 'role'
     }]
     var Main = {
         data() {
             return {
                 titles,
-                canNotClickList: ['id'],
-                actionsDef: [],
-                filteredData: [],
-                projects:[],
+                users:[],
             }
         },
         created() {
