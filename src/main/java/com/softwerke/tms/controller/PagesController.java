@@ -52,4 +52,11 @@ public class PagesController {
         modelAndView.addObject("title", "Report Page");
         return modelAndView;
     }
+    @RequestMapping("/runpage")
+    public ModelAndView runPageView() {
+        ModelAndView modelAndView = new ModelAndView("page/run");
+        modelAndView.addObject("view", "page/run");
+        modelAndView.addObject("title", "Run Page");
+        return modelAndView;
+    }
 }

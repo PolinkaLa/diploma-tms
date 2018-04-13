@@ -15,6 +15,7 @@
     <el-menu-item index="4"><a href="<c:url value="/projectpage"/>">Projects</a></el-menu-item>
     <el-menu-item index="5"><a href="<c:url value="/managepage"/>">Manage</a></el-menu-item>
     <el-menu-item index="6"><a href="<c:url value="/reportpage"/>">Report</a></el-menu-item>
+    <el-menu-item index="7"><a href="<c:url value="/runpage"/>">Run</a></el-menu-item>
 </el-menu></div>
 <div>
         <el-tag>${sessionScope.user.name}</el-tag>
