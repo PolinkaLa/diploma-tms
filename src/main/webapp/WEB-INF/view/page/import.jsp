@@ -50,6 +50,12 @@
         <el-button slot="trigger" size="small" type="primary">select file</el-button>
         <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">upload to server</el-button>
     </el-upload>
+    <div>
+        <h2>пример импортируемых данных</h2>
+        <p>"ID","Title","Description","Level","Type"</p>
+        <p>9,"Заголовок теста","Описание теста",1,1</p>
+        <p>12,"Заголовок теста","Описание теста",1,1</p>
+    </div>
 
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
