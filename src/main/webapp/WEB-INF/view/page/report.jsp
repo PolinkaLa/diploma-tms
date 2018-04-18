@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.2.2/lib/theme-chalk/index.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        .report-name{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,6 +41,8 @@
     new Ctor().$mount('#menu')
 </script>
 <div id="app">
+    <div class="report-name">
+        <el-tag type="info">Test group by Users</el-tag></div>
     <line-chart></line-chart>
 </div>
 
@@ -42,19 +50,26 @@
 <script>
     ELEMENT.locale(ELEMENT.lang.en);
 Vue.component('line-chart', {
-  extends: VueChartJs.Line,
+  extends: VueChartJs.Pie,
   mounted () {
     this.renderChart({
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'Data One',
-          backgroundColor: '#f87979',
-          data: [40, 39, 10, 40, 39, 80, 40]
+        labels: ['TMS Project', 'Test Project', 'AEM Project', 'Vacation planer',],
+        datasets: [
+            {
+                backgroundColor: ['rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'],
+                data: [10, 5, 8, 3]
         }
       ]
     }, {responsive: true, maintainAspectRatio: false})
-  }
+  },
+    created() {
+        axios.get('/tms/testGroupByUsers')
+            .then(response => {
+                this.datasets.data = response.data })
+    },
 
 })
 
