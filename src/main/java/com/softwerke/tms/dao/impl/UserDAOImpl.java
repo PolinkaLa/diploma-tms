@@ -43,6 +43,17 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     }
 
     @Override
+    public User getUserByID(int id) {
+        User user = null;
+            user = getJdbcTemplate().
+                    queryForObject("SELECT * FROM user WHERE id = ?",
+                            new Object[]{id},
+                            new UserDAOImpl.UserMapper()
+                    );
+        return user;
+    }
+
+    @Override
     public List<User> getUsers() {
         List<User> users = getJdbcTemplate().
                 query("SELECT * FROM user",

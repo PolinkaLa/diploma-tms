@@ -81,6 +81,6 @@ public class LoginController {
     @PostMapping(value = "/logout")
     public void handleLogoutPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().invalidate();
-        response.sendRedirect("/");
+        response.sendRedirect("/login");
     }
 }

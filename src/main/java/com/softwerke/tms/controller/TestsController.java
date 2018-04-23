@@ -21,7 +21,7 @@ public class TestsController {
     }
 
     @RequestMapping("/getTests")
-    public List<Test> getAllTests(@RequestParam int checklistId) {
+    public List<Test> getAllTests(@RequestParam int checklistId) throws Exception {
         List<Test> tests;
         tests = testService.getTests(checklistId);
         return tests;

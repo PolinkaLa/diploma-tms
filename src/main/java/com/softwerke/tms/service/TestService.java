@@ -9,7 +9,7 @@ public interface TestService {
 
     Test getTest(int testID) throws Exception;
 
-    List<Test> getTests(int checklistId);
+    List<Test> getTests(int checklistId) throws Exception;
 
     void updateTest(Test test);
 }

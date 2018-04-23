@@ -13,6 +13,51 @@ public class Test {
     Timestamp createdDate;
     Timestamp updatedDate;
     String fileName;
+    String type;
+    String level;
+    String user;
+    String cDate;
+    String uDate;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getcDate() {
+        return cDate;
+    }
+
+    public void setcDate(String cDate) {
+        this.cDate = cDate;
+    }
+
+    public String getuDate() {
+        return uDate;
+    }
+
+    public void setuDate(String uDate) {
+        this.uDate = uDate;
+    }
 
     public int getId() {
         return id;

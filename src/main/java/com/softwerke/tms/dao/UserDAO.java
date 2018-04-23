@@ -11,7 +11,9 @@ public interface UserDAO {
 
     User getUser(String login) throws Exception ;
 
-    List<User> getUsers();
+    User getUserByID(int id);
+
+    List<User> getUsers() throws Exception;
 
     void updateUser (User User);
 

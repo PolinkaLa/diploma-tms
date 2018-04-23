@@ -31,8 +31,18 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User getUserByID(int id) {
+        return userDAO.getUserByID(id);
+    }
+
+    @Override
     public List<User> getUsers() {
-        return userDAO.getUsers();
+        try {
+            return userDAO.getUsers();
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

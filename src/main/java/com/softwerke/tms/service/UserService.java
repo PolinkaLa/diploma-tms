@@ -9,6 +9,7 @@ public interface UserService {
     void insertUser(String name);
 
     User getUser(String login) throws Exception;
+    User getUserByID(int id);
 
     List<User> getUsers();
 
