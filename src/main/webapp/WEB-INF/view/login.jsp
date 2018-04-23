@@ -24,6 +24,18 @@
             margin-left: 50px;
             margin-bottom: 50px;
         }
+        h1 {
+            font-size: 35px;
+            color: #1f2f3d;
+            font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 400;
+            color: #1f2f3d;
+            font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -36,7 +48,8 @@
             <div class="login">
             <form action="<c:url value="/login" />" method="POST">
                 <input type="hidden" name="from" value="${from}"/>
-                <div><h2>Please sign in</h2></div>
+                <div><h1>Система управления тестированием</h1></div>
+                <div><h2>Авторизуйтесь, чтобы начать</h2></div>
                 <div class="el-input el-input--suffix">
                     <input class="el-input__inner" type="text" name="login" id="login" placeholder="Login" required
                        autofocus>
@@ -45,14 +58,14 @@
                 <div class="el-input el-input--suffix"><input class="el-input__inner" type="password" name="password" id="inputPassword" placeholder="Password" required>
                     <span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-icon-edit el-input__icon"></i><!----></span><!----></span></div>
 
-                <div><button class="el-button el-button--primary" type="submit">Sign in</button></div>
+                <div><button class="el-button el-button--primary" type="submit">Войти</button></div>
             </form>
             </div>
         </c:when>
         <c:otherwise>
             <form action="<c:url value="/logout" />" method="POST">
-                <h2>Welcome : ${sessionScope.user.login}</h2>
-                <button class="el-button el-button--primary" type="submit">Log out</button>
+                <div class="login" style="margin-top: 50px"><h2>${sessionScope.user.name}, вы точно хотите выйти?</h2>
+                <button class="el-button el-button--primary" type="submit">Выйти</button></div>
             </form>
         </c:otherwise>
     </c:choose>

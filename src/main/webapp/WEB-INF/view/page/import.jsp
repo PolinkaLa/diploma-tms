@@ -8,8 +8,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style>
+        .el-select {
+            margin-right: 20px;
+        }
         .el-upload-list {
             height: 0%;
+            width: 10%;
+        }
+        .upload-demo {
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-bottom: 50px;
+        }
+        .text {
+            font-size: 14px;
+        }
+
+        .item {
+            margin-bottom: 18px;
+        }
+
+        .clearfix:before,
+        .clearfix:after {
+            display: table;
+            content: "";
+        }
+        .clearfix:after {
+            clear: both
+        }
+
+        .box-card {
+            width: 480px;
         }
     </style>
 </head>
@@ -47,15 +76,19 @@
     </el-select>
     <el-upload class="upload-demo" ref="file" action="/tms/uploadFile" :auto-upload="false" :limit="1"
                :data="{checklistId: selectedChecklist, userId: `${sessionScope.user.id}`}">
-        <el-button slot="trigger" size="small" type="primary">select file</el-button>
-        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">upload to server</el-button>
+        <el-button slot="trigger" size="small" type="primary">Выбрать файл</el-button>
+        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">Импорт</el-button>
     </el-upload>
-    <div>
-        <h2>пример импортируемых данных</h2>
-        <p>"ID","Title","Description","Level","Type"</p>
-        <p>9,"Заголовок теста","Описание теста",1,1</p>
-        <p>12,"Заголовок теста","Описание теста",1,1</p>
-    </div>
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>Пример импортируемых данных</span>
+            </div>
+            <div class="text item">
+                <p>"ID","Title","Description","Level","Type"</p>
+                <p>9,"Заголовок теста","Описание теста",1,1</p>
+                <p>12,"Заголовок теста","Описание теста",1,1</p>
+            </div>
+        </el-card>
 
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

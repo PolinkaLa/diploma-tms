@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.2.2/lib/theme-chalk/index.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        .sc-table{
+            margin-top: 20px;
+        }
+        .el-form {
+            width: 50%;
+        }
+        .el-collapse-item__header{
+            border: none;
+        }
+        .el-collapse {
+            border: none;
+            margin-top: 20px;
+        }
+        .el-collapse-item__wrap {
+            border: none;
+        }
+        .el-select {
+            margin-right: 20px;
+        }
+
+    </style>
 </head>
 <body>
 <script src="https://rawgit.com/vuejs/vue/dev/dist/vue.js"></script>
@@ -40,33 +62,45 @@
     <el-select v-model="selectedChecklist">
         <el-option v-for="checklist in checklists" v-bind:label="checklist.title" v-bind:value="checklist.id"></el-option>
     </el-select>
+
+    <el-collapse accordion>
+        <el-collapse-item >
+            <template slot="title">
+                <el-button type="success" icon="el-icon-plus">Добавить тест</el-button>
+            </template>
+            <el-form ref="form" :model="formAddTest" label-width="120px">
+                <el-form-item label="Название">
+                    <el-input v-model="formAddTest.title"></el-input>
+                </el-form-item>
+                <el-form-item label="Тип">
+                    <el-select v-model="formAddTest.type" placeholder="выбери тип">
+                        <el-option v-for="type in types" v-bind:label="type.name" v-bind:value="type.id"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="Уровень">
+                    <el-select v-model="formAddTest.level" placeholder="выбери уровень">
+                        <el-option v-for="level in levels" v-bind:label="level.name" v-bind:value="level.id"></el-option>
+                    </el-select>
+                </el-form-item>
+
+                <el-form-item label="Описание">
+                    <el-input type="textarea" v-model="formAddTest.description"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="addTest">Добавить</el-button>
+                    <el-button>Отмена</el-button>
+                </el-form-item>
+            </el-form>
+        </el-collapse-item>
+        </el-collapse>
+
+
+
     <data-tables :data="tests" :actions-def="actionsDef" @filtered-data="handleFilteredData">
         <el-table-column v-for="title in titles" :prop="title.prop" :label="title.label" :key="title.label" sortable="custom">
         </el-table-column>
     </data-tables>
-    <el-form ref="form" :model="formAddTest" label-width="120px">
-        <el-form-item label="Название">
-            <el-input v-model="formAddTest.title"></el-input>
-        </el-form-item>
-        <el-form-item label="Тип">
-            <el-select v-model="formAddTest.type" placeholder="выбери тип">
-                <el-option v-for="type in types" v-bind:label="type.name" v-bind:value="type.id"></el-option>
-            </el-select>
-        </el-form-item>
-        <el-form-item label="Уровень">
-            <el-select v-model="formAddTest.level" placeholder="выбери уровень">
-                <el-option v-for="level in levels" v-bind:label="level.name" v-bind:value="level.id"></el-option>
-            </el-select>
-        </el-form-item>
 
-        <el-form-item label="Описание">
-            <el-input type="textarea" v-model="formAddTest.description"></el-input>
-        </el-form-item>
-        <el-form-item>
-            <el-button type="primary" @click="addTest">Create</el-button>
-            <el-button>Cancel</el-button>
-        </el-form-item>
-    </el-form>
 
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -88,13 +122,13 @@
         label: "Description"
     }, {
         label: 'Level',
-        prop: 'fkLevelId'
+        prop: 'level'
     }, {
         label: 'Type',
-        prop: 'fkTypeId'
+        prop: 'type'
     }, {
         label: 'Author',
-        prop: 'fkUserId'
+        prop: 'user'
     }, {
         label: 'UpdatedDate',
         prop: 'updatedDate'
@@ -165,13 +199,14 @@
                     span: 19
                 },
                 def: [ {
-                    name: 'export',
+                    name: 'Экспортировать',
                     handler: () => {
                         CsvExport(this.tests, columns, columnNames, "fileName")
                     },
-                    buttonProps: {
-                        type: 'text'
-                    }
+                    icon: 'plus'
+                    // buttonProps: {
+                    //     type: 'text'
+                    // }
                 }]
             }
         },

@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.2.2/lib/theme-chalk/index.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        .el-select {
+            margin-right: 20px;
+        }
+    </style>
 </head>
 <body>
 <script src="https://rawgit.com/vuejs/vue/dev/dist/vue.js"></script>
@@ -40,7 +45,7 @@
     <el-select v-model="selectedChecklist">
         <el-option v-for="checklist in checklists" v-bind:label="checklist.title" v-bind:value="checklist.id"></el-option>
     </el-select>
-    <data-tables :data="tests" :actions-def="actionsDef" @filtered-data="handleFilteredData">
+    <data-tables :data="tests" :search-def="searchDef" @filtered-data="handleFilteredData">
         <el-table-column v-for="title in titles" :prop="title.prop" :label="title.label" :key="title.label" sortable="custom">
         </el-table-column>
     </data-tables>
@@ -81,14 +86,14 @@
             return {
                 titles,
                 canNotClickList: ['id'],
-                actionsDef: [],
-                filteredData: [],
                 projects:[],
                 selectedProject:'Выбрать проект',
                 checklists:[],
                 selectedChecklist:'Выбрать чеклист',
                 tests:[],
-                total: 0,
+                searchDef: {
+                    show: false
+                }
             }
         },
         created() {
