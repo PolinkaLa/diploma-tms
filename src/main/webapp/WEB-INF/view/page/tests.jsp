@@ -110,8 +110,7 @@
     ELEMENT.locale(ELEMENT.lang.en);
     Vue.use(DataTables);
     Vue.use(DataTables.DataTablesServer);
-    var titles, currentDate;
-    currentDate = "today";
+    var titles;
 
     titles = [{
         prop: "id",
@@ -150,7 +149,7 @@
             var encodedUri = encodeURI(csvContent)
             var link = document.createElement('a')
             link.setAttribute('href', encodedUri)
-            link.setAttribute('download', `${(fileName || 'file')}.csv`)
+            link.setAttribute('download', `${("tms_export")}.csv`)
             document.body.appendChild(link)
             link.click()
             document.body.removeChild(link)
