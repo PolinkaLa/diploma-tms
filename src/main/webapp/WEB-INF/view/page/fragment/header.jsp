@@ -37,14 +37,14 @@
     <el-menu-item index="1"><a href="<c:url value="/testpage"/>">Управление тестами</a></el-menu-item>
     <el-menu-item index="7"><a href="<c:url value="/runpage"/>">Прогоны</a></el-menu-item>
     <el-menu-item index="2"><a href="<c:url value="/importpage"/>">Импорт</a></el-menu-item>
+    <el-menu-item index="5"><a href="<c:url value="/managepage"/>">Управление чеклистами</a></el-menu-item>
     <el-menu-item index="4"><a href="<c:url value="/projectpage"/>">Управление проектами</a></el-menu-item>
-    <%--<el-menu-item index="5"><a href="<c:url value="/managepage"/>">Manage</a></el-menu-item>--%>
     <el-menu-item index="3"><a href="<c:url value="/userpage"/>">Управление пользователями</a></el-menu-item>
     <el-menu-item index="6"><a href="<c:url value="/reportpage"/>">Отчеты</a></el-menu-item>
 
 </el-menu></div>
 <div class="profile">
-        <el-tag>${sessionScope.user.name}</el-tag>
+        <el-tag ><span class="el-icon-info"></span>${sessionScope.user.name}</el-tag>
         <a href="<c:url value="/logout"/>"><span>Выход</span></a>
 </div>
 </div>

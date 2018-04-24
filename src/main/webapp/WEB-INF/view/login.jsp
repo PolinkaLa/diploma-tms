@@ -4,7 +4,7 @@
 <%@page session="true" %>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.2.2/lib/theme-chalk/index.css" type="text/css" />
+    <link rel="stylesheet" href="<spring:url value="/resources/css/index.css"/>" type="text/css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Login Page</title>
     <style>

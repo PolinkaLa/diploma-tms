@@ -4,7 +4,7 @@
 <%@page session="true"%>
 <html>
 <head>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.2.2/lib/theme-chalk/index.css" type="text/css" />
+    <link rel="stylesheet" href="<spring:url value="/resources/css/index.css"/>" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style>
@@ -14,11 +14,11 @@
     </style>
 </head>
 <body>
-<script src="https://rawgit.com/vuejs/vue/dev/dist/vue.js"></script>
-<script src="https://unpkg.com/element-ui@2.2.2/lib/index.js"></script>
-<script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
-<script src="https://unpkg.com/vue-data-tables@3.0.0/dist/data-tables.min.js"></script>
-<script src="https://unpkg.com/json2csv@3.9.1/dist/json2csv.js"></script>
+<script src="<spring:url value="/resources/js/vue.js"/>"></script>
+<script src="<spring:url value="/resources/js/index.js"/>"></script>
+<script src="<spring:url value="/resources/js/en.js"/>"></script>
+<script src="<spring:url value="/resources/js/axios.min.js"/>"></script>
+<script src="<spring:url value="/resources/js/data-tables.min.js"/>"></script>
 <%@include file="fragment/header.jsp" %>
 <script>
     var Main = {
@@ -45,6 +45,7 @@
     <el-select v-model="selectedChecklist">
         <el-option v-for="checklist in checklists" v-bind:label="checklist.title" v-bind:value="checklist.id"></el-option>
     </el-select>
+    <el-button type="success" icon="el-icon-plus" disabled>Добавить прогон</el-button>
     <data-tables :data="tests" :search-def="searchDef" @filtered-data="handleFilteredData">
         <el-table-column v-for="title in titles" :prop="title.prop" :label="title.label" :key="title.label" sortable="custom">
         </el-table-column>
@@ -69,10 +70,10 @@
         label: "Description"
     }, {
         label: 'Level',
-        prop: 'fkLevelId'
+        prop: 'level'
     }, {
         label: 'Type',
-        prop: 'fkTypeId'
+        prop: 'type'
     }, {
         label: 'Current',
         prop: 'current'

@@ -4,7 +4,7 @@
 <%@page session="true"%>
 <html>
 <head>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.2.2/lib/theme-chalk/index.css" type="text/css" />
+    <link rel="stylesheet" href="<spring:url value="/resources/css/index.css"/>" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style>
@@ -31,11 +31,13 @@
     </style>
 </head>
 <body>
-<script src="https://rawgit.com/vuejs/vue/dev/dist/vue.js"></script>
-<script src="https://unpkg.com/element-ui@2.2.2/lib/index.js"></script>
-<script src="https://unpkg.com/element-ui/lib/umd/locale/en.js"></script>
-<script src="https://unpkg.com/vue-data-tables@3.0.0/dist/data-tables.min.js"></script>
-<script src="https://unpkg.com/json2csv@3.9.1/dist/json2csv.js"></script>
+<script src="<spring:url value="/resources/js/vue.js"/>"></script>
+<script src="<spring:url value="/resources/js/index.js"/>"></script>
+<script src="<spring:url value="/resources/js/en.js"/>"></script>
+<script src="<spring:url value="/resources/js/axios.min.js"/>"></script>
+<script src="<spring:url value="/resources/js/data-tables.min.js"/>"></script>
+<script src="<spring:url value="/resources/js/json2csv.js"/>"></script>
+
 <%@include file="fragment/header.jsp" %>
 <script>
     var Main = {
@@ -103,7 +105,7 @@
 
 
 </div>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <script>
     ELEMENT.locale(ELEMENT.lang.en);
     Vue.use(DataTables);
@@ -131,10 +133,10 @@
         prop: 'user'
     }, {
         label: 'UpdatedDate',
-        prop: 'updatedDate'
+        prop: 'uDate'
     }, {
         label: 'CreatedDate',
-        prop: 'createdDate'
+        prop: 'cDate'
     }]
 
     let CsvExport = function(data, fields, fieldNames, fileName) {
@@ -204,9 +206,6 @@
                         CsvExport(this.tests, columns, columnNames, "fileName")
                     },
                     icon: 'plus'
-                    // buttonProps: {
-                    //     type: 'text'
-                    // }
                 }]
             }
         },
