@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -51,6 +53,11 @@ public class TestServiceImpl implements TestService {
                 String name = ldapService.getUserData(login)[0];
                 name = name.split("= ")[1];
                 test.setUser(name);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+                String date = dateFormat.format(test.getCreatedDate());
+                test.setcDate(date);
+                date = dateFormat.format(test.getUpdatedDate());
+                test.setuDate(date);
             }
         return tests;
     }
