@@ -1,7 +1,6 @@
 package com.softwerke.tms.dao;
 
-import com.softwerke.tms.model.Credential;
-import com.softwerke.tms.model.User;
+import com.softwerke.tms.repository.User;
 
 import java.util.List;
 

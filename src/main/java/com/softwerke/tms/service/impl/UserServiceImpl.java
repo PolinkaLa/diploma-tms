@@ -1,8 +1,8 @@
 package com.softwerke.tms.service.impl;
 
 import com.softwerke.tms.dao.UserDAO;
-import com.softwerke.tms.model.Credential;
-import com.softwerke.tms.model.User;
+import com.softwerke.tms.repository.Credential;
+import com.softwerke.tms.repository.User;
 import com.softwerke.tms.service.LdapService;
 import com.softwerke.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

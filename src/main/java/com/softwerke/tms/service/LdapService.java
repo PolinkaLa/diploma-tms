@@ -1,6 +1,6 @@
 package com.softwerke.tms.service;
 
-import com.softwerke.tms.model.Credential;
+import com.softwerke.tms.repository.Credential;
 
 public interface LdapService {
 

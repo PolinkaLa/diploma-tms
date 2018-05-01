@@ -1,7 +1,6 @@
 package com.softwerke.tms.controller;
 
-import com.softwerke.tms.model.Checklist;
-import com.softwerke.tms.model.Project;
+import com.softwerke.tms.repository.Checklist;
 import com.softwerke.tms.service.ChecklistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

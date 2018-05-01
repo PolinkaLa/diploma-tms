@@ -1,7 +1,7 @@
 package com.softwerke.tms.service.impl;
 
 import com.softwerke.tms.dao.ProjectDAO;
-import com.softwerke.tms.model.Project;
+import com.softwerke.tms.repository.Project;
 import com.softwerke.tms.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

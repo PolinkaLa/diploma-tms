@@ -2,7 +2,7 @@ package com.softwerke.tms.service.impl;
 
 
 import com.softwerke.tms.dao.TypeDAO;
-import com.softwerke.tms.model.Type;
+import com.softwerke.tms.repository.Type;
 import com.softwerke.tms.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

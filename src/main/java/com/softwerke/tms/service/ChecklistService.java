@@ -1,6 +1,6 @@
 package com.softwerke.tms.service;
 
-import com.softwerke.tms.model.Checklist;
+import com.softwerke.tms.repository.Checklist;
 
 import java.util.List;
 

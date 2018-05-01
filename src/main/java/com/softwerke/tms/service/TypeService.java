@@ -1,6 +1,6 @@
 package com.softwerke.tms.service;
 
-import com.softwerke.tms.model.Type;
+import com.softwerke.tms.repository.Type;
 
 import java.util.List;
 

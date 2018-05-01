@@ -1,6 +1,6 @@
 package com.softwerke.tms.service;
 
-import com.softwerke.tms.model.ReportData;
+import com.softwerke.tms.repository.ReportData;
 
 import java.util.List;
 

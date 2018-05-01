@@ -1,4 +1,4 @@
-package com.softwerke.tms.model;
+package com.softwerke.tms.repository;
 
 public class User {
     private static int count;

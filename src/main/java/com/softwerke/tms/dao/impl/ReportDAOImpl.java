@@ -1,7 +1,7 @@
 package com.softwerke.tms.dao.impl;
 
 import com.softwerke.tms.dao.ReportDAO;
-import com.softwerke.tms.model.ReportData;
+import com.softwerke.tms.repository.ReportData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;

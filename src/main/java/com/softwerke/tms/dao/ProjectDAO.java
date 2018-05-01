@@ -1,6 +1,6 @@
 package com.softwerke.tms.dao;
 
-import com.softwerke.tms.model.Project;
+import com.softwerke.tms.repository.Project;
 
 import java.util.List;
 

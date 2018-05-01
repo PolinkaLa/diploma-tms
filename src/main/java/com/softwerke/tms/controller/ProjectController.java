@@ -1,6 +1,6 @@
 package com.softwerke.tms.controller;
 
-import com.softwerke.tms.model.Project;
+import com.softwerke.tms.repository.Project;
 import com.softwerke.tms.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,17 +1,8 @@
 package com.softwerke.tms.service.impl;
 
-import com.softwerke.tms.model.Credential;
+import com.softwerke.tms.repository.Credential;
 import com.softwerke.tms.service.LdapService;
 import org.springframework.stereotype.Service;
-
-import javax.naming.Context;
-import javax.naming.NamingEnumeration;
-import javax.naming.NamingException;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.InitialDirContext;
-import javax.naming.directory.SearchControls;
-import javax.naming.directory.SearchResult;
-import java.util.Hashtable;
 
 /**
  softwerke\tmsapp

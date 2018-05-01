@@ -1,6 +1,6 @@
 package com.softwerke.tms.controller;
 
-import com.softwerke.tms.model.Test;
+import com.softwerke.tms.repository.Test;
 import com.softwerke.tms.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

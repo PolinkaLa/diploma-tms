@@ -1,7 +1,7 @@
 package com.softwerke.tms.service.impl;
 
 import com.softwerke.tms.dao.ChecklistDAO;
-import com.softwerke.tms.model.Checklist;
+import com.softwerke.tms.repository.Checklist;
 import com.softwerke.tms.service.ChecklistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

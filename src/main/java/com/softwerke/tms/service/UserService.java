@@ -1,7 +1,7 @@
 package com.softwerke.tms.service;
 
-import com.softwerke.tms.model.Credential;
-import com.softwerke.tms.model.User;
+import com.softwerke.tms.repository.Credential;
+import com.softwerke.tms.repository.User;
 
 import java.util.List;
 

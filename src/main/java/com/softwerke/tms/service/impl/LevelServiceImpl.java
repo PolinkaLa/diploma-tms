@@ -1,7 +1,7 @@
 package com.softwerke.tms.service.impl;
 
 import com.softwerke.tms.dao.LevelDAO;
-import com.softwerke.tms.model.Level;
+import com.softwerke.tms.repository.Level;
 import com.softwerke.tms.service.LevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

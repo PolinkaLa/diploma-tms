@@ -1,6 +1,6 @@
 package com.softwerke.tms.controller;
 
-import com.softwerke.tms.model.Credential;
+import com.softwerke.tms.repository.Credential;
 import com.softwerke.tms.security.AuthorizationManager;
 import com.softwerke.tms.service.LdapService;
 import com.softwerke.tms.service.UserService;

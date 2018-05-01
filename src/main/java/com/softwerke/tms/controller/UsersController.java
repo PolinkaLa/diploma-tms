@@ -1,6 +1,6 @@
 package com.softwerke.tms.controller;
 
-import com.softwerke.tms.model.Credential;
+import com.softwerke.tms.repository.Credential;
 import com.softwerke.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

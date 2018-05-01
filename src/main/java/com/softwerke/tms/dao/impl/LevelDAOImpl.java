@@ -1,7 +1,7 @@
 package com.softwerke.tms.dao.impl;
 
 import com.softwerke.tms.dao.LevelDAO;
-import com.softwerke.tms.model.Level;
+import com.softwerke.tms.repository.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;

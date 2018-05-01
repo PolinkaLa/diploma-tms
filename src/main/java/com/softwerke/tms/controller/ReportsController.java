@@ -1,6 +1,6 @@
 package com.softwerke.tms.controller;
 
-import com.softwerke.tms.model.ReportData;
+import com.softwerke.tms.repository.ReportData;
 import com.softwerke.tms.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

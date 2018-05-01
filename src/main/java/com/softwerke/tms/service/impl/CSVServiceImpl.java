@@ -2,7 +2,7 @@ package com.softwerke.tms.service.impl;
 
 import com.opencsv.CSVReader;
 import com.softwerke.tms.dao.TestDAO;
-import com.softwerke.tms.model.Test;
+import com.softwerke.tms.repository.Test;
 import com.softwerke.tms.service.CSVService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.softwerke.tms.model;
+package com.softwerke.tms.repository;
 
 import java.sql.Timestamp;
 

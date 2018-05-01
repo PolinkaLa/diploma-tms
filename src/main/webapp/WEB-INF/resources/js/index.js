@@ -2360,7 +2360,7 @@
                     t = e.$createElement,
                     i = e._self._c || t;
                 return i("div", { directives: [{ name: "clickoutside", rawName: "v-clickoutside", value: e.handleClose, expression: "handleClose" }], staticClass: "el-select", class: [e.selectSize ? "el-select--" + e.selectSize : ""], on: { click: function(t) { t.stopPropagation(), e.toggleMenu(t) } } }, [e.multiple ? i("div", { ref: "tags", staticClass: "el-select__tags", style: { "max-width": e.inputWidth - 32 + "px" } }, [e.collapseTags && e.selected.length ? i("span", [i("el-tag", { attrs: { closable: !e.selectDisabled, size: e.collapseTagSize, hit: e.selected[0].hitState, type: "info", "disable-transitions": "" }, on: { close: function(t) { e.deleteTag(t, e.selected[0]) } } }, [i("span", { staticClass: "el-select__tags-text" }, [e._v(e._s(e.selected[0].currentLabel))])]), e.selected.length > 1 ? i("el-tag", { attrs: { closable: !1, size: e.collapseTagSize, type: "info", "disable-transitions": "" } }, [i("span", { staticClass: "el-select__tags-text" }, [e._v("+ " + e._s(e.selected.length - 1))])]) : e._e()], 1) : e._e(), e.collapseTags ? e._e() : i("transition-group", { on: { "after-leave": e.resetInputHeight } }, e._l(e.selected, function(t) { return i("el-tag", { key: e.getValueKey(t), attrs: { closable: !e.selectDisabled, size: e.collapseTagSize, hit: t.hitState, type: "info", "disable-transitions": "" }, on: { close: function(i) { e.deleteTag(i, t) } } }, [i("span", { staticClass: "el-select__tags-text" }, [e._v(e._s(t.currentLabel))])]) })), e.filterable ? i("input", {
-                    directives: [{ name: "model", rawName: "v-model", value: e.query, expression: "query" }],
+                    directives: [{ name: "model", rawName: "v-repository", value: e.query, expression: "query" }],
                     ref: "input",
                     staticClass: "el-select__input",
                     class: [e.selectSize ? "is-" + e.selectSize : ""],
@@ -3563,7 +3563,7 @@
                             t.stopPropagation(), t.preventDefault(), e.model = e.label
                         }
                     }
-                }, [i("span", { staticClass: "el-radio__input", class: { "is-disabled": e.isDisabled, "is-checked": e.model === e.label } }, [i("span", { staticClass: "el-radio__inner" }), i("input", { directives: [{ name: "model", rawName: "v-model", value: e.model, expression: "model" }], staticClass: "el-radio__original", attrs: { type: "radio", name: e.name, disabled: e.isDisabled, tabindex: "-1" }, domProps: { value: e.label, checked: e._q(e.model, e.label) }, on: { focus: function(t) { e.focus = !0 }, blur: function(t) { e.focus = !1 }, change: [function(t) { e.model = e.label }, e.handleChange] } })]), i("span", { staticClass: "el-radio__label" }, [e._t("default"), e.$slots.default ? e._e() : [e._v(e._s(e.label))]], 2)])
+                }, [i("span", { staticClass: "el-radio__input", class: { "is-disabled": e.isDisabled, "is-checked": e.model === e.label } }, [i("span", { staticClass: "el-radio__inner" }), i("input", { directives: [{ name: "model", rawName: "v-repository", value: e.model, expression: "model" }], staticClass: "el-radio__original", attrs: { type: "radio", name: e.name, disabled: e.isDisabled, tabindex: "-1" }, domProps: { value: e.label, checked: e._q(e.model, e.label) }, on: { focus: function(t) { e.focus = !0 }, blur: function(t) { e.focus = !1 }, change: [function(t) { e.model = e.label }, e.handleChange] } })]), i("span", { staticClass: "el-radio__label" }, [e._t("default"), e.$slots.default ? e._e() : [e._v(e._s(e.label))]], 2)])
             },
             s = [],
             r = { render: n, staticRenderFns: s };
@@ -3700,7 +3700,7 @@
                             t.stopPropagation(), t.preventDefault(), e.value = e.label
                         }
                     }
-                }, [i("input", { directives: [{ name: "model", rawName: "v-model", value: e.value, expression: "value" }], staticClass: "el-radio-button__orig-radio", attrs: { type: "radio", name: e.name, disabled: e.isDisabled, tabindex: "-1" }, domProps: { value: e.label, checked: e._q(e.value, e.label) }, on: { change: [function(t) { e.value = e.label }, e.handleChange], focus: function(t) { e.focus = !0 }, blur: function(t) { e.focus = !1 } } }), i("span", { staticClass: "el-radio-button__inner", style: e.value === e.label ? e.activeStyle : null }, [e._t("default"), e.$slots.default ? e._e() : [e._v(e._s(e.label))]], 2)])
+                }, [i("input", { directives: [{ name: "model", rawName: "v-repository", value: e.value, expression: "value" }], staticClass: "el-radio-button__orig-radio", attrs: { type: "radio", name: e.name, disabled: e.isDisabled, tabindex: "-1" }, domProps: { value: e.label, checked: e._q(e.value, e.label) }, on: { change: [function(t) { e.value = e.label }, e.handleChange], focus: function(t) { e.focus = !0 }, blur: function(t) { e.focus = !1 } } }), i("span", { staticClass: "el-radio-button__inner", style: e.value === e.label ? e.activeStyle : null }, [e._t("default"), e.$slots.default ? e._e() : [e._v(e._s(e.label))]], 2)])
             },
             s = [],
             r = { render: n, staticRenderFns: s };
@@ -3761,7 +3761,7 @@
                     t = e.$createElement,
                     i = e._self._c || t;
                 return i("label", { staticClass: "el-checkbox", class: [e.border && e.checkboxSize ? "el-checkbox--" + e.checkboxSize : "", { "is-disabled": e.isDisabled }, { "is-bordered": e.border }, { "is-checked": e.isChecked }], attrs: { role: "checkbox", "aria-checked": e.indeterminate ? "mixed" : e.isChecked, "aria-disabled": e.isDisabled, id: e.id } }, [i("span", { staticClass: "el-checkbox__input", class: { "is-disabled": e.isDisabled, "is-checked": e.isChecked, "is-indeterminate": e.indeterminate, "is-focus": e.focus }, attrs: { "aria-checked": "mixed" } }, [i("span", { staticClass: "el-checkbox__inner" }), e.trueLabel || e.falseLabel ? i("input", {
-                    directives: [{ name: "model", rawName: "v-model", value: e.model, expression: "model" }],
+                    directives: [{ name: "model", rawName: "v-repository", value: e.model, expression: "model" }],
                     staticClass: "el-checkbox__original",
                     attrs: { type: "checkbox", name: e.name, disabled: e.isDisabled, "true-value": e.trueLabel, "false-value": e.falseLabel },
                     domProps: { checked: Array.isArray(e.model) ? e._i(e.model, null) > -1 : e._q(e.model, e.trueLabel) },
@@ -3779,7 +3779,7 @@
                         blur: function(t) { e.focus = !1 }
                     }
                 }) : i("input", {
-                    directives: [{ name: "model", rawName: "v-model", value: e.model, expression: "model" }],
+                    directives: [{ name: "model", rawName: "v-repository", value: e.model, expression: "model" }],
                     staticClass: "el-checkbox__original",
                     attrs: { type: "checkbox", disabled: e.isDisabled, name: e.name },
                     domProps: { value: e.label, checked: Array.isArray(e.model) ? e._i(e.model, e.label) > -1 : e.model },
@@ -3863,7 +3863,7 @@
                     t = e.$createElement,
                     i = e._self._c || t;
                 return i("label", { staticClass: "el-checkbox-button", class: [e.size ? "el-checkbox-button--" + e.size : "", { "is-disabled": e.isDisabled }, { "is-checked": e.isChecked }, { "is-focus": e.focus }], attrs: { role: "checkbox", "aria-checked": e.isChecked, "aria-disabled": e.isDisabled } }, [e.trueLabel || e.falseLabel ? i("input", {
-                    directives: [{ name: "model", rawName: "v-model", value: e.model, expression: "model" }],
+                    directives: [{ name: "model", rawName: "v-repository", value: e.model, expression: "model" }],
                     staticClass: "el-checkbox-button__original",
                     attrs: { type: "checkbox", name: e.name, disabled: e.isDisabled, "true-value": e.trueLabel, "false-value": e.falseLabel },
                     domProps: { checked: Array.isArray(e.model) ? e._i(e.model, null) > -1 : e._q(e.model, e.trueLabel) },
@@ -3881,7 +3881,7 @@
                         blur: function(t) { e.focus = !1 }
                     }
                 }) : i("input", {
-                    directives: [{ name: "model", rawName: "v-model", value: e.model, expression: "model" }],
+                    directives: [{ name: "model", rawName: "v-repository", value: e.model, expression: "model" }],
                     staticClass: "el-checkbox-button__original",
                     attrs: { type: "checkbox", name: e.name, disabled: e.isDisabled },
                     domProps: { value: e.label, checked: Array.isArray(e.model) ? e._i(e.model, e.label) > -1 : e.model },
@@ -6655,7 +6655,7 @@
                 clearValidate: function() { this.fields.forEach(function(e) { e.clearValidate() }) },
                 validate: function(e) {
                     var t = this;
-                    if (!this.model) return void console.warn("[Element Warn][Form]model is required for validate to work!");
+                    if (!this.model) return void console.warn("[Element Warn][Form]repository is required for validate to work!");
                     var i = void 0;
                     "function" != typeof e && window.Promise && (i = new window.Promise(function(t, i) { e = function(e) { e ? t(e) : i(e) } }));
                     var n = !0,

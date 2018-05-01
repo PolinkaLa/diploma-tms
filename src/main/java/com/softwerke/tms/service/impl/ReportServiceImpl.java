@@ -1,7 +1,7 @@
 package com.softwerke.tms.service.impl;
 
 import com.softwerke.tms.dao.ReportDAO;
-import com.softwerke.tms.model.ReportData;
+import com.softwerke.tms.repository.ReportData;
 import com.softwerke.tms.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
