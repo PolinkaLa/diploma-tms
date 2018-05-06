@@ -34,10 +34,10 @@
 <script src="<spring:url value="/resources/js/vue.js"/>"></script>
 <script src="<spring:url value="/resources/js/index.js"/>"></script>
 <script src="<spring:url value="/resources/js/en.js"/>"></script>
-<script src="<spring:url value="/resources/js/axios.min.js"/>"></script>
+
 <script src="<spring:url value="/resources/js/data-tables.min.js"/>"></script>
 <script src="<spring:url value="/resources/js/json2csv.js"/>"></script>
-
+<script src="<spring:url value="/resources/js/axios.min.js"/>"></script>
 <%@include file="fragment/header.jsp" %>
 <script>
     var Main = {
@@ -95,18 +95,13 @@
             </el-form>
         </el-collapse-item>
         </el-collapse>
-
-
-
     <data-tables :data="tests" :actions-def="actionsDef" @filtered-data="handleFilteredData">
         <el-table-column v-for="title in titles" :prop="title.prop" :label="title.label" :key="title.label" sortable="custom">
         </el-table-column>
     </data-tables>
-
-
 </div>
-
 <script>
+
     ELEMENT.locale(ELEMENT.lang.en);
     Vue.use(DataTables);
     Vue.use(DataTables.DataTablesServer);
@@ -202,7 +197,7 @@
                 def: [ {
                     name: 'Экспортировать',
                     handler: () => {
-                        CsvExport(this.tests, columns, columnNames, "fileName")
+                        CsvExport(this.tests, columns, columnNames, fileName)
                     },
                     icon: 'plus'
                 }]
@@ -244,6 +239,8 @@
     }
     var Ctor = Vue.extend(Main)
     new Ctor().$mount('#app')
+
+
 </script>
 </body>
 </html>

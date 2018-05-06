@@ -66,4 +66,11 @@ public class PagesController {
         modelAndView.addObject("title", "Run Page");
         return modelAndView;
     }
+    @RequestMapping("/demo_user")
+    public ModelAndView demoUserPageView() {
+        ModelAndView modelAndView = new ModelAndView("page/demo_user");
+        modelAndView.addObject("view", "page/demo_user");
+        modelAndView.addObject("title", "Run Page");
+        return modelAndView;
+    }
 }

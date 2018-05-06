@@ -12,6 +12,16 @@ public class Credential{
 
     private int role;
 
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    private String roleName;
+
     public Credential() {
     }
 

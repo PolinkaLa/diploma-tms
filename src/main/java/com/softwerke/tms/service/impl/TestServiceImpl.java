@@ -60,7 +60,7 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public void updateTest(Test test) {
-        // TODO
+        testDAO.updateTest(test);
     }
 
 

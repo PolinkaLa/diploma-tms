@@ -1,5 +1,6 @@
 package com.softwerke.tms.service.impl;
 
+import com.softwerke.tms.dao.RoleDAO;
 import com.softwerke.tms.dao.UserDAO;
 import com.softwerke.tms.repository.Credential;
 import com.softwerke.tms.repository.User;
@@ -16,6 +17,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     UserDAO userDAO;
+
+    @Autowired
+    RoleDAO roleDAO;
 
     @Autowired
     LdapService ldapService;
@@ -71,6 +75,8 @@ public class UserServiceImpl implements UserService{
                 userData.setName(temp[1]);
                 temp = ldapData[1].split("= ");
                 userData.setEmail(temp[1]);
+                String roleName = roleDAO.getRoleName(user.getFkRoleId());
+                userData.setRoleName(roleName);
                 usersData.add(userData);
             }
             return  usersData;

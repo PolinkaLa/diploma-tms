@@ -43,10 +43,6 @@
     </style>
 </head>
 <body>
-<script src="<spring:url value="/resources/js/vue.js"/>"></script>
-<script src="<spring:url value="/resources/js/index.js"/>"></script>
-<script src="<spring:url value="/resources/js/en.js"/>"></script>
-<script src="<spring:url value="/resources/js/axios.min.js"/>"></script>
 
 <%@include file="fragment/header.jsp" %>
 <script>
@@ -92,7 +88,10 @@
         </el-card>
 
 </div>
-
+<script src="<spring:url value="/resources/js/vue.js"/>"></script>
+<script src="<spring:url value="/resources/js/index.js"/>"></script>
+<script src="<spring:url value="/resources/js/en.js"/>"></script>
+<script src="<spring:url value="/resources/js/axios.min.js"/>"></script>
 <script>
     ELEMENT.locale(ELEMENT.lang.en);
     var Main = {

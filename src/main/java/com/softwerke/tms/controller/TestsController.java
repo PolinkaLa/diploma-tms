@@ -38,4 +38,10 @@ public class TestsController {
         testService.insertTest(checklist, user, type, level, title, description);
     }
 
+    @PostMapping(value = "/updateTest")
+    public void updateTests(@RequestBody Test test){
+        testService.updateTest(test);
+    }
+
+
 }
