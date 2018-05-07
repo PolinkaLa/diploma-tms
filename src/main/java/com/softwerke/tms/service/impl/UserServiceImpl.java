@@ -50,8 +50,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void updateUser(User user) {
-        userDAO.updateUser(user);
+    public void updateUser(User user) throws Exception {
+        try {
+            userDAO.updateUser(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isUserExist(String login)  throws Exception{

@@ -43,8 +43,15 @@ public class ProjectDAOImpl extends JdbcDaoSupport implements ProjectDAO {
     }
 
     @Override
-    public void updateProject(Project project) {
-        // TODO
+    public void updateProject(Project project) throws Exception {
+        try {
+            getJdbcTemplate().update("UPDATE project SET title = ? , active_status = ? WHERE id = ?",
+                    project.getTitle(),
+                    project.isActiveStatus(),
+                    project.getId());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private class ProjectMapper implements RowMapper<Project> {

@@ -11,5 +11,5 @@ public interface ProjectService {
 
     List<Project> getProjects();
 
-    void updateProject(Project project);
+    void updateProject(Project project)  throws Exception;
 }

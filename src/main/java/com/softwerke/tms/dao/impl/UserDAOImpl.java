@@ -62,10 +62,14 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
         return users;
     }
 
-    public void updateUser(User user){
-        getJdbcTemplate().update ("UPDATE user SET fk_role_id = ? WHERE id = ?",
-                user.getFkRoleId(),
-                user.getId());
+    public void updateUser(User user) throws Exception{
+        try {
+            getJdbcTemplate().update ("UPDATE user SET fk_role_id = ? WHERE id = ?",
+                    user.getFkRoleId(),
+                    user.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

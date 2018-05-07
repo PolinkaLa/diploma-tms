@@ -6,6 +6,7 @@ public class Project {
     int id;
     String title;
     Timestamp createdDate;
+    String cDate;
     boolean activeStatus;
 
     public int getId() {
@@ -18,6 +19,13 @@ public class Project {
 
     public String getTitle() {
         return title;
+    }
+    public String getcDate() {
+        return cDate;
+    }
+
+    public void setcDate(String cDate) {
+        this.cDate = cDate;
     }
 
     public void setTitle(String title) {

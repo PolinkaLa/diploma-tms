@@ -13,7 +13,6 @@
 <div id="app">
     <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
-        <v-container grid-list-md>
             <div>
              <v-dialog v-model="dialog" max-width="500px">
                             <v-card>
@@ -107,7 +106,6 @@
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="<spring:url value="/resources/js/json2csv.js"/>"></script>
 <script>
     new Vue({
         el: '#app',
@@ -134,7 +132,7 @@
 
         computed: {
         formTitle () {
-                        return this.editedIndex === -1 ? 'Добавить тест-кейс' : 'Редактировать тест-кейс'
+                        return this.editedIndex === -1 ? 'Добавить тест-кейс' : 'Редактирование прав доступа'
                     }
         },
 
@@ -169,17 +167,20 @@
             },
 
             save () {
-                Object.assign(this.users[this.editedIndex], this.editedItem)
-                axios({
-                    method: 'POST',
-                    url: '/tms/updateUser',
-                    data: {
-                        'principal_name': this.editedItem.login,
-                        'fk_role_id': this.editedItem.role,
-                        'id': this.editedItem.id
-                     }
-                }).then(function() {
-                    console.log("done");});
+                if (this.editedIndex > -1) {
+                    Object.assign(this.users[this.editedIndex], this.editedItem)
+                    axios({
+                        method: 'POST',
+                        url: '/tms/updateUser',
+                        data: {
+                            'fkRoleId': this.editedItem.roleName.id,
+                            'id': this.editedItem.id
+                        }
+                    }).then(function () {
+                        console.log("done");
+                    });
+                }
+                else {}
                 this.close()
             },
         }

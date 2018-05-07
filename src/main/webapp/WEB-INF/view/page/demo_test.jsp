@@ -13,7 +13,6 @@
 <div id="app">
     <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
-        <v-container grid-list-md>
             <v-layout wrap>
                 <v-flex>
         <v-select
@@ -27,7 +26,6 @@
                 return-object
                 required
         ></v-select>
-                    </v-flex><v-flex>
         <v-select
                 :items="checklists"
                 v-model="selectedChecklist"

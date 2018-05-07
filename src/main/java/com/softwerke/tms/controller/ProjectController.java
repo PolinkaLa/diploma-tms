@@ -24,4 +24,9 @@ public class ProjectController {
         boolean status = project.isActiveStatus();
         projectService.insertProject(name, status);
     }
+
+    @PostMapping(value = "/updateProject")
+    public void updateProject(@RequestBody Project project) throws Exception{
+        projectService.updateProject(project);
+    }
 }

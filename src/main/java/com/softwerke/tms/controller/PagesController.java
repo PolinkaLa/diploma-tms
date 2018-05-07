@@ -59,18 +59,53 @@ public class PagesController {
         modelAndView.addObject("title", "Run Page");
         return modelAndView;
     }
-    @RequestMapping("/demo")
-    public ModelAndView demoPageView() {
-        ModelAndView modelAndView = new ModelAndView("page/demo");
-        modelAndView.addObject("view", "page/demo");
-        modelAndView.addObject("title", "Run Page");
+    @RequestMapping("/demo_test")
+    public ModelAndView demoTestPageView() {
+        ModelAndView modelAndView = new ModelAndView("page/demo_test");
+        modelAndView.addObject("view", "page/demo_test");
+        modelAndView.addObject("title", "test");
         return modelAndView;
     }
     @RequestMapping("/demo_user")
     public ModelAndView demoUserPageView() {
         ModelAndView modelAndView = new ModelAndView("page/demo_user");
         modelAndView.addObject("view", "page/demo_user");
-        modelAndView.addObject("title", "Run Page");
+        modelAndView.addObject("title", "user");
+        return modelAndView;
+    }
+    @RequestMapping("/demo_checklist")
+    public ModelAndView demoChecklistPageView() {
+        ModelAndView modelAndView = new ModelAndView("page/demo_checklist");
+        modelAndView.addObject("view", "page/demo_checklist");
+        modelAndView.addObject("title", "checklist");
+        return modelAndView;
+    }
+    @RequestMapping("/demo_import")
+    public ModelAndView demoImportPageView() {
+        ModelAndView modelAndView = new ModelAndView("page/demo_import");
+        modelAndView.addObject("view", "page/demo_import");
+        modelAndView.addObject("title", "import");
+        return modelAndView;
+    }
+    @RequestMapping("/demo_project")
+    public ModelAndView demoProjectPageView() {
+        ModelAndView modelAndView = new ModelAndView("page/demo_project");
+        modelAndView.addObject("view", "page/demo_project");
+        modelAndView.addObject("title", "project");
+        return modelAndView;
+    }
+    @RequestMapping("/demo_report")
+    public ModelAndView demoReportPageView() {
+        ModelAndView modelAndView = new ModelAndView("page/demo_report");
+        modelAndView.addObject("view", "page/demo_report");
+        modelAndView.addObject("title", "report");
+        return modelAndView;
+    }
+    @RequestMapping("/demo_run")
+    public ModelAndView demoRunPageView() {
+        ModelAndView modelAndView = new ModelAndView("page/demo_run");
+        modelAndView.addObject("view", "page/demo_run");
+        modelAndView.addObject("title", "run");
         return modelAndView;
     }
 }
