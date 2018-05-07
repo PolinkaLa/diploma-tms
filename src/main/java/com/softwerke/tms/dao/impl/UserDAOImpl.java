@@ -63,7 +63,9 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     }
 
     public void updateUser(User user){
-        // TODO
+        getJdbcTemplate().update ("UPDATE user SET fk_role_id = ? WHERE id = ?",
+                user.getFkRoleId(),
+                user.getId());
     }
 
     @Override

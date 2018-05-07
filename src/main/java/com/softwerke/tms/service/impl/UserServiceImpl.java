@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void updateUser(User User) {
-        // TODO
+    public void updateUser(User user) {
+        userDAO.updateUser(user);
     }
 
     public boolean isUserExist(String login)  throws Exception{

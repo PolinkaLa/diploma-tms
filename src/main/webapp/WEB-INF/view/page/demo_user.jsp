@@ -15,6 +15,53 @@
     <v-app id="inspire">
         <v-container grid-list-md>
             <div>
+             <v-dialog v-model="dialog" max-width="500px">
+                            <v-card>
+                                <v-card-title>
+                                    <span class="headline">{{ formTitle }}</span>
+                                </v-card-title>
+                                <v-card-text>
+                                    <v-container grid-list-md>
+                                        <v-layout wrap>
+                                            <v-flex>
+                                                <v-text-field v-model="editedItem.login" label="Логин" disabled></v-text-field>
+                                            </v-flex>
+                                        </v-layout>
+                                        </v-layout>
+                                            <v-layout wrap>
+                                            <v-flex>
+                                                <v-text-field v-model="editedItem.name" label="Имя" disabled></v-text-field>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout wrap>
+                                             <v-flex>
+                                                <v-text-field v-model="editedItem.email" label="email" disabled></v-text-field>
+                                             </v-flex>
+                                        </v-layout>
+                                        <v-layout wrap>
+                                        <v-flex>
+                                            <v-select
+                                                :items="roles"
+                                                v-model="editedItem.roleName"
+                                                :hint="`${selectedRole.name}, ${selectedRole.id}`"
+                                                label="Роль"
+                                                single-line
+                                                item-text="name"
+                                                item-value="id"
+                                                return-object
+                                                persistent-hint
+                                            ></v-select>
+                                        </v-flex>
+                                        </v-layout>
+                                    </v-container>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
+                                    <v-btn color="blue darken-1" flat @click.native="save">Сохранить</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
                 <v-card-title>
                     <v-spacer></v-spacer>
                     <v-text-field
@@ -36,22 +83,12 @@
                         <td>{{ props.item.login }}</td>
                         <td>{{ props.item.name }}</td>
                         <td>{{ props.item.email }}</td>
-                        <td><v-edit-dialog
-                                :return-value.sync="props.item.role"
-                                lazy
-                        ><div>{{ props.item.roleName }}</div>
-                            <v-select
-                                    :items="roles"
-                                    slot="input"
-                                    v-model="props.item.role"
-                                    :hint="`${props.item.role.name}, ${props.item.role.id}`"
-                                    single-line
-                                    item-text="name"
-                                    item-value="id"
-                                    return-object
-                                    autofocus
-                            ></v-select>
-                        </v-edit-dialog></td>
+                        <td>{{ props.item.roleName }}</td>
+                        <td class="justify-center layout px-0">
+                                                <v-btn icon class="mx-0" @click="editItem(props.item)">
+                                                    <v-icon color="teal">edit</v-icon>
+                                                </v-btn>
+                                            </td>
                     </template>
                     <v-alert slot="no-results" :value="true"  outline color="error" icon="warning">
                         Поиск по запросу "{{ search }}" не дал результатов.
@@ -86,9 +123,19 @@
                 { text: 'email', value: 'email' },
                 { text: 'Pоль', value: 'roleName' }
             ],
+             editedIndex: -1,
+             editedItem: {
+                login: '',
+                name: '',
+                email: 0,
+                roleName: 0
+             },
         }),
 
         computed: {
+        formTitle () {
+                        return this.editedIndex === -1 ? 'Добавить тест-кейс' : 'Редактировать тест-кейс'
+                    }
         },
 
         watch: {
@@ -109,16 +156,10 @@
         methods: {
 
             editItem (item) {
-                this.editedIndex = this.tests.indexOf(item)
+                this.editedIndex = this.users.indexOf(item)
                 this.editedItem = Object.assign({}, item)
                 this.dialog = true
             },
-
-            deleteItem (item) {
-                const index = this.tests.indexOf(item)
-                confirm('Are you sure you want to delete this item?') && this.tests.splice(index, 1)
-            },
-
             close () {
                 this.dialog = false
                 setTimeout(() => {
@@ -128,11 +169,17 @@
             },
 
             save () {
-                if (this.editedIndex > -1) {
-                    Object.assign(this.tests[this.editedIndex], this.editedItem)
-                } else {
-                    this.tests.push(this.editedItem)
-                }
+                Object.assign(this.users[this.editedIndex], this.editedItem)
+                axios({
+                    method: 'POST',
+                    url: '/tms/updateUser',
+                    data: {
+                        'principal_name': this.editedItem.login,
+                        'fk_role_id': this.editedItem.role,
+                        'id': this.editedItem.id
+                     }
+                }).then(function() {
+                    console.log("done");});
                 this.close()
             },
         }

@@ -2,9 +2,12 @@ package com.softwerke.tms.controller;
 
 import com.softwerke.tms.repository.Credential;
 import com.softwerke.tms.repository.Role;
+import com.softwerke.tms.repository.User;
 import com.softwerke.tms.service.RoleService;
 import com.softwerke.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +33,11 @@ public class UsersController {
     public List<Role> getAllRoles () throws Exception{
         List<Role> roles = roleService.getRoles();
         return roles;
+    }
+
+    @PostMapping("/updateUser")
+    public void updateUser (@RequestBody User user) throws Exception{
+        userService.updateUser(user);
     }
 
 }
