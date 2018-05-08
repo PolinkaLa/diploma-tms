@@ -42,8 +42,15 @@ public class ChecklistDAOImpl extends JdbcDaoSupport implements ChecklistDAO {
     }
 
     @Override
-    public void updateChecklist(Checklist checklist) {
-        // TODO
+    public void updateChecklist(Checklist checklist) throws Exception {
+        try {
+            getJdbcTemplate().update("UPDATE checklist SET title = ? , active_status = ? WHERE id = ?",
+                    checklist.getTitle(),
+                    checklist.isActiveStatus(),
+                    checklist.getId());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private class ChecklistMapper implements RowMapper<Checklist> {

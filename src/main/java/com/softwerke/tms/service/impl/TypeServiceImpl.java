@@ -30,7 +30,7 @@ public class TypeServiceImpl implements TypeService{
     }
 
     @Override
-    public void updateType(Type type) {
+    public void updateType(Type type) throws Exception {
         typeDAO.updateType(type);
     }
 

@@ -55,8 +55,14 @@ public class TypeDAOImpl extends JdbcDaoSupport implements TypeDAO {
     }
 
     @Override
-    public void updateType(Type type) {
-        // TODO
+    public void updateType(Type type) throws Exception{
+        try {
+            getJdbcTemplate().update("UPDATE type SET name = ?  WHERE id = ?",
+                    type.getName(),
+                    type.getId());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

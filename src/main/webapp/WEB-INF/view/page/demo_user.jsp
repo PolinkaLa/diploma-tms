@@ -83,7 +83,7 @@
                         <td>{{ props.item.name }}</td>
                         <td>{{ props.item.email }}</td>
                         <td>{{ props.item.roleName }}</td>
-                        <td class="justify-center layout px-0">
+                        <td class="layout px-0">
                                                 <v-btn icon class="mx-0" @click="editItem(props.item)">
                                                     <v-icon color="teal">edit</v-icon>
                                                 </v-btn>
@@ -119,7 +119,8 @@
                 { text: 'Логин', value: 'login' },
                 { text: 'Имя', value: 'name' },
                 { text: 'email', value: 'email' },
-                { text: 'Pоль', value: 'roleName' }
+                { text: 'Pоль', value: 'roleName' },
+                { text: 'Actions', value: 'act', sortable: false }
             ],
              editedIndex: -1,
              editedItem: {

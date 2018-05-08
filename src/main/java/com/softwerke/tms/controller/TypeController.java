@@ -21,9 +21,15 @@ public class TypeController {
         List<Type> type = typeService.getTypes();
         return type;
     }
+
     @PostMapping(value = "/addType")
     public void addType(@RequestBody Type type){
         String name = type.getName();
         typeService.insertType(name);
+    }
+
+    @PostMapping(value = "/updateType")
+    public void updateType(@RequestBody Type type) throws Exception{
+        typeService.updateType(type);
     }
 }

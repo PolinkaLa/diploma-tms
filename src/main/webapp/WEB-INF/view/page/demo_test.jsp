@@ -13,8 +13,6 @@
 <div id="app">
     <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
-            <v-layout wrap>
-                <v-flex>
         <v-select
                 :items="projects"
                 v-model="selectedProject"
@@ -37,8 +35,6 @@
                 return-object
                 required
         ></v-select>
-                </v-flex>
-            </v-layout>
         <v-btn color="info" @click="CsvExport(tests)">Экспортировать</v-btn>
         <div>
             <v-dialog v-model="dialog" max-width="500px">
@@ -122,7 +118,7 @@
                     <td>{{ props.item.type }}</td>
                     <td>{{ props.item.user }}</td>
                     <td>{{ props.item.uDate }}</td>
-                    <td class="justify-center layout px-0">
+                    <td class="layout px-0">
                         <v-btn icon class="mx-0" @click="editItem(props.item)">
                             <v-icon color="teal">edit</v-icon>
                         </v-btn>

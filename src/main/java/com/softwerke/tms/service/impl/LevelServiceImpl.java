@@ -29,12 +29,12 @@ public class LevelServiceImpl implements LevelService{
     }
 
     @Override
-    public void updateLevel(Level level) {
+    public void updateLevel(Level level)throws Exception {
         levelDAO.updateLevel(level);
     }
 
     @Override
-    public void delLevel(int id) {
-        levelDAO.delLevel(id);
+    public void delLevel(Level level)throws Exception {
+        levelDAO.delLevel(level);
     }
 }

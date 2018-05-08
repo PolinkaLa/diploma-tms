@@ -13,7 +13,7 @@ public interface TypeDAO {
 
     List<Type> getTypes();
 
-    void updateType (Type type);
+    void updateType (Type type) throws Exception;
 
     void delType(int id);
 }

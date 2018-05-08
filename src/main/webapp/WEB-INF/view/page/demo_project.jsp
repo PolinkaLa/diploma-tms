@@ -67,7 +67,7 @@
                         <td>{{ props.item.title }}</td>
                         <td>{{ props.item.activeStatus }}</td>
                         <td>{{ props.item.cDate }}</td>
-                        <td class="justify-center layout px-0">
+                        <td class="layout px-0">
                             <v-btn icon class="mx-0" @click="editItem(props.item)">
                                 <v-icon color="teal">edit</v-icon>
                             </v-btn>

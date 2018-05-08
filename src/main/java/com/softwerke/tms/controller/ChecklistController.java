@@ -25,4 +25,9 @@ public class ChecklistController {
         int project = checklist.getFkProjectId();
         checklistService.insertChecklist(name, status, project);
     }
+
+    @PostMapping(value = "/updateChecklist")
+    public void updateChecklist(@RequestBody Checklist checklist) throws Exception {
+        checklistService.updateChecklist(checklist);
+    }
 }

@@ -11,7 +11,7 @@ public interface TypeService {
 
     List<Type> getTypes();
 
-    void updateType (Type type);
+    void updateType (Type type) throws Exception;
 
     void delType(int id);
 }

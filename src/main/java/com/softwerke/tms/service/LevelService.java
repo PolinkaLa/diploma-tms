@@ -11,7 +11,7 @@ public interface LevelService {
 
     List<Level> getLevels();
 
-    void updateLevel (Level level);
+    void updateLevel (Level level) throws Exception;
 
-    void delLevel(int id);
+    void delLevel(Level level) throws Exception;
 }

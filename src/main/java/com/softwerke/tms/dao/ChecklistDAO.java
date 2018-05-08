@@ -12,5 +12,5 @@ public interface ChecklistDAO {
 
     List<Checklist> getChecklists(int projectId);
 
-    void updateChecklist(Checklist checklist);
+    void updateChecklist(Checklist checklist) throws Exception;
 }

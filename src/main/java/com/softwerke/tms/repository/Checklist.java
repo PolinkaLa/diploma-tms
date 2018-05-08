@@ -8,6 +8,7 @@ public class Checklist {
     String title;
     Timestamp createdDate;
     boolean activeStatus;
+    String cDate;
 
     public int getId() {
         return id;
@@ -47,5 +48,13 @@ public class Checklist {
 
     public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public String getcDate() {
+        return cDate;
+    }
+
+    public void setcDate(String cDate) {
+        this.cDate = cDate;
     }
 }

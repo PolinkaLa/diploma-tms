@@ -45,13 +45,24 @@ public class LevelDAOImpl extends JdbcDaoSupport implements LevelDAO {
     }
 
     @Override
-    public void updateLevel(Level level) {
-        // TODO
+    public void updateLevel(Level level) throws Exception{
+        try {
+            getJdbcTemplate().update("UPDATE level SET name = ?  WHERE id = ?",
+                    level.getName(),
+                    level.getId());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void delLevel(int id) {
-        // TODO
+    public void delLevel(Level level) throws Exception{
+        try {
+            getJdbcTemplate().update("DELETE FROM level WHERE id = ?",
+                    level.getId());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     private class LevelMapper implements RowMapper<Level> {
 

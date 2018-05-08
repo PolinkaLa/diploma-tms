@@ -21,9 +21,20 @@ public class LevelController {
         List<Level> level = levelService.getLevels();
         return level;
     }
+
     @PostMapping(value = "/addLevel")
     public void addLevel(@RequestBody Level level){
         String name = level.getName();
         levelService.insertLevel(name);
+    }
+
+    @PostMapping(value = "/updateLevel")
+    public void updateLevel(@RequestBody Level level) throws Exception{
+        levelService.updateLevel(level);
+    }
+
+    @PostMapping(value = "/deleteLevel")
+    public void deleteLevel(@RequestBody Level level) throws Exception{
+        levelService.delLevel(level);
     }
 }
