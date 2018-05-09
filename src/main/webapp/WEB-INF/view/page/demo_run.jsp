@@ -13,6 +13,7 @@
 <div id="app">
     <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
+        <v-container grid-list-lg>
         <v-select
                 :items="projects"
                 v-model="selectedProject"
@@ -116,9 +117,7 @@
                     :headers="headers"
                     :items="tests"
                     :search="search"
-                    pagination.sync
-                    hide-actions
-                    class="elevation-1"
+                    class="elevation-8"
             >
                 <template slot="items" slot-scope="props">
                     <td>{{ props.item.id }}</td>
@@ -142,6 +141,8 @@
                 </template>
             </v-data-table>
         </div>
+
+        </v-container>
     </v-app>
 </div>
 
@@ -149,6 +150,8 @@
 <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="<spring:url value="/resources/js/json2csv.js"/>"></script>
+<script src="<spring:url value="/resources/js/vue-markdown.js"/>"></script>
+
 <script>
     Vue.use(VueMarkdown);
     new Vue({

@@ -13,6 +13,7 @@
 <div id="app">
     <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
+        <v-container grid-list-lg>
             <div>
                 <v-dialog v-model="dialog" max-width="500px">
                     <v-btn slot="activator" color="primary" dark class="mb-2">Добавить проект</v-btn>
@@ -52,16 +53,13 @@
                             append-icon="search"
                             label="Поиск"
                             single-line
-                            hide-details
                     ></v-text-field>
                 </v-card-title>
                 <v-data-table
                         :headers="headers"
                         :items="projects"
                         :search="search"
-                        pagination.sync
-                        hide-actions
-                        class="elevation-1"
+                        class="elevation-8"
                 >
                     <template slot="items" slot-scope="props">
                         <td>{{ props.item.title }}</td>
@@ -87,6 +85,7 @@
                     </template>
                 </v-data-table>
             </div>
+        </v-container>
     </v-app>
 </div>
 

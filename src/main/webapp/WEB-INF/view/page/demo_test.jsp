@@ -13,6 +13,7 @@
 <div id="app">
     <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
+        <v-container grid-list-lg>
         <v-select
                 :items="projects"
                 v-model="selectedProject"
@@ -35,7 +36,6 @@
                 return-object
                 required
         ></v-select>
-        <v-btn color="info" @click="CsvExport(tests)">Экспортировать</v-btn>
         <div>
             <v-dialog v-model="dialog" max-width="500px">
                 <v-btn slot="activator" color="info" dark class="mb-2">Добавить тест-кейс</v-btn>
@@ -94,6 +94,7 @@
                 </v-card>
             </v-dialog>
             <v-card-title>
+                <v-btn color="info" @click="CsvExport(tests)">Экспортировать</v-btn>
                 <v-spacer></v-spacer>
                 <v-text-field
                         v-model="search"
@@ -107,9 +108,7 @@
                     :headers="headers"
                     :items="tests"
                     :search="search"
-                    pagination.sync
-                    hide-actions
-                    class="elevation-1"
+                    class="elevation-8"
             >
                 <template slot="items" slot-scope="props">
                     <td>{{ props.item.id }}</td>
@@ -139,6 +138,7 @@
                 </template>
             </v-data-table>
         </div>
+            </v-container>
     </v-app>
 </div>
 

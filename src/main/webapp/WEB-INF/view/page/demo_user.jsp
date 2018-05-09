@@ -13,6 +13,7 @@
 <div id="app">
     <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
+        <v-container grid-list-lg>
             <div>
              <v-dialog v-model="dialog" max-width="500px">
                             <v-card>
@@ -75,8 +76,7 @@
                         :headers="headers"
                         :items="users"
                         :search="search"
-                        hide-actions
-                        class="elevation-1"
+                        class="elevation-8"
                 >
                     <template slot="items" slot-scope="props">
                         <td>{{ props.item.login }}</td>
@@ -100,6 +100,7 @@
                     </template>
                 </v-data-table>
             </div>
+        </v-container>
     </v-app>
 </div>
 

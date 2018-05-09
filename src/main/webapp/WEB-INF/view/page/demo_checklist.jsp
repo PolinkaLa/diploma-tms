@@ -13,6 +13,7 @@
 <div id="app">
     <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
+        <v-container grid-list-lg>
     <div>
                     <v-dialog v-model="dialogType" max-width="500px">
                         <v-btn slot="activator" color="primary" dark class="mb-2">Добавить Тип</v-btn>
@@ -83,8 +84,7 @@
                     <v-data-table
                             :headers="typeHeader"
                             :items="levels"
-                            hide-actions
-                            class="elevation-1"
+                            class="elevation-8"
                     >
                         <template slot="items" slot-scope="props">
                             <td>{{ props.item.name }}</td>
@@ -185,6 +185,7 @@
                     </template>
                 </v-data-table>
             </div>
+        </v-container>
     </v-app>
 </div>
 
