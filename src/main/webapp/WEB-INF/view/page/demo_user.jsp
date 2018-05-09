@@ -120,7 +120,7 @@
                 { text: 'Имя', value: 'name' },
                 { text: 'email', value: 'email' },
                 { text: 'Pоль', value: 'roleName' },
-                { text: 'Actions', value: 'act', sortable: false }
+                { text: '', value: 'act', sortable: false }
             ],
              editedIndex: -1,
              editedItem: {

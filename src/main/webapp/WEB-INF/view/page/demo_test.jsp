@@ -38,10 +38,11 @@
         <v-btn color="info" @click="CsvExport(tests)">Экспортировать</v-btn>
         <div>
             <v-dialog v-model="dialog" max-width="500px">
-                <v-btn slot="activator" color="primary" dark class="mb-2">Добавить тест-кейс</v-btn>
+                <v-btn slot="activator" color="info" dark class="mb-2">Добавить тест-кейс</v-btn>
                 <v-card>
                     <v-card-title>
                         <span class="headline">{{ formTitle }}</span>
+                        <a href="http://miaolz123.github.io/vue-markdown/" target="_blank" style="float: right;"><v-icon color="grey">help</v-icon>Markdown синтаксис</a>
                     </v-card-title>
                     <v-card-text>
                         <v-container grid-list-md>
@@ -87,8 +88,8 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
-                        <v-btn color="blue darken-1" flat @click.native="save">Сохранить</v-btn>
+                        <v-btn color="blue" flat @click.native="close">Отмена</v-btn>
+                        <v-btn color="blue" flat @click.native="save">Сохранить</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -113,17 +114,14 @@
                 <template slot="items" slot-scope="props">
                     <td>{{ props.item.id }}</td>
                     <td>{{ props.item.title }}</td>
-                    <td>{{ props.item.description }}</td>
+                    <td><vue-markdown>{{ props.item.description }}</vue-markdown></td>
                     <td>{{ props.item.level }}</td>
                     <td>{{ props.item.type }}</td>
                     <td>{{ props.item.user }}</td>
                     <td>{{ props.item.uDate }}</td>
                     <td class="layout px-0">
                         <v-btn icon class="mx-0" @click="editItem(props.item)">
-                            <v-icon color="teal">edit</v-icon>
-                        </v-btn>
-                        <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-                            <v-icon color="pink">delete</v-icon>
+                            <v-icon color="grey">edit</v-icon>
                         </v-btn>
                     </td>
                 </template>
@@ -148,7 +146,9 @@
 <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="<spring:url value="/resources/js/json2csv.js"/>"></script>
+<script src="<spring:url value="/resources/js/vue-markdown.js"/>"></script>
 <script>
+    Vue.use(VueMarkdown);
     new Vue({
         el: '#app',
         data: () => ({
@@ -172,7 +172,7 @@
                 { text: 'Тип', value: 'type' },
                 { text: 'Автор', value: 'user'},
                 { text: 'Обновлен', value: 'uDate'},
-                { text: 'Actions', value: 'name', sortable: false }
+                { text: '', value: 'name', sortable: false }
             ],
             editedIndex: -1,
             editedItem: {

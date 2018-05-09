@@ -21,6 +21,7 @@ public class Credential{
     }
 
     private String roleName;
+    private String principalName;
 
     public Credential() {
     }
@@ -80,5 +81,13 @@ public class Credential{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPrincipalName() {
+        return principalName;
+    }
+
+    public void setPrincipalName(String principalName) {
+        this.principalName = principalName;
     }
 }

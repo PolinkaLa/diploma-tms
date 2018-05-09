@@ -40,8 +40,8 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
-                            <v-btn color="blue darken-1" flat @click.native="save">Сохранить</v-btn>
+                            <v-btn color="blue" flat @click.native="close">Отмена</v-btn>
+                            <v-btn color="blue" flat @click.native="save">Сохранить</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -69,10 +69,7 @@
                         <td>{{ props.item.cDate }}</td>
                         <td class="layout px-0">
                             <v-btn icon class="mx-0" @click="editItem(props.item)">
-                                <v-icon color="teal">edit</v-icon>
-                            </v-btn>
-                            <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-                                <v-icon color="pink">delete</v-icon>
+                                <v-icon color="grey">edit</v-icon>
                             </v-btn>
                         </td>
                     </template>
@@ -108,7 +105,7 @@
                 { text: 'Название', value: 'title' },
                 { text: 'Статус', value: 'activeStatus' },
                 { text: 'Дата создания', value: 'сDate'},
-                { text: 'Actions', value: 'name', sortable: false }
+                { text: '', value: 'name', sortable: false }
             ],
             editedIndex: -1,
             editedItem: {

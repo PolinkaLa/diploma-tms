@@ -31,8 +31,8 @@
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" flat @click.native="closeType">Отмена</v-btn>
-                                <v-btn color="blue darken-1" flat @click.native="saveType">Сохранить</v-btn>
+                                <v-btn color="blue" flat @click.native="closeType">Отмена</v-btn>
+                                <v-btn color="blue" flat @click.native="saveType">Сохранить</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -46,10 +46,7 @@
                             <td>{{ props.item.name }}</td>
                             <td class=" layout px-0">
                                 <v-btn icon class="mx-0" @click="editItemType(props.item)">
-                                    <v-icon color="teal">edit</v-icon>
-                                </v-btn>
-                                <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-                                    <v-icon color="pink">delete</v-icon>
+                                    <v-icon color="gray">edit</v-icon>
                                 </v-btn>
                             </td>
                         </template>
@@ -78,8 +75,8 @@
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" flat @click.native="closeLevel">Отмена</v-btn>
-                                <v-btn color="blue darken-1" flat @click.native="saveLevel">Сохранить</v-btn>
+                                <v-btn color="blue" flat @click.native="closeLevel">Отмена</v-btn>
+                                <v-btn color="blue" flat @click.native="saveLevel">Сохранить</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -93,10 +90,7 @@
                             <td>{{ props.item.name }}</td>
                             <td class="layout px-0">
                                 <v-btn icon class="mx-0" @click="editItemLevel(props.item)">
-                                    <v-icon color="teal">edit</v-icon>
-                                </v-btn>
-                                <v-btn icon class="mx-0" @click="deleteItemLevel(props.item)">
-                                    <v-icon color="pink">delete</v-icon>
+                                    <v-icon color="tgrayeal">edit</v-icon>
                                 </v-btn>
                             </td>
                         </template>
@@ -144,8 +138,8 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
-                            <v-btn color="blue darken-1" flat @click.native="saveChecklist">Сохранить</v-btn>
+                            <v-btn color="blue" flat @click.native="close">Отмена</v-btn>
+                            <v-btn color="blue" flat @click.native="saveChecklist">Сохранить</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -173,10 +167,7 @@
                         <td>{{ props.item.cDate }}</td>
                         <td class="layout px-0">
                             <v-btn icon class="mx-0" @click="editItem(props.item)">
-                                <v-icon color="teal">edit</v-icon>
-                            </v-btn>
-                            <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-                                <v-icon color="pink">delete</v-icon>
+                                <v-icon color="gray">edit</v-icon>
                             </v-btn>
                         </td>
                     </template>
@@ -209,7 +200,7 @@
             levels: [],
             typeHeader:[
                 { text: 'Название', value: 'name' },
-                { text: 'Actions', value: 'name', sortable: false }],
+                { text: '', value: 'name', sortable: false }],
             types: [],
             projects:[],
             selectedProject: '',
@@ -221,7 +212,7 @@
                 { text: 'Название', value: 'title' },
                 { text: 'Статус', value: 'activeStatus' },
                 { text: 'Дата создания', value: 'сDate'},
-                { text: 'Actions', value: 'name', sortable: false }
+                { text: '', value: 'name', sortable: false }
             ],
             editedIndex: -1,
             editedIndexType: -1,
@@ -303,20 +294,6 @@
                 this.dialogLevel = true
             },
 
-            deleteItemLevel (item) {
-                const index = this.levels.indexOf(item)
-                confirm('Are you sure you want to delete this item?')
-                axios({
-                        method: 'POST',
-                            url: '/tms/deleteLevel',
-                            data: {
-                                'id': this.editedItemLevel.id,
-                                'name': this.editedItemLevel.name
-                            }
-                    }).then(function() {
-                        console.log("done");});
-                this.levels.splice(index, 1)
-            },
 
             close () {
                 this.dialog = false
@@ -343,7 +320,7 @@
                         data: {
                             'title': this.editedItem.title,
                             'activeStatus': this.editedItem.activeStatus,
-                            'id': this.editedItem.id
+                            'id': this.editedItem.id,
                         }
                     }).then(function() {
                         console.log("done");});
@@ -354,7 +331,8 @@
                         url: '/tms/addChecklist',
                         data: {
                             'title': this.editedItem.title,
-                            'activeStatus': this.editedItem.activeStatus
+                            'activeStatus': this.editedItem.activeStatus,
+                            'fkProjectId': this.selectedProject.id
                         }
                     }).then(function() {
                         console.log("done");});

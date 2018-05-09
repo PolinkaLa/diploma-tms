@@ -20,10 +20,7 @@ public class ChecklistController {
     }
     @PostMapping(value = "/addChecklist")
     public void addChecklist(@RequestBody Checklist checklist){
-        String name = checklist.getTitle();
-        boolean status = checklist.isActiveStatus();
-        int project = checklist.getFkProjectId();
-        checklistService.insertChecklist(name, status, project);
+        checklistService.insertChecklist(checklist);
     }
 
     @PostMapping(value = "/updateChecklist")

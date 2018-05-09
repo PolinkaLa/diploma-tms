@@ -21,8 +21,11 @@ public class ChecklistDAOImpl extends JdbcDaoSupport implements ChecklistDAO {
     }
 
     @Override
-    public void insertChecklist(String name, boolean status, int project) {
-        getJdbcTemplate().update ("INSERT INTO checklist (title, active_status, fk_project_id) VALUE ( ?, ?, ?)", name, status, project);
+    public void insertChecklist(Checklist checklist) {
+        getJdbcTemplate().update ("INSERT INTO checklist (title, active_status, fk_project_id) VALUE ( ?, ?, ?)",
+                checklist.getTitle(),
+                checklist.isActiveStatus(),
+                checklist.getFkProjectId());
     }
 
     @Override
