@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ChecklistService {
 
-    void insertChecklist(String name, boolean status, int project);
+    void insertChecklist(Checklist checklist);
 
     Checklist getChecklist(int checklistID);
 

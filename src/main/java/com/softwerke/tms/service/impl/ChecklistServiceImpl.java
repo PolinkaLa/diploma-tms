@@ -16,8 +16,8 @@ public class ChecklistServiceImpl implements ChecklistService{
     ChecklistDAO checklistDAO;
 
     @Override
-    public void insertChecklist(String name, boolean status, int project) {
-        checklistDAO.insertChecklist(name, status, project);
+    public void insertChecklist(Checklist checklist) {
+        checklistDAO.insertChecklist(checklist);
     }
 
     @Override

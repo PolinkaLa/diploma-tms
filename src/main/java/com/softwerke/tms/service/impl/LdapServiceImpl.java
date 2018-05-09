@@ -111,7 +111,7 @@ public class LdapServiceImpl implements LdapService {
     /*
     * workflow for authorize user without VPN for developing*/
     public Credential authorizeUser(String login, String password) {
-        Credential credential = new Credential("testTest", "cn= Test Test", "mail= test.test@soft-werke.com");
+        Credential credential = new Credential("lpv", "cn= Test Test", "mail= test.test@soft-werke.com");
         return credential;
     }
 }
