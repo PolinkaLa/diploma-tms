@@ -1,8 +1,20 @@
 package com.softwerke.tms.service.impl;
 
+import com.softwerke.tms.dao.RoleDAO;
+import com.softwerke.tms.dao.UserDAO;
 import com.softwerke.tms.repository.Credential;
 import com.softwerke.tms.service.LdapService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.naming.Context;
+import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.InitialDirContext;
+import javax.naming.directory.SearchControls;
+import javax.naming.directory.SearchResult;
+import java.util.Hashtable;
 
 /**
  softwerke\tmsapp
@@ -19,6 +31,12 @@ public class LdapServiceImpl implements LdapService {
     private static String SECURITY_PRINCIPAL_PREFIX = "cn=tmsapp";
     private static String SECURITY_PASS = "ac8_yMp8ghv1eeZ";
     private static String SEARCH_FILTER_ATTRIBUTE_NAME = "sAMAccountName";
+
+    @Autowired
+    UserDAO userDAO;
+
+    @Autowired
+    RoleDAO roleDAO;
 
     public String[] getUserData(String login) throws Exception {
 //        Hashtable<String, Object> lpv = new Hashtable<String, Object>();
@@ -68,7 +86,7 @@ public class LdapServiceImpl implements LdapService {
 //        accountData[0] = accountName;
 //        accountData[1] = accountEmail;
 //        return accountData;
-//
+
         //**************************************
         //********* without ldap, for test *****
         //**************************************
@@ -77,7 +95,7 @@ public class LdapServiceImpl implements LdapService {
         accountData[1] = "mail= test.test@soft-werke.com";
         return accountData;
 
-    }
+   }
 
 //    public Credential authorizeUser(String login, String password) {
 //        String[] accountData;
@@ -102,6 +120,8 @@ public class LdapServiceImpl implements LdapService {
 //        try {
 //            DirContext ctx = new InitialDirContext(env);
 //            credential = new Credential(login, accountLogin, accountEmail);
+//    credential.setRole(userDAO.getUserRole(credential.getLogin()));
+//        credential.setRoleName(roleDAO.getRoleName(credential.getRole()));
 //            return credential;
 //        } catch (NamingException e) {
 //
@@ -112,6 +132,8 @@ public class LdapServiceImpl implements LdapService {
     * workflow for authorize user without VPN for developing*/
     public Credential authorizeUser(String login, String password) {
         Credential credential = new Credential("lpv", "cn= Test Test", "mail= test.test@soft-werke.com");
+        credential.setRole(userDAO.getUserRole(credential.getLogin()));
+        credential.setRoleName(roleDAO.getRoleName(credential.getRole()));
         return credential;
     }
 }

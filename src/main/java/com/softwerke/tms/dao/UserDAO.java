@@ -17,4 +17,6 @@ public interface UserDAO {
     void updateUser (User User) throws Exception;
 
     boolean isUserExist (String login) throws Exception ;
+
+    int getUserRole (String login);
 }

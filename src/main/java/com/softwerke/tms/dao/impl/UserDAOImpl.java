@@ -80,6 +80,17 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
         return true;
     }
 
+    @Override
+    public int getUserRole(String login) {
+        User user = null;
+            user = getJdbcTemplate().
+                    queryForObject("SELECT * FROM user WHERE principal_name = ?",
+                            new Object[]{login},
+                            new UserDAOImpl.UserMapper()
+                    );
+        return user.getFkRoleId();
+    }
+
     private class UserMapper implements RowMapper<User> {
 
         @Override

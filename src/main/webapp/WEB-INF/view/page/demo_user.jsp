@@ -13,9 +13,11 @@
 <div id="app">
     <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
-        <v-container grid-list-lg>
-            <div>
-             <v-dialog v-model="dialog" max-width="500px">
+        <c:choose>
+            <c:when test="${sessionScope.user.roleName == 'admin'}">
+                <v-container grid-list-lg>
+                    <div>
+                        <v-dialog v-model="dialog" max-width="500px">
                             <v-card>
                                 <v-card-title>
                                     <span class="headline">{{ formTitle }}</span>
@@ -28,30 +30,30 @@
                                             </v-flex>
                                         </v-layout>
                                         </v-layout>
-                                            <v-layout wrap>
+                                        <v-layout wrap>
                                             <v-flex>
                                                 <v-text-field v-model="editedItem.name" label="Имя" disabled></v-text-field>
                                             </v-flex>
                                         </v-layout>
                                         <v-layout wrap>
-                                             <v-flex>
+                                            <v-flex>
                                                 <v-text-field v-model="editedItem.email" label="email" disabled></v-text-field>
-                                             </v-flex>
+                                            </v-flex>
                                         </v-layout>
                                         <v-layout wrap>
-                                        <v-flex>
-                                            <v-select
-                                                :items="roles"
-                                                v-model="editedItem.roleName"
-                                                :hint="`${selectedRole.name}, ${selectedRole.id}`"
-                                                label="Роль"
-                                                single-line
-                                                item-text="name"
-                                                item-value="id"
-                                                return-object
-                                                persistent-hint
-                                            ></v-select>
-                                        </v-flex>
+                                            <v-flex>
+                                                <v-select
+                                                        :items="roles"
+                                                        v-model="editedItem.roleName"
+                                                        :hint="`${selectedRole.name}, ${selectedRole.id}`"
+                                                        label="Роль"
+                                                        single-line
+                                                        item-text="name"
+                                                        item-value="id"
+                                                        return-object
+                                                        persistent-hint
+                                                ></v-select>
+                                            </v-flex>
                                         </v-layout>
                                     </v-container>
                                 </v-card-text>
@@ -62,45 +64,66 @@
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
-                <v-card-title>
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                            v-model="search"
-                            append-icon="search"
-                            label="Поиск"
-                            single-line
-                            hide-details
-                    ></v-text-field>
-                </v-card-title>
-                <v-data-table
-                        :headers="headers"
-                        :items="users"
-                        :search="search"
-                        class="elevation-8"
-                >
-                    <template slot="items" slot-scope="props">
-                        <td>{{ props.item.login }}</td>
-                        <td>{{ props.item.name }}</td>
-                        <td>{{ props.item.email }}</td>
-                        <td>{{ props.item.roleName }}</td>
-                        <td class="layout px-0">
-                                                <v-btn icon class="mx-0" @click="editItem(props.item)">
-                                                    <v-icon color="teal">edit</v-icon>
-                                                </v-btn>
-                                            </td>
-                    </template>
-                    <v-alert slot="no-results" :value="true"  outline color="error" icon="warning">
-                        Поиск по запросу "{{ search }}" не дал результатов.
-                    </v-alert>
+                        <v-card-title>
+                            <v-spacer></v-spacer>
+                            <v-text-field
+                                    v-model="search"
+                                    append-icon="search"
+                                    label="Поиск"
+                                    single-line
+                                    hide-details
+                            ></v-text-field>
+                        </v-card-title>
+                        <v-data-table
+                                :headers="headers"
+                                :items="users"
+                                :search="search"
+                                class="elevation-8"
+                        >
+                            <template slot="items" slot-scope="props">
+                                <td>{{ props.item.login }}</td>
+                                <td>{{ props.item.name }}</td>
+                                <td>{{ props.item.email }}</td>
+                                <td>{{ props.item.roleName }}</td>
+                                <td class="layout px-0">
+                                    <v-btn icon class="mx-0" @click="editItem(props.item)">
+                                        <v-icon color="teal">edit</v-icon>
+                                    </v-btn>
+                                </td>
+                            </template>
+                            <v-alert slot="no-results" :value="true"  outline color="error" icon="warning">
+                                Поиск по запросу "{{ search }}" не дал результатов.
+                            </v-alert>
 
-                    <template slot="no-data">
-                        <v-alert :value="true"  outline color="error" icon="warning">
-                            В базе данных нет сведений о пользователях системы
-                        </v-alert>
-                    </template>
-                </v-data-table>
-            </div>
-        </v-container>
+                            <template slot="no-data">
+                                <v-alert :value="true"  outline color="error" icon="warning">
+                                    В базе данных нет сведений о пользователях системы
+                                </v-alert>
+                            </template>
+                        </v-data-table>
+                    </div>
+                </v-container>
+            </c:when>
+            <c:otherwise>
+                <v-container grid-list-lg>
+                    <v-card>
+                        <v-card-title>
+                            <span class="headline">Недостаточно прав</span>
+                        </v-card-title>
+                        <v-card-text>
+                            <v-container grid-list-md>
+                                <v-layout wrap>
+                                    <v-flex>
+                                        Обратитесть к администратору приложения
+                                    </v-flex>
+                                </v-layout>
+                                </v-layout>
+                            </v-container>
+                        </v-card-text>
+                    </v-card>
+                </v-container>
+            </c:otherwise>
+        </c:choose>
     </v-app>
 </div>
 
@@ -133,9 +156,9 @@
         }),
 
         computed: {
-        formTitle () {
-                        return this.editedIndex === -1 ? 'Добавить тест-кейс' : 'Редактирование прав доступа'
-                    }
+            formTitle () {
+                return this.editedIndex === -1 ? 'Добавить тест-кейс' : 'Редактирование прав доступа'
+            }
         },
 
         watch: {

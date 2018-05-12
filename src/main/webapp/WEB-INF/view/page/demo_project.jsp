@@ -13,82 +13,104 @@
 <div id="app">
     <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
-        <v-container grid-list-lg>
-            <div>
-                <v-dialog v-model="dialog" max-width="500px">
-                    <v-btn slot="activator" color="primary" dark class="mb-2">Добавить проект</v-btn>
+        <c:choose>
+            <c:when test="${sessionScope.user.roleName == 'qa'}">
+                <v-container grid-list-lg>
                     <v-card>
                         <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
+                            <span class="headline">Недостаточно прав</span>
                         </v-card-title>
                         <v-card-text>
                             <v-container grid-list-md>
                                 <v-layout wrap>
                                     <v-flex>
-                                        <v-text-field v-model="editedItem.title" label="Название"></v-text-field>
+                                        Обратитесть к администратору приложения
                                     </v-flex>
                                 </v-layout>
-                                <v-layout wrap>
-                                    <v-flex>
-                                        <v-checkbox
-                                                :label="`Активный проект: ${editedItem.activeStatus.toString()}`"
-                                                v-model="editedItem.activeStatus"
-                                        ></v-checkbox>
-                                    </v-flex>
                                 </v-layout>
-
                             </v-container>
                         </v-card-text>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="blue" flat @click.native="close">Отмена</v-btn>
-                            <v-btn color="blue" flat @click.native="save">Сохранить</v-btn>
-                        </v-card-actions>
                     </v-card>
-                </v-dialog>
-                <v-card-title>
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                            v-model="search"
-                            append-icon="search"
-                            label="Поиск"
-                            single-line
-                    ></v-text-field>
-                </v-card-title>
-                <v-data-table
-                        :headers="headers"
-                        :items="projects"
-                        :search="search"
-                        class="elevation-8"
-                >
-                    <template slot="items" slot-scope="props">
-                        <td>{{ props.item.title }}</td>
-                        <td>{{ props.item.activeStatus }}</td>
-                        <td>{{ props.item.cDate }}</td>
-                        <td class="layout px-0">
-                            <v-btn icon class="mx-0" @click="editItem(props.item)">
-                                <v-icon color="grey">edit</v-icon>
-                            </v-btn>
-                        </td>
-                    </template>
-                    <v-alert slot="no-results" :value="true"  outline color="error" icon="warning">
-                        Поиск по запросу "{{ search }}" не дал результатов.
-                    </v-alert>
+                </v-container>
+            </c:when>
+            <c:otherwise>
+                <v-container grid-list-lg>
+                    <div>
+                        <v-dialog v-model="dialog" max-width="500px">
+                            <v-btn slot="activator" color="primary" dark class="mb-2">Добавить проект</v-btn>
+                            <v-card>
+                                <v-card-title>
+                                    <span class="headline">{{ formTitle }}</span>
+                                </v-card-title>
+                                <v-card-text>
+                                    <v-container grid-list-md>
+                                        <v-layout wrap>
+                                            <v-flex>
+                                                <v-text-field v-model="editedItem.title" label="Название"></v-text-field>
+                                            </v-flex>
+                                        </v-layout>
+                                        <v-layout wrap>
+                                            <v-flex>
+                                                <v-checkbox
+                                                        :label="`Активный проект: ${editedItem.activeStatus.toString()}`"
+                                                        v-model="editedItem.activeStatus"
+                                                ></v-checkbox>
+                                            </v-flex>
+                                        </v-layout>
 
-                    <template slot="no-data">
-                        <v-alert :value="true"  outline color="error" icon="warning">
-                            Ни одного проекта еще не создано
-                        </v-alert>
-                    </template>
-                    <template slot="pageText" slot-scope="{ pageStart, pageStop }">
-                        From {{ pageStart }} to {{ pageStop }}
-                    </template>
-                </v-data-table>
-            </div>
-        </v-container>
+                                    </v-container>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="blue" flat @click.native="close">Отмена</v-btn>
+                                    <v-btn color="blue" flat @click.native="save">Сохранить</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                        <v-card-title>
+                            <v-spacer></v-spacer>
+                            <v-text-field
+                                    v-model="search"
+                                    append-icon="search"
+                                    label="Поиск"
+                                    single-line
+                            ></v-text-field>
+                        </v-card-title>
+                        <v-data-table
+                                :headers="headers"
+                                :items="projects"
+                                :search="search"
+                                class="elevation-8"
+                        >
+                            <template slot="items" slot-scope="props">
+                                <td>{{ props.item.title }}</td>
+                                <td>{{ props.item.activeStatus }}</td>
+                                <td>{{ props.item.cDate }}</td>
+                                <td class="layout px-0">
+                                    <v-btn icon class="mx-0" @click="editItem(props.item)">
+                                        <v-icon color="grey">edit</v-icon>
+                                    </v-btn>
+                                </td>
+                            </template>
+                            <v-alert slot="no-results" :value="true"  outline color="error" icon="warning">
+                                Поиск по запросу "{{ search }}" не дал результатов.
+                            </v-alert>
+
+                            <template slot="no-data">
+                                <v-alert :value="true"  outline color="error" icon="warning">
+                                    Ни одного проекта еще не создано
+                                </v-alert>
+                            </template>
+                            <template slot="pageText" slot-scope="{ pageStart, pageStop }">
+                                From {{ pageStart }} to {{ pageStop }}
+                            </template>
+                        </v-data-table>
+                    </div>
+                </v-container>
+            </c:otherwise>
+        </c:choose>
     </v-app>
 </div>
-
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
