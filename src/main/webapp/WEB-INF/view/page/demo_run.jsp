@@ -11,13 +11,12 @@
 </head>
 <body>
 <div id="app">
-    <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
+        <%@include file="fragment/menu.jsp" %>
         <v-container grid-list-lg>
         <v-select
                 :items="projects"
                 v-model="selectedProject"
-                :hint="`${selectedProject.title}, ${selectedProject.id}`"
                 label="Выбрать проект"
                 single-line
                 item-text="title"
@@ -28,7 +27,6 @@
         <v-select
                 :items="checklists"
                 v-model="selectedChecklist"
-                :hint="`${selectedChecklist.title}, ${selectedChecklist.id}`"
                 label="Выбрать чеклист"
                 single-line
                 item-text="title"
@@ -39,7 +37,6 @@
         <v-select
                 :items="runs"
                 v-model="selectedRun"
-                :hint="`${selectedRun.name}, ${selectedRun.id}`"
                 label="Выбрать прогон"
                 single-line
                 item-text="name"
@@ -49,57 +46,24 @@
         ></v-select>
         <div>
             <v-dialog v-model="dialog" max-width="500px">
-                <v-btn slot="activator" color="primary" dark class="mb-2">Добавить тест-кейс</v-btn>
+                <v-btn slot="activator" color="info" dark class="mb-2">Добавить прогон</v-btn>
                 <v-card>
                     <v-card-title>
-                        <span class="headline">{{ formTitle }}</span>
+                        <span class="headline">Добавить прогон</span>
                     </v-card-title>
                     <v-card-text>
                         <v-container grid-list-md>
                             <v-layout wrap>
                                 <v-flex>
-                                    <v-text-field v-model="editedItem.title" label="Название"></v-text-field>
-                                </v-flex>
-                            </v-layout>
-                            <v-layout wrap>
-                                <v-flex>
-                                    <v-select
-                                            :items="types"
-                                            v-model="editedItem.type"
-                                            :hint="`${selectedType.name}, ${selectedType.id}`"
-                                            label="Тип"
-                                            single-line
-                                            item-text="name"
-                                            item-value="id"
-                                            return-object
-                                            persistent-hint
-                                    ></v-select>
-                                </v-flex>
-                                <v-flex>
-                                    <v-select
-                                            :items="levels"
-                                            v-model="editedItem.level"
-                                            :hint="`${selectedLevel.name}, ${selectedLevel.id}`"
-                                            label="Уровень"
-                                            single-line
-                                            item-text="name"
-                                            item-value="id"
-                                            return-object
-                                            persistent-hint
-                                    ></v-select>
-                                </v-flex>
-                            </v-layout>
-                            <v-layout wrap>
-                                <v-flex>
-                                    <v-text-field v-model="editedItem.description" label="Описание" multi-line></v-text-field>
+                                    <v-text-field v-model="newRun.name" label="Название"></v-text-field>
                                 </v-flex>
                             </v-layout>
                         </v-container>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
-                        <v-btn color="blue darken-1" flat @click.native="save">Сохранить</v-btn>
+                        <v-btn color="blue" flat @click.native="closeRun">Отмена</v-btn>
+                        <v-btn color="blue" flat @click.native="saveRun">Сохранить</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -125,7 +89,23 @@
                     <td><vue-markdown>{{ props.item.description }}</vue-markdown></td>
                     <td>{{ props.item.level }}</td>
                     <td>{{ props.item.type }}</td>
-                    <td></td>
+                    <td>
+                        <v-edit-dialog
+                                :return-value.sync="selectedStatus"
+                                lazy
+                        >
+                            <v-select
+                                    :items="statuses"
+                                    v-model="props.item.status"
+                                    label="Статус"
+                                    single-line
+                                    item-text="name"
+                                    item-value="id"
+                                    return-object
+                                    persistent-hint
+                            ></v-select>
+                        </v-edit-dialog>
+                    </td>
                 </template>
                 <v-alert slot="no-results" :value="true"  outline color="error" icon="warning">
                     Поиск по запросу "{{ search }}" не дал результатов.
@@ -135,9 +115,6 @@
                     <v-alert :value="true"  outline color="error" icon="warning">
                         Выберите проект и чеклист для отображения тест-кейсов
                     </v-alert>
-                </template>
-                <template slot="pageText" slot-scope="{ pageStart, pageStop }">
-                    From {{ pageStart }} to {{ pageStop }}
                 </template>
             </v-data-table>
         </div>
@@ -157,7 +134,9 @@
     new Vue({
         el: '#app',
         data: () => ({
-            pagination: {},
+            drawer: true,
+            mini: true,
+            right: null,
             search: '',
             projects:[],
             selectedProject: '',
@@ -167,7 +146,6 @@
             runs: [],
             selectedRun: '',
             statuses: [],
-            selectedStatus: '',
             dialog: false,
             headers: [
                 {
@@ -181,18 +159,8 @@
                 { text: 'Тип', value: 'type' },
                 { text: 'Статус', value: 'status', sortable: false }
             ],
-            editedIndex: -1,
-            editedItem: {
-                title: '',
-                description: '',
-                level: 0,
-                type: 0
-            },
-            defaultItem: {
-                title: '',
-                description: '',
-                level: 0,
-                type: 0
+            newRun: {
+                name: '',
             },
             levels:[],
             types:[],
@@ -201,14 +169,11 @@
         }),
 
         computed: {
-            formTitle () {
-                return this.editedIndex === -1 ? 'Добавить тест-кейс' : 'Редактировать тест-кейс'
-            }
         },
 
         watch: {
             dialog (val) {
-                val || this.close()
+                val || this.closeRun()
             },
             selectedProject: function () {
                 axios.get('/tms/checklists?projectId='+this.selectedProject.id)
@@ -235,62 +200,27 @@
             axios.get('/tms/types')
                 .then(response => {
                     this.types = response.data })
+            axios.get('/tms/status')
+                .then(response => {
+                    this.statuses = response.data })
         },
 
         methods: {
-
-            editItem (item) {
-                this.editedIndex = this.tests.indexOf(item)
-                this.editedItem = Object.assign({}, item)
-                this.dialog = true
-            },
-
-            deleteItem (item) {
-                const index = this.tests.indexOf(item)
-                confirm('Are you sure you want to delete this item?') && this.tests.splice(index, 1)
-            },
-
-            close () {
+            closeRun () {
                 this.dialog = false
-                setTimeout(() => {
-                    this.editedItem = Object.assign({}, this.defaultItem)
-                    this.editedIndex = -1
-                }, 300)
             },
 
-            save () {
-                if (this.editedIndex > -1) {
-                    Object.assign(this.tests[this.editedIndex], this.editedItem)
-                    axios({
-                        method: 'POST',
-                        url: '/tms/updateTest',
-                        data: {
-                            'title': this.editedItem.title,
-                            'description': this.editedItem.description,
-                            'fkLevelId': this.editedItem.level.id,
-                            'fkTypeId': this.editedItem.type.id,
-                            'fkUserId': `${sessionScope.user.id}`,
-                            'id': this.editedItem.id
-                        }
-                    }).then(function() {
-                        console.log("done");});
-                } else {
-                    this.tests.push(this.editedItem)
-                    axios({
-                        method: 'POST',
-                        url: '/tms/addTest',
-                        data: {
-                            'title': this.editedItem.title,
-                            'description': this.editedItem.description,
-                            'fkLevelId': this.editedItem.level.id,
-                            'fkTypeId': this.editedItem.type.id,
-                            'fkUserId': `${sessionScope.user.id}`,
-                            'fkChecklistId': this.selectedChecklist.id
-                        }
-                    }).then(function() {
-                        console.log("done");});
-                }
-                this.close()
+            saveRun () {
+                axios({
+                    method: 'POST',
+                    url: '/tms/addRun',
+                    data: {
+                        'name': this.newRun.name,
+                        'fkChecklistId': this.selectedChecklist.id
+                    }
+                }).then(function() {
+                    console.log("done");});
+                this.closeRun()
             },
         }
     })

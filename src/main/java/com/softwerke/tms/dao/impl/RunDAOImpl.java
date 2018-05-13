@@ -22,7 +22,7 @@ public class RunDAOImpl extends JdbcDaoSupport implements RunDAO {
 
     @Override
     public void insertRun(Run run) {
-        getJdbcTemplate().update ("INSERT INTO run (name, fk_checklist_id) VALUE ( ?, ?)",
+        getJdbcTemplate().update ("INSERT INTO run (name, fk_checklist_id) VALUE (?, ?)",
                 run.getName(),
                 run.getFkChecklistId());
     }

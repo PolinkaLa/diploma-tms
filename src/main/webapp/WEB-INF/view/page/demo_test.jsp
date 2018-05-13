@@ -11,13 +11,17 @@
 </head>
 <body>
 <div id="app">
-    <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
-        <v-container grid-list-lg>
+        <%@include file="fragment/menu.jsp" %>
+            <v-toolbar app fixed clipped-left>
+                <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+                <v-toolbar-title>Управление тестами</v-toolbar-title>
+            </v-toolbar>
+            <v-content>
+        <v-container>
         <v-select
                 :items="projects"
                 v-model="selectedProject"
-                :hint="`${selectedProject.title}, ${selectedProject.id}`"
                 label="Выбрать проект"
                 single-line
                 item-text="title"
@@ -28,7 +32,6 @@
         <v-select
                 :items="checklists"
                 v-model="selectedChecklist"
-                :hint="`${selectedChecklist.title}, ${selectedChecklist.id}`"
                 label="Выбрать чеклист"
                 single-line
                 item-text="title"
@@ -56,7 +59,6 @@
                                     <v-select
                                             :items="types"
                                             v-model="editedItem.type"
-                                            :hint="`${selectedType.name}, ${selectedType.id}`"
                                             label="Тип"
                                             single-line
                                             item-text="name"
@@ -69,7 +71,6 @@
                                     <v-select
                                             :items="levels"
                                             v-model="editedItem.level"
-                                            :hint="`${selectedLevel.name}, ${selectedLevel.id}`"
                                             label="Уровень"
                                             single-line
                                             item-text="name"
@@ -133,12 +134,10 @@
                         Выберите проект и чеклист для отображения тест-кейсов
                     </v-alert>
                 </template>
-                <template slot="pageText" slot-scope="{ pageStart, pageStop }">
-                    From {{ pageStart }} to {{ pageStop }}
-                </template>
             </v-data-table>
         </div>
             </v-container>
+    </v-content>
     </v-app>
 </div>
 
@@ -151,8 +150,11 @@
     Vue.use(VueMarkdown);
     new Vue({
         el: '#app',
+
         data: () => ({
-            pagination: {},
+            drawer: true,
+            mini: true,
+            right: null,
             search: '',
             projects:[],
             selectedProject:'Выбрать проект',
@@ -176,16 +178,12 @@
             ],
             editedIndex: -1,
             editedItem: {
-                title: '',
-                description: '',
-                level: 0,
-                type: 0
             },
             defaultItem: {
                 title: '',
                 description: '',
-                level: 0,
-                type: 0
+                level: '',
+                type: ''
             },
             levels:[],
             types:[],

@@ -11,8 +11,8 @@
 </head>
 <body>
 <div id="app">
-    <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
+        <%@include file="fragment/menu.jsp" %>
         <c:choose>
             <c:when test="${sessionScope.user.roleName == 'admin'}">
                 <v-container grid-list-lg>
@@ -45,7 +45,6 @@
                                                 <v-select
                                                         :items="roles"
                                                         v-model="editedItem.roleName"
-                                                        :hint="`${selectedRole.name}, ${selectedRole.id}`"
                                                         label="Роль"
                                                         single-line
                                                         item-text="name"
@@ -59,8 +58,8 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
-                                    <v-btn color="blue darken-1" flat @click.native="close">Отмена</v-btn>
-                                    <v-btn color="blue darken-1" flat @click.native="save">Сохранить</v-btn>
+                                    <v-btn color="blue" flat @click.native="close">Отмена</v-btn>
+                                    <v-btn color="blue" flat @click.native="save">Сохранить</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -134,6 +133,9 @@
     new Vue({
         el: '#app',
         data: () => ({
+            drawer: true,
+            mini: true,
+            right: null,
             search: '',
             users:[],
             roles: [],

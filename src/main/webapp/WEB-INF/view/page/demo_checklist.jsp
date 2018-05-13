@@ -11,10 +11,15 @@
 </head>
 <body>
 <div id="app">
-    <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
-        <v-container grid-list-lg>
-    <div>
+        <%@include file="fragment/menu.jsp" %>
+        <v-toolbar app fixed clipped-left>
+            <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+            <v-toolbar-title>Управление чеклистами</v-toolbar-title>
+        </v-toolbar>
+        <v-content>
+        <v-container grid-list-lg app>
+            <div>
                     <v-dialog v-model="dialogType" max-width="500px">
                         <v-btn slot="activator" color="primary" dark class="mb-2">Добавить Тип</v-btn>
                         <v-card>
@@ -104,7 +109,6 @@
     <v-select
                     :items="projects"
                     v-model="selectedProject"
-                    :hint="`${selectedProject.title}, ${selectedProject.id}`"
                     label="Выбрать проект"
                     single-line
                     item-text="title"
@@ -180,12 +184,11 @@
                             Для получения списка чеклистов, выберите проект
                         </v-alert>
                     </template>
-                    <template slot="pageText" slot-scope="{ pageStart, pageStop }">
-                        From {{ pageStart }} to {{ pageStop }}
-                    </template>
                 </v-data-table>
             </div>
+
         </v-container>
+            </v-content>
     </v-app>
 </div>
 
@@ -196,7 +199,9 @@
     new Vue({
         el: '#app',
         data: () => ({
-            pagination: {},
+            drawer: true,
+            mini: true,
+            right: null,
             search: '',
             levels: [],
             typeHeader:[

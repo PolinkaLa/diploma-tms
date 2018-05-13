@@ -5,6 +5,8 @@ import com.softwerke.tms.repository.RunStatus;
 import com.softwerke.tms.service.RunService;
 import com.softwerke.tms.service.RunStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,8 +31,8 @@ public class RunController {
         return runService.getRuns(checklistId);
     }
 
-    @RequestMapping("/addRun")
-    public void addRun (Run run) {
+    @PostMapping("/addRun")
+    public void addRun (@RequestBody Run run) {
         runService.insertRun(run);
     }
 }

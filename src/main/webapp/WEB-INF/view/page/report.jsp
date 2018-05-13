@@ -47,22 +47,20 @@
         <el-tag type="info">Test group by Users</el-tag></div>
     <line-chart></line-chart>
 </div>
-
-
 <script>
     ELEMENT.locale(ELEMENT.lang.en);
 Vue.component('line-chart', {
   extends: VueChartJs.Pie,
   mounted () {
     this.renderChart({
-        labels: ['Admin', 'Test Test'],
+        labels: ['Admin', 'Test Test', 'Polina Lappo'],
         datasets: [
             {
                 backgroundColor: ['rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
                     'rgba(75, 192, 192, 1)'],
-                data: [1, 3]
+                data: [1, 4, 7]
         }
       ]
     }, {responsive: true, maintainAspectRatio: false})

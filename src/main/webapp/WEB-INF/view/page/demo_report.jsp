@@ -11,13 +11,12 @@
 </head>
 <body>
 <div id="app">
-    <%@include file="fragment/menu.jsp" %>
+
     <v-app id="inspire">
+        <%@include file="fragment/menu.jsp" %>
     </v-app>
 </div>
-
         <v-container grid-list-lg>
-
         </v-container>
     </v-app>
 </div>
@@ -30,6 +29,9 @@
     new Vue({
         el: '#app',
         data: () => ({
+            drawer: true,
+            mini: true,
+            right: null,
 
         }),
 

@@ -11,8 +11,8 @@
 </head>
 <body>
 <div id="app">
-    <%@include file="fragment/menu.jsp" %>
     <v-app id="inspire">
+        <%@include file="fragment/menu.jsp" %>
         <c:choose>
             <c:when test="${sessionScope.user.roleName == 'qa'}">
                 <v-container grid-list-lg>
@@ -101,9 +101,6 @@
                                     Ни одного проекта еще не создано
                                 </v-alert>
                             </template>
-                            <template slot="pageText" slot-scope="{ pageStart, pageStop }">
-                                From {{ pageStart }} to {{ pageStop }}
-                            </template>
                         </v-data-table>
                     </div>
                 </v-container>
@@ -118,7 +115,9 @@
     new Vue({
         el: '#app',
         data: () => ({
-            pagination: {},
+            drawer: true,
+            mini: true,
+            right: null,
             search: '',
             projects:[],
             dialog: false,
