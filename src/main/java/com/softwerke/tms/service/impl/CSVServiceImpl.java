@@ -22,12 +22,17 @@ public class CSVServiceImpl implements CSVService {
     private TestDAO testDAO;
 
     @Override
-    public List<Test> importChecklist(MultipartFile file, int checklistId, int userId) throws Exception {
+    public int[] importChecklist(MultipartFile file, int checklistId, int userId) throws Exception {
 
         String fileName = file.getOriginalFilename();
         InputStream fileReader = file.getInputStream();
         List<Test> importedTests = new ArrayList<>();
         CSVReader reader = null;
+        int all = 0;
+        int update = 0;
+        int insert = 0;
+        int copy = 0;
+        int error;
         try {
             reader = new CSVReader(new InputStreamReader(fileReader, "UTF-8"));
             String[] lineHeader;
@@ -54,20 +59,30 @@ public class CSVServiceImpl implements CSVService {
                 if (testItem.getId() >= 0 && testDAO.isTestExist(testItem.getId())) {
                     if (testDAO.getChecklistOfTest(testItem.getId()) == checklistId) {
                         testDAO.updateTest(testItem);
+                        update++;
                     }
                     else {
                         testDAO.copyTest(testItem);
+                        copy++;
                     }
                 }
                 else {
                     testDAO.insertTestFromFile(testItem);
+                    insert++;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return importedTests;
+        all = importedTests.size();
+        error = all -(insert + copy + update);
+        int[] importStatus = new int[5];
+        importStatus[0] = all;
+        importStatus[1] = update;
+        importStatus[2] = copy;
+        importStatus[3] = insert;
+        importStatus[4] = error;
+        return importStatus;
 
     }
 

@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface CSVService {
 
-    List<Test> importChecklist(MultipartFile file, int checklistId, int userId) throws Exception;
+    int[] importChecklist(MultipartFile file, int checklistId, int userId) throws Exception;
 
 }

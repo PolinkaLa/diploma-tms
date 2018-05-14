@@ -35,7 +35,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addRedirectViewController("/", "/testpage")
+        registry.addRedirectViewController("/", "/demo_test")
                 .setKeepQueryParams(true)
                 .setStatusCode(HttpStatus.PERMANENT_REDIRECT);
     }

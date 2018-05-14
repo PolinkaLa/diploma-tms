@@ -16,7 +16,7 @@
         <%@include file="fragment/menu.jsp" %>
         <v-toolbar app fixed clipped-left>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-            <v-toolbar-title>Управление проектами</v-toolbar-title>
+            <v-toolbar-title>Отчеты</v-toolbar-title>
         </v-toolbar>
         <v-content>
         <v-container>
