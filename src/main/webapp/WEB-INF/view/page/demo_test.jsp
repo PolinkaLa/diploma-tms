@@ -152,8 +152,7 @@
         el: '#app',
 
         data: () => ({
-            drawer: true,
-            mini: true,
+            drawer: false,
             right: null,
             search: '',
             projects:[],

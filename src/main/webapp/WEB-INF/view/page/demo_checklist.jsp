@@ -18,7 +18,7 @@
             <v-toolbar-title>Управление чеклистами</v-toolbar-title>
         </v-toolbar>
         <v-content>
-        <v-container grid-list-lg app>
+        <v-container>
             <div>
                     <v-dialog v-model="dialogType" max-width="500px">
                         <v-btn slot="activator" color="primary" dark class="mb-2">Добавить Тип</v-btn>
@@ -46,13 +46,13 @@
                             :headers="typeHeader"
                             :items="types"
                             hide-actions
-                            class="elevation-1"
+                            class="elevation-8"
                     >
                         <template slot="items" slot-scope="props">
                             <td>{{ props.item.name }}</td>
                             <td class=" layout px-0">
                                 <v-btn icon class="mx-0" @click="editItemType(props.item)">
-                                    <v-icon color="gray">edit</v-icon>
+                                    <v-icon color="grey">edit</v-icon>
                                 </v-btn>
                             </td>
                         </template>
@@ -95,7 +95,7 @@
                             <td>{{ props.item.name }}</td>
                             <td class="layout px-0">
                                 <v-btn icon class="mx-0" @click="editItemLevel(props.item)">
-                                    <v-icon color="tgrayeal">edit</v-icon>
+                                    <v-icon color="grey">edit</v-icon>
                                 </v-btn>
                             </td>
                         </template>
@@ -163,7 +163,7 @@
                         :search="search"
                         pagination.sync
                         hide-actions
-                        class="elevation-1"
+                        class="elevation-8"
                 >
                     <template slot="items" slot-scope="props">
                         <td>{{ props.item.title }}</td>
@@ -171,7 +171,7 @@
                         <td>{{ props.item.cDate }}</td>
                         <td class="layout px-0">
                             <v-btn icon class="mx-0" @click="editItem(props.item)">
-                                <v-icon color="gray">edit</v-icon>
+                                <v-icon color="grey">edit</v-icon>
                             </v-btn>
                         </td>
                     </template>
@@ -199,8 +199,7 @@
     new Vue({
         el: '#app',
         data: () => ({
-            drawer: true,
-            mini: true,
+            drawer: false,
             right: null,
             search: '',
             levels: [],

@@ -13,7 +13,12 @@
 <div id="app">
     <v-app id="inspire">
         <%@include file="fragment/menu.jsp" %>
-        <v-container grid-list-lg>
+        <v-toolbar app fixed clipped-left>
+                        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+                        <v-toolbar-title>Прогоны</v-toolbar-title>
+                    </v-toolbar>
+                    <v-content>
+        <v-container>
         <v-select
                 :items="projects"
                 v-model="selectedProject"
@@ -118,8 +123,8 @@
                 </template>
             </v-data-table>
         </div>
-
         </v-container>
+        </v-content>
     </v-app>
 </div>
 
@@ -134,8 +139,7 @@
     new Vue({
         el: '#app',
         data: () => ({
-            drawer: true,
-            mini: true,
+            drawer: false,
             right: null,
             search: '',
             projects:[],

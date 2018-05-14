@@ -23,7 +23,7 @@ public class UserDAOImpl extends JdbcDaoSupport implements UserDAO {
     @Override
     public void insertUser(String name) {
         getJdbcTemplate().update ("INSERT INTO user ( fk_role_id, principal_name) VALUE ( ?, ?)",
-                 1, name);
+                 2, name);
     }
 
     @Override

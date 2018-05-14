@@ -13,9 +13,14 @@
 <div id="app">
     <v-app id="inspire">
         <%@include file="fragment/menu.jsp" %>
+        <v-toolbar app fixed clipped-left>
+                                <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+                                <v-toolbar-title>Управление пользователями</v-toolbar-title>
+                            </v-toolbar>
+                            <v-content>
         <c:choose>
             <c:when test="${sessionScope.user.roleName == 'admin'}">
-                <v-container grid-list-lg>
+                <v-container>
                     <div>
                         <v-dialog v-model="dialog" max-width="500px">
                             <v-card>
@@ -86,7 +91,7 @@
                                 <td>{{ props.item.roleName }}</td>
                                 <td class="layout px-0">
                                     <v-btn icon class="mx-0" @click="editItem(props.item)">
-                                        <v-icon color="teal">edit</v-icon>
+                                        <v-icon color="grey">edit</v-icon>
                                     </v-btn>
                                 </td>
                             </template>
@@ -123,6 +128,7 @@
                 </v-container>
             </c:otherwise>
         </c:choose>
+        </v-content>
     </v-app>
 </div>
 
@@ -133,7 +139,7 @@
     new Vue({
         el: '#app',
         data: () => ({
-            drawer: true,
+            drawer: false,
             mini: true,
             right: null,
             search: '',

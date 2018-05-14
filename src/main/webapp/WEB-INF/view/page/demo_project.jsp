@@ -13,9 +13,15 @@
 <div id="app">
     <v-app id="inspire">
         <%@include file="fragment/menu.jsp" %>
+        <v-toolbar app fixed clipped-left>
+                                <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+                                <v-toolbar-title>Управление проектами</v-toolbar-title>
+                            </v-toolbar>
+
         <c:choose>
             <c:when test="${sessionScope.user.roleName == 'qa'}">
-                <v-container grid-list-lg>
+            <v-content>
+                <v-container>
                     <v-card>
                         <v-card-title>
                             <span class="headline">Недостаточно прав</span>
@@ -32,9 +38,11 @@
                         </v-card-text>
                     </v-card>
                 </v-container>
+                </v-content>
             </c:when>
             <c:otherwise>
-                <v-container grid-list-lg>
+            <v-content>
+                <v-container>
                     <div>
                         <v-dialog v-model="dialog" max-width="500px">
                             <v-btn slot="activator" color="primary" dark class="mb-2">Добавить проект</v-btn>
@@ -104,8 +112,10 @@
                         </v-data-table>
                     </div>
                 </v-container>
+                </v-content>
             </c:otherwise>
         </c:choose>
+
     </v-app>
 </div>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -115,8 +125,7 @@
     new Vue({
         el: '#app',
         data: () => ({
-            drawer: true,
-            mini: true,
+            drawer: false,
             right: null,
             search: '',
             projects:[],

@@ -14,10 +14,16 @@
 
     <v-app id="inspire">
         <%@include file="fragment/menu.jsp" %>
-    </v-app>
-</div>
-        <v-container grid-list-lg>
+        <v-toolbar app fixed clipped-left>
+            <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+            <v-toolbar-title>Управление проектами</v-toolbar-title>
+        </v-toolbar>
+        <v-content>
+        <v-container>
+
+
         </v-container>
+        </v-content>
     </v-app>
 </div>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -29,8 +35,7 @@
     new Vue({
         el: '#app',
         data: () => ({
-            drawer: true,
-            mini: true,
+            drawer: false,
             right: null,
 
         }),
