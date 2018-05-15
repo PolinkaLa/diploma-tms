@@ -42,18 +42,18 @@
                         required
                 ></v-select>
                 <el-upload class="upload-demo" ref="file" action="/tms/uploadFile" :auto-upload="false" :limit="1"
-                           :data="{checklistId: selectedChecklist.id, userId: `${sessionScope.user.id}`}">
-                    <v-btn outline color="info"><v-icon>attach_file</v-icon>Загрузить файл</v-btn>
-                    <el-button style="margin-left: 10px;" size="small" type="primary" @click="submitUpload">upload to server</el-button>
-                    <%--<v-btn color="success" @click="submitUpload">Импорт</v-btn>--%>
+                :on-success="showStatus" :data="{checklistId: selectedChecklist.id, userId: `${sessionScope.user.id}`}">
+                    <el-button slot="trigger" size="small" type="primary"><i class="el-icon-upload"></i> ЗАГРУЗИТЬ ФАЙЛ</el-button>
+                    <el-button style="margin-left: 10px;" size="small" type="primary" @click="submitUpload">ИМПОРТИРОВАТЬ</el-button>
                 </el-upload>
+                <p>&nbsp;</p>
                 <v-card v-model="importStatus">
                     <v-card-text>
                         <p>Всего обработанно {{ importStatus[0] }}</p>
                         <p>Обновлено {{ importStatus[1] }}</p>
                         <p>Скопировано в другой чеклист {{ importStatus[2] }}</p>
                         <p>Созданно новых {{ importStatus[3] }}</p>
-                        <p>незагруженно {{ importStatus[4] }}</p>
+                        <p>Не загружено {{ importStatus[4] }}</p>
                     </v-card-text>
                 </v-card>
                 <v-layout row wrap>
@@ -112,9 +112,11 @@
 
         methods: {
             submitUpload() {
-                this.$refs.file.submit();
-                this.importStatus = $response.data
-            }
+                this.$refs.file.submit()
+            },
+            showStatus(response, file) {
+                this.importStatus = response;
+            },
         }
     })
 </script>
