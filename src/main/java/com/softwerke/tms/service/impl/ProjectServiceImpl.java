@@ -38,6 +38,17 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<Project> getActiveProjects() {
+        List<Project> projects = projectDAO.getActiveProjects();
+        for (Project project : projects) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+            String date = dateFormat.format(project.getCreatedDate());
+            project.setcDate(date);
+        }
+        return projects;
+    }
+
+    @Override
     public void updateProject(Project project)  throws Exception {
         projectDAO.updateProject(project);
     }

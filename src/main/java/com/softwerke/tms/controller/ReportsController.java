@@ -18,4 +18,34 @@ public class ReportsController {
         return reportService.getTestsGroupByUsers();
     }
 
+    @RequestMapping("/numberOfAllProject")
+    int allProject(){
+        return reportService.allProject();
+    }
+
+    @RequestMapping("/numberOfactiveProject")
+    int activeProject(){
+        return reportService.activeProject();
+    }
+
+    @RequestMapping("/numberOfAllChecklist")
+    int allChecklist (int projectId){
+        return reportService.allChecklist(projectId);
+    }
+
+    @RequestMapping("/numberOfActiveChecklist")
+    int activeProject (int projectId){
+        return reportService.activeChecklist(projectId);
+    }
+
+    @RequestMapping("/numberOfTests")
+    int allTest(int checklistId){
+        return reportService.allTest(checklistId);
+    }
+
+    @RequestMapping("/imported")
+    int[] importedtests(){
+        return reportService.imported();
+    }
+
 }

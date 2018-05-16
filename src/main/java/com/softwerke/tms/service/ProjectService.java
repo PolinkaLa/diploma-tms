@@ -11,5 +11,7 @@ public interface ProjectService {
 
     List<Project> getProjects();
 
+    List<Project> getActiveProjects();
+
     void updateProject(Project project)  throws Exception;
 }

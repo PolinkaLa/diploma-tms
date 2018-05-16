@@ -12,5 +12,7 @@ public interface ProjectDAO {
 
     List<Project> getProjects();
 
+    List<Project> getActiveProjects();
+
     void updateProject(Project project)  throws Exception;
 }

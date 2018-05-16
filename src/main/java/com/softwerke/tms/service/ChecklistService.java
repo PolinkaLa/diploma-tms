@@ -12,5 +12,7 @@ public interface ChecklistService {
 
     List<Checklist> getChecklists(int projectId);
 
+    List<Checklist> getActiveChecklists(int projectId);
+
     void updateChecklist(Checklist checklist) throws Exception;
 }

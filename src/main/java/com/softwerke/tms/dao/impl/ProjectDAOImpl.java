@@ -43,6 +43,15 @@ public class ProjectDAOImpl extends JdbcDaoSupport implements ProjectDAO {
     }
 
     @Override
+    public List<Project> getActiveProjects() {
+        List<Project> projects = getJdbcTemplate().
+                query("SELECT * FROM project WHERE active_status = TRUE",
+                        new ProjectMapper()
+                );
+        return projects;
+    }
+
+    @Override
     public void updateProject(Project project) throws Exception {
         try {
             getJdbcTemplate().update("UPDATE project SET title = ? , active_status = ? WHERE id = ?",

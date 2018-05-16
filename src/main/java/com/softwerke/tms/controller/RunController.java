@@ -35,4 +35,9 @@ public class RunController {
     public void addRun (@RequestBody Run run) {
         runService.insertRun(run);
     }
+
+    @PostMapping("/updateStatus")
+    public void updateStatus (@RequestBody int test, int run, int status) {
+        runService.updateStatus(test, run, status);
+    }
 }

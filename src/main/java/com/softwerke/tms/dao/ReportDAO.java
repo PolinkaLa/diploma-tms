@@ -8,4 +8,14 @@ public interface ReportDAO {
 
     List<ReportData> getTestsGroupByUsers ();
 
+    int allProject();
+    int activeProject();
+
+    int allChecklist (int projectId);
+    int activeChecklist (int projectId);
+
+    int allTest(int checklistId);
+
+    int[] imported ();
+
 }

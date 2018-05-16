@@ -168,8 +168,8 @@
             },
             levels:[],
             types:[],
-            selectedType: '',
-            selectedLevel: '',
+            selectedStatus:[],
+
         }),
 
         computed: {
@@ -180,7 +180,7 @@
                 val || this.closeRun()
             },
             selectedProject: function () {
-                axios.get('/tms/checklists?projectId='+this.selectedProject.id)
+                axios.get('/tms/activeChecklists?projectId='+this.selectedProject.id)
                     .then(response => {
                         this.checklists = response.data })
             },
@@ -188,14 +188,25 @@
                 axios.get('/tms/getRuns?checklistId='+this.selectedChecklist.id)
                     .then(response => {
                         this.runs = response.data })
-                axios.get('/tms/getTests?checklistId='+this.selectedChecklist.id)
+            },
+            selectedRun: function () {
+                axios.get('/tms/getTests?checklistId=' + this.selectedChecklist.id)
                     .then(response => {
-                        this.tests = response.data })
+                        this.tests = response.data
+                    })
+            },
+            siteStatus: function () {
+                axios({
+                    method: 'POST',
+                    url: '/tms/updateStatus?test=props.item.id&run=selectedRun.id&status=selectedStatus.id',
+                }).then(function () {
+                    console.log("done");
+                });
             }
         },
 
         created () {
-            axios.get('/tms/projects')
+            axios.get('/tms/activeProjects')
                 .then(response => {
                     this.projects = response.data })
             axios.get('/tms/levels')

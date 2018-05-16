@@ -45,6 +45,16 @@ public class ChecklistDAOImpl extends JdbcDaoSupport implements ChecklistDAO {
     }
 
     @Override
+    public List<Checklist> getActiveChecklists(int projectId) {
+        List<Checklist> checklists = getJdbcTemplate().
+                query("SELECT * FROM checklist WHERE fk_project_id = ? AND active_status = TRUE",
+                        new Object[] {projectId},
+                        new ChecklistMapper()
+                );
+        return checklists;
+    }
+
+    @Override
     public void updateChecklist(Checklist checklist) throws Exception {
         try {
             getJdbcTemplate().update("UPDATE checklist SET title = ? , active_status = ? WHERE id = ?",

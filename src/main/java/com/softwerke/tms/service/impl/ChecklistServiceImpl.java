@@ -28,13 +28,24 @@ public class ChecklistServiceImpl implements ChecklistService{
 
     @Override
     public List<Checklist> getChecklists(int projectId) {
-        List<Checklist> сhecklists = checklistDAO.getChecklists(projectId);
-        for (Checklist сhecklist : сhecklists) {
+        List<Checklist> checklists = checklistDAO.getChecklists(projectId);
+        for (Checklist checklist : checklists) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-            String date = dateFormat.format(сhecklist.getCreatedDate());
-            сhecklist.setcDate(date);
+            String date = dateFormat.format(checklist.getCreatedDate());
+            checklist.setcDate(date);
         }
-        return сhecklists;
+        return checklists;
+    }
+
+    @Override
+    public List<Checklist> getActiveChecklists(int projectId) {
+        List<Checklist> checklists = checklistDAO.getActiveChecklists(projectId);
+        for (Checklist checklist : checklists) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+            String date = dateFormat.format(checklist.getCreatedDate());
+            checklist.setcDate(date);
+        }
+        return checklists;
     }
 
     @Override

@@ -18,6 +18,11 @@ public class ChecklistController {
         List<Checklist> checklists = checklistService.getChecklists(projectId);
         return checklists;
     }
+    @RequestMapping("/activeChecklists")
+    public List<Checklist> getActiveChecklists (@RequestParam int projectId) {
+        List<Checklist> checklists = checklistService.getActiveChecklists(projectId);
+        return checklists;
+    }
     @PostMapping(value = "/addChecklist")
     public void addChecklist(@RequestBody Checklist checklist){
         checklistService.insertChecklist(checklist);

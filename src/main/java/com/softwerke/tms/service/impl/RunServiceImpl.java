@@ -22,4 +22,9 @@ public class RunServiceImpl implements RunService {
     public List<Run> getRuns(int checklistId) {
         return runDAO.getRuns(checklistId);
     }
+
+    @Override
+    public void updateStatus(int test, int run, int status) {
+        runDAO.updateStatus(test, run, status);
+    }
 }

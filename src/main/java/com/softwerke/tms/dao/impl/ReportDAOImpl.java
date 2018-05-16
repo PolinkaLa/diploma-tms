@@ -28,6 +28,59 @@ public class ReportDAOImpl extends JdbcDaoSupport implements ReportDAO {
         return reportData;
     }
 
+    @Override
+    public int allProject() {
+        int count = getJdbcTemplate().
+                queryForObject("SELECT COUNT(id) FROM project",
+                        new Object[]{}, Integer.class);
+        return count;
+    }
+
+    @Override
+    public int activeProject() {
+        int count = getJdbcTemplate().
+                queryForObject("SELECT COUNT(id) FROM project WHERE active_status= TRUE",
+                        new Object[]{}, Integer.class);
+        return count;
+    }
+
+    @Override
+    public int allChecklist(int projectId) {
+        int count = getJdbcTemplate().
+                queryForObject("SELECT COUNT(id) FROM checklist WHERE fk_project_id = ?",
+                        new Object[]{ projectId}, Integer.class);
+        return count;
+    }
+
+    @Override
+    public int activeChecklist(int projectId) {
+        int count = getJdbcTemplate().
+                queryForObject("SELECT COUNT(id) FROM checklist WHERE fk_project_id = ? AND active_status= TRUE",
+                        new Object[]{projectId}, Integer.class);
+        return count;
+    }
+
+    @Override
+    public int allTest(int checklistId) {
+        int count = getJdbcTemplate().
+                queryForObject("SELECT COUNT(id) FROM test WHERE fk_checklist_id = ?",
+                        new Object[]{checklistId}, Integer.class);
+        return count;
+    }
+
+    @Override
+    public int[] imported() {
+        int[] count = new int [2];
+        count[0] = getJdbcTemplate().
+                queryForObject("SELECT COUNT(id) FROM test WHERE file_name is not NULL",
+                        new Object[]{}, Integer.class);
+        count[1] = getJdbcTemplate().
+                queryForObject("SELECT COUNT(id) FROM test WHERE file_name is NULL",
+                        new Object[]{}, Integer.class);
+        return count;
+    }
+
+
     private class ReportDataMapper implements RowMapper<ReportData> {
 
         @Override

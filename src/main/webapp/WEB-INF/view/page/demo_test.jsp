@@ -177,6 +177,7 @@
             ],
             editedIndex: -1,
             editedItem: {
+                user: `${sessionScope.user.name}`
             },
             defaultItem: {
                 title: '',
@@ -201,7 +202,7 @@
                 val || this.close()
             },
             selectedProject: function () {
-                axios.get('/tms/checklists?projectId='+this.selectedProject.id)
+                axios.get('/tms/activeChecklists?projectId='+this.selectedProject.id)
                     .then(response => {
                         this.checklists = response.data })
             },
@@ -213,7 +214,7 @@
         },
 
         created () {
-            axios.get('/tms/projects')
+            axios.get('/tms/activeProjects')
                 .then(response => {
                     this.projects = response.data })
             axios.get('/tms/levels')
@@ -260,7 +261,9 @@
                             'id': this.editedItem.id
                         }
                     }).then(function() {
-                        console.log("done");});
+                        console.log("done");
+                        });
+
                 } else {
                     this.tests.push(this.editedItem)
                         axios({
@@ -275,7 +278,8 @@
                                 'fkChecklistId': this.selectedChecklist.id
                             }
                         }).then(function() {
-                            console.log("done");});
+                            console.log("done");
+                        });
                     }
                 this.close()
             },

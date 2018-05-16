@@ -104,13 +104,13 @@
             }
         },
         created() {
-            axios.get('/tms/projects')
+            axios.get('/tms/activeProjects')
                 .then(response => {
                     this.projects = response.data })
         },
         watch: {
             selectedProject: function () {
-                axios.get('/tms/checklists?projectId='+this.selectedProject)
+                axios.get('/tms/activeChecklists?projectId='+this.selectedProject)
                     .then(response => {
                         this.checklists = response.data })
             }

@@ -18,6 +18,11 @@ public class ProjectController {
         List<Project> projects = projectService.getProjects();
         return projects;
     }
+    @RequestMapping("/activeProjects")
+    public List<Project> getActiveProjects () {
+        List<Project> projects = projectService.getActiveProjects();
+        return projects;
+    }
     @PostMapping(value = "/addProject")
     public void addProject(@RequestBody Project project){
         String name = project.getTitle();

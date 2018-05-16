@@ -17,4 +17,34 @@ public class ReportServiceImpl implements ReportService {
     public List<ReportData> getTestsGroupByUsers() {
         return reportDAO.getTestsGroupByUsers();
     }
+
+    @Override
+    public int allProject() {
+        return reportDAO.allProject();
+    }
+
+    @Override
+    public int activeProject() {
+        return reportDAO.activeProject();
+    }
+
+    @Override
+    public int allChecklist(int projectId) {
+        return reportDAO.allChecklist(projectId);
+    }
+
+    @Override
+    public int activeChecklist(int projectId) {
+        return reportDAO.activeChecklist(projectId);
+    }
+
+    @Override
+    public int allTest(int checklistId) {
+        return reportDAO.allTest(checklistId);
+    }
+
+    @Override
+    public int[] imported() {
+        return reportDAO.imported();
+    }
 }

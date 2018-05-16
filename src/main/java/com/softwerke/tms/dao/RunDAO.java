@@ -8,4 +8,6 @@ public interface RunDAO {
     void insertRun(Run run);
 
     List<Run> getRuns(int checklistId);
+
+    void updateStatus(int test, int run, int status);
 }
